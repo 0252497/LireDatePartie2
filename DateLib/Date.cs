@@ -65,34 +65,24 @@ namespace Prog2
         /// <returns>la date clonée</returns>
         public static Date Cloner(Date date, int année = 0, int mois = 0, int jour = 0)
         {
+            Date clone = New(date.Année, date.Mois, date.Jour);
+
             if (année > 0)
             {
-                date.Année = année;
-            }
-            else
-            {
-                année = date.Année;
+                clone.Année = année;
             }
 
             if (mois > 0)
             {
-                date.Mois = mois;
-            }
-            else
-            {
-                mois = date.Mois;
+                clone.Mois = mois;
             }
 
             if (jour > 0)
             {
-                date.Jour = jour;
-            }
-            else
-            {
-                jour = date.Jour;
+                clone.Jour = jour;
             }
 
-            return date;
+            return clone;
         }
     }
 }
