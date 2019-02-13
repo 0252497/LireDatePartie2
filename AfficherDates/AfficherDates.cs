@@ -30,10 +30,12 @@ namespace Prog2
             Debug.Assert(Date.SontÉgales(dateAttentatWTC, D4));
             Debug.Assert(!Date.SontÉgales(dateAttentatWTC, badAttentatWTC));
 
+            // Pour vérifier nos affichages!
             Title = "AfficherDates";
             ColorWriteLine(Green, "\nAttentat du WTC:\t{0}", Date.EnTexte(dateAttentatWTC, "/"));
             ColorWriteLine(Yellow, "\nMort de MJ:\t\t{0}", Date.EnTexte(dateDecesMJ, "/"));
             ColorWriteLine(Cyan, "\nExplosion de la NC:\t{0}", Date.EnTexte(dateExplosionNC, "/"));
+            ColorWriteLine(Magenta, "\nAujourd'hui:\t\t{0}", Date.EnTexte());
             Poursuivre();
         }
     }

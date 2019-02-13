@@ -56,6 +56,8 @@
     <Compile Include="TesterDate21_SontÉgales.cs" />
     <Compile Include="TesterDate22_EnTexteAvecSéparateur.cs" />
     <Compile Include="TesterDate23_Cloner.cs" />
+    <Compile Include="TesterDate24_Aujourdhui.cs" />
+    <Compile Include="TesterDate25_EnTexteDateParDéfaut.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
