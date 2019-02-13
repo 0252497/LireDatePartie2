@@ -8,16 +8,20 @@ namespace Prog2
     /// </summary>
     public class Date
     {
+        // --- Attributs ---
         public int Année;
         public int Mois;
         public int Jour;
         private static readonly Date aujourdhui = New(
             DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
 
-        public static Date Aujourdhui()
-        {
-            return aujourdhui;
-        }
+        // --- Méthodes ---
+        /// <summary>
+        /// Retourne la date d'aujourd'hui.
+        /// </summary>
+        /// <returns>aujourd'hui</returns>
+        public static Date Aujourdhui() 
+            => aujourdhui;
 
         /// <summary>
         /// Pour cloner une date en modifiant certains attributs au besoin.
@@ -77,7 +81,8 @@ namespace Prog2
         /// </summary>
         /// <param name="date">la date</param>
         /// <returns>vrai si elle est spéciale</returns>
-        public static bool EstSpéciale(Date date) => date.Jour == date.Mois;
+        public static bool EstSpéciale(Date date) 
+            => date.Jour == date.Mois;
 
         /// <summary>
         /// Pour savoir si une date est très spéciale. Une date est très spéciale si le jour, le mois et

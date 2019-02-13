@@ -9,10 +9,9 @@ namespace Prog2
     public static class DateUtil
     {
         // --- Attributs ---
-        public static readonly Date dateAttentatWTC = Date.New(2001, 09, 11);
-        public const int Dummy = 10;
-        public static readonly Date dateDecesMJ = Date.New(2012, 01, 31);
-        public static readonly Date dateExplosionNC = Date.New(2018, 07, 11);
+        public static readonly Date DateAttentatWTC = Date.New(2001, 09, 11);
+        public static readonly Date DateDecesMJ = Date.New(2012, 01, 31);
+        public static readonly Date DateExplosionNC = Date.New(2018, 07, 11);
 
         // --- Méthodes ---
         /// <summary>

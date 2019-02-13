@@ -1,4 +1,5 @@
-﻿using System;
+﻿/* Programme qui fait afficher diverses dates. */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,17 +25,17 @@ namespace Prog2
             var D4 = Date.New(2001, jour: 11, mois: 09);
 
             // Parfaitement équivalent? ok on va valider ça!
-            Debug.Assert(Date.SontÉgales(dateAttentatWTC, D1));
-            Debug.Assert(Date.SontÉgales(dateAttentatWTC, D2));
-            Debug.Assert(Date.SontÉgales(dateAttentatWTC, D3));
-            Debug.Assert(Date.SontÉgales(dateAttentatWTC, D4));
-            Debug.Assert(!Date.SontÉgales(dateAttentatWTC, badAttentatWTC));
+            Debug.Assert(Date.SontÉgales(DateAttentatWTC, D1));
+            Debug.Assert(Date.SontÉgales(DateAttentatWTC, D2));
+            Debug.Assert(Date.SontÉgales(DateAttentatWTC, D3));
+            Debug.Assert(Date.SontÉgales(DateAttentatWTC, D4));
+            Debug.Assert(!Date.SontÉgales(DateAttentatWTC, badAttentatWTC));
 
             // Pour vérifier nos affichages!
             Title = "AfficherDates";
-            ColorWriteLine(Green, "\nAttentat du WTC:\t{0}", Date.EnTexte(dateAttentatWTC, "/"));
-            ColorWriteLine(Yellow, "\nMort de MJ:\t\t{0}", Date.EnTexte(dateDecesMJ, "/"));
-            ColorWriteLine(Cyan, "\nExplosion de la NC:\t{0}", Date.EnTexte(dateExplosionNC, "/"));
+            ColorWriteLine(Green, "\nAttentat du WTC:\t{0}", Date.EnTexte(DateAttentatWTC, "/"));
+            ColorWriteLine(Yellow, "\nMort de MJ:\t\t{0}", Date.EnTexte(DateDecesMJ, "/"));
+            ColorWriteLine(Cyan, "\nExplosion de la NC:\t{0}", Date.EnTexte(DateExplosionNC, "/"));
             ColorWriteLine(Magenta, "\nAujourd'hui:\t\t{0}", Date.EnTexte());
             Poursuivre();
         }
