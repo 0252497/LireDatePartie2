@@ -74,16 +74,7 @@ namespace Prog2
                     séparateur);
             }
         }
-
-        /// <summary>
-        /// Pour savoir si une date est spéciale. Une date est spéciale si le mois et le jour sont
-        /// identiques.
-        /// </summary>
-        /// <param name="date">la date</param>
-        /// <returns>vrai si elle est spéciale</returns>
-        public static bool EstSpéciale(Date date) 
-            => date.Jour == date.Mois;
-
+        
         /// <summary>
         /// Pour savoir si une date est très spéciale. Une date est très spéciale si le jour, le mois et
         /// les deux derniers chiffres de l'année sont identiques.
@@ -91,7 +82,7 @@ namespace Prog2
         /// <param name="date">la date</param>
         /// <returns>vrai si elle est très spéciale</returns>
         public static bool EstTrèsSpéciale(Date date)
-            => EstSpéciale(date) && date.Mois == date.Année % 100;
+            => DateUtil.EstSpéciale(date) && date.Mois == date.Année % 100;
 
         /// <summary>
         /// Pour aider à construire une nouvelle date.

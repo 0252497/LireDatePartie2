@@ -30,7 +30,7 @@ namespace Prog2
             {
                 MessageOk("très spéciale\n");
             }
-            else if (EstSpéciale(date))
+            else if (date.EstSpéciale())
             {
                 MessageOk("spéciale\n");
             }

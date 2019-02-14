@@ -14,6 +14,16 @@ namespace Prog2
         public static readonly Date DateExplosionNC = Date.New(2018, 07, 11);
 
         // --- Méthodes ---
+
+        /// <summary>
+        /// Pour savoir si une date est spéciale. Une date est spéciale si le mois et le jour sont
+        /// identiques.
+        /// </summary>
+        /// <param name="date">la date</param>
+        /// <returns>vrai si elle est spéciale</returns>
+        public static bool EstSpéciale(this Date date)
+            => date.Jour == date.Mois;
+
         /// <summary>
         /// Pour lire une date sur la console; année, mois et jour séparément. 
         /// </summary>
