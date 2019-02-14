@@ -26,7 +26,7 @@ namespace Prog2
 
             ColorWrite(Green, "\nNB : Cette date est ");
 
-            if (EstTrèsSpéciale(date))
+            if (date.EstTrèsSpéciale())
             {
                 MessageOk("très spéciale\n");
             }

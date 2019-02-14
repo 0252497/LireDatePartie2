@@ -13,10 +13,10 @@ namespace Prog2
         [TestMethod]
         public void _12_EstTrèsSpéciale()
         {
-            IsTrue(EstTrèsSpéciale(D(2001, 01, 01)));
-            IsTrue(EstTrèsSpéciale(D(2012, 12, 12)));
-            IsTrue(EstTrèsSpéciale(D(1905, 05, 05)));
-            IsTrue(EstTrèsSpéciale(D(808, 08, 08)));
+            IsTrue(D(2001, 01, 01).EstTrèsSpéciale());
+            IsTrue(D(2012, 12, 12).EstTrèsSpéciale());
+            IsTrue(D(1905, 05, 05).EstTrèsSpéciale());
+            IsTrue(D(808, 08, 08).EstTrèsSpéciale());
         }
 
     }

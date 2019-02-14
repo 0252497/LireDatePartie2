@@ -24,36 +24,6 @@ namespace Prog2
             => aujourdhui;
 
         /// <summary>
-        /// Pour cloner une date en modifiant certains attributs au besoin.
-        /// </summary>
-        /// <param name="date">date à cloner</param>
-        /// <param name="année">année modifiée au besoin</param>
-        /// <param name="mois">mois modifié au besoin</param>
-        /// <param name="jour">jour modifié au besoin</param>
-        /// <returns>la date clonée</returns>
-        public static Date Cloner(Date date, int année = 0, int mois = 0, int jour = 0)
-        {
-            Date clone = New(date.Année, date.Mois, date.Jour); // On clone la date entrée
-
-            if (année > 0)
-            {
-                clone.Année = année;
-            }
-
-            if (mois > 0)
-            {
-                clone.Mois = mois;
-            }
-
-            if (jour > 0)
-            {
-                clone.Jour = jour;
-            }
-
-            return clone;
-        }
-
-        /// <summary>
         /// Fais afficher la date, soit le mois, le jour et l'année. Si aucune date n'est précisée, on fera 
         /// afficher la date d'aujourd'hui.
         /// </summary>
@@ -75,15 +45,6 @@ namespace Prog2
             }
         }
         
-        /// <summary>
-        /// Pour savoir si une date est très spéciale. Une date est très spéciale si le jour, le mois et
-        /// les deux derniers chiffres de l'année sont identiques.
-        /// </summary>
-        /// <param name="date">la date</param>
-        /// <returns>vrai si elle est très spéciale</returns>
-        public static bool EstTrèsSpéciale(Date date)
-            => DateUtil.EstSpéciale(date) && date.Mois == date.Année % 100;
-
         /// <summary>
         /// Pour aider à construire une nouvelle date.
         /// </summary>
