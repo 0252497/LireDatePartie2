@@ -58,6 +58,8 @@
     <Compile Include="TesterDate23_Cloner.cs" />
     <Compile Include="TesterDate24_Aujourdhui.cs" />
     <Compile Include="TesterDate25_EnTexteDateParDéfaut.cs" />
+    <Compile Include="TesterDate31_EstBissextile.cs" />
+    <Compile Include="TesterDate32_NbJoursDsMois.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

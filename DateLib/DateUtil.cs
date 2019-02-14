@@ -47,6 +47,14 @@ namespace Prog2
         }
 
         /// <summary>
+        /// Renvoie si une année est bissextile.
+        /// </summary>
+        /// <param name="année">l'année</param>
+        /// <returns>vrai si l'année est bissextile</returns>
+        public static bool EstBissextile(this int année) 
+            => année % 4 == 0 && année % 100 != 0 || année % 400 == 0 ? true : false;
+
+        /// <summary>
         /// Pour savoir si une date est spéciale. Une date est spéciale si le mois et le jour sont
         /// identiques.
         /// </summary>
@@ -93,6 +101,47 @@ namespace Prog2
             };
 
             return true;
+        }
+
+        /// <summary>
+        /// Renvoie le nombre de jours dans le mois entré.
+        /// </summary>
+        /// <param name="année">l'année</param>
+        /// <param name="mois">le mois</param>
+        /// <returns></returns>
+        public static int NbJoursDsMois(this int année, int mois)
+        {
+            int joursDsMois;    // Le nombre de jours selon le mois
+
+            switch (mois)
+            {
+                // Pour les mois de janvier, mars, mai, juillet, août, octobre et décembre :
+                case 1:
+                case 3:
+                case 5:
+                case 7:
+                case 8:
+                case 10:
+                case 12:
+                    joursDsMois = 31;
+                    break;
+                // Pour le mois de février :
+                case 2:
+                    joursDsMois = année.EstBissextile() ? 29 : 28;
+                    break;
+                // Pour les mois d'avril, juin, septembre et novembre :
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    joursDsMois = 30;
+                    break;
+                default:
+                    joursDsMois = 0;
+                    break;
+            }
+
+            return joursDsMois;
         }
     }
 }

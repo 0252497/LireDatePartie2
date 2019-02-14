@@ -21,11 +21,11 @@ namespace Prog2
 
             IsFalse(D1 == D1.Cloner(), "Cloner doit créer un nouvel objet");
             IsTrue(SontÉgales(D1, D1.Cloner()));
-            IsTrue(SontÉgales(D3, D1.Cloner()));
-            IsTrue(SontÉgales(D4, D1.Cloner()));
-            IsTrue(SontÉgales(D5, D1.Cloner()));
-            IsTrue(SontÉgales(D6, D1.Cloner()));
-            IsTrue(SontÉgales(D7, D1.Cloner()));
+            IsTrue(SontÉgales(D3, D1.Cloner(année: 2002)));
+            IsTrue(SontÉgales(D4, D1.Cloner(mois: 8)));
+            IsTrue(SontÉgales(D5, D1.Cloner(jour: 10)));
+            IsTrue(SontÉgales(D6, D1.Cloner(année: 2002, jour: 10)));
+            IsTrue(SontÉgales(D7, D1.Cloner(année : 2002, mois : 8, jour : 10)));
         }
 
     }
