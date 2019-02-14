@@ -50,10 +50,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Desktop\LireDate\UtilitaireLib\UtilitaireLib.csproj">
-      <Project>{d100541b-ae6a-457d-9597-ddcc0055e149}</Project>
-      <Name>UtilitaireLib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DateLib\DateLib.csproj">
       <Project>{5954e0a4-2b05-415b-aa9c-07c7df1cecee}</Project>
       <Name>DateLib</Name>

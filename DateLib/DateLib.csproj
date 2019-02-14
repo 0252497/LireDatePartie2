@@ -45,11 +45,5 @@
     <Compile Include="DateUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Desktop\LireDate\UtilitaireLib\UtilitaireLib.csproj">
-      <Project>{d100541b-ae6a-457d-9597-ddcc0055e149}</Project>
-      <Name>UtilitaireLib</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
