@@ -62,15 +62,8 @@ namespace Prog2
         /// <param name="mois">le mois, 1 = janvier</param>
         /// <param name="jour">le jour du mois</param>
         /// <returns>une nouvelle date ou null si la date n'est pas valide</returns>
-        public static Date New(int année, int mois, int jour)
-        {
-            if (!EstValide(année, mois, jour))
-            {
-                return null;
-            }
-
-            return new Date { Année = année, Mois = mois, Jour = jour };
-        }
+        public static Date New(int année, int mois, int jour) 
+            => !EstValide(année, mois, jour) ? null : new Date { Année = année, Mois = mois, Jour = jour };
 
         /// <summary>
         /// Pour vérifier que deux dates sont pareilles.

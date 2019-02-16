@@ -21,22 +21,24 @@ namespace Prog2
 
             if (LireDate("Entrez une date svp!", out Date date))
             {
-                ColorWriteLine(Green, $"\nDate = {EnTexte(date, "/")}");
-            }
+                if (date == null) date = Aujourdhui();
 
-            ColorWrite(Green, "\nNB : Cette date est ");
+                var message = $"\nDate = {EnTexte(date)}";
 
-            if (date.EstTrèsSpéciale())
-            {
-                MessageOk("très spéciale\n");
-            }
-            else if (date.EstSpéciale())
-            {
-                MessageOk("spéciale\n");
-            }
-            else
-            {
-                MessageOk("sans particularité numérologique\n");
+                message += $"\n\nNB : Cette date est ";
+
+                if (date.EstTrèsSpéciale())
+                    message += "très spéciale";
+                else if (date.EstSpéciale())
+                    message += "spéciale";
+                else
+                    message += "sans particularité numérologique.";
+
+                message += $"\nPS : L'année {date.Année} ";
+                message += date.Année.EstBissextile() ? "est" : "n'est pas";
+                message += " bissextile.";
+
+                MessageOk(message);
             }
         }
     }
