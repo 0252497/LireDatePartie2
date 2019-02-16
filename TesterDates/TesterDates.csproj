@@ -8,7 +8,7 @@
     <ProjectGuid>{1B4C1562-A63D-4F08-969A-23051465B1BE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TesterDates</RootNamespace>
+    <RootNamespace>Prog2</RootNamespace>
     <AssemblyName>TesterDates</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -60,6 +60,8 @@
     <Compile Include="TesterDate25_EnTexteDateParDéfaut.cs" />
     <Compile Include="TesterDate31_EstBissextile.cs" />
     <Compile Include="TesterDate32_NbJoursDsMois.cs" />
+    <Compile Include="TesterDate33_EstValide.cs" />
+    <Compile Include="TesterDate34_New.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

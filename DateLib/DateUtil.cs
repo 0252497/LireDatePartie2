@@ -3,16 +3,15 @@
 using static Prog2.ConsolePlus;
 using static System.ConsoleColor;
 using static Prog2.Date;
-using System;
 
 namespace Prog2
 {
     public static class DateUtil
     {
         // --- Attributs ---
-        public static readonly Date DateAttentatWTC = Date.New(2001, 09, 11);
-        public static readonly Date DateDecesMJ = Date.New(2012, 01, 31);
-        public static readonly Date DateExplosionNC = Date.New(2018, 07, 11);
+        public static readonly Date DateAttentatWTC = New(2001, 09, 11);
+        public static readonly Date DateDecesMJ = New(2012, 01, 31);
+        public static readonly Date DateExplosionNC = New(2018, 07, 11);
 
         // --- Méthodes ---
 
@@ -51,8 +50,8 @@ namespace Prog2
         /// </summary>
         /// <param name="année">l'année</param>
         /// <returns>vrai si l'année est bissextile</returns>
-        public static bool EstBissextile(this int année) 
-            => année % 4 == 0 && année % 100 != 0 || année % 400 == 0 ? true : false;
+        public static bool EstBissextile(this int année)
+            => année % 4 == 0 && année % 100 != 0 || année % 400 == 0;
 
         /// <summary>
         /// Pour savoir si une date est spéciale. Une date est spéciale si le mois et le jour sont
@@ -70,7 +69,7 @@ namespace Prog2
         /// <param name="date">la date</param>
         /// <returns>vrai si elle est très spéciale</returns>
         public static bool EstTrèsSpéciale(this Date date)
-            => EstSpéciale(date) && date.Mois == date.Année % 100;
+            => date.EstSpéciale() && date.Mois == date.Année % 100;
 
         /// <summary>
         /// Pour lire une date sur la console; année, mois et jour séparément. 
@@ -82,23 +81,16 @@ namespace Prog2
         {
             ColorWriteLine(Magenta, propriété);
 
-            // L'année, le mois et le jour de la date à lire :
-            int année;
-            int mois;
-            int jour;
+            LireEntier("\tAnnée ", "", out int année);
+            LireEntier("\tMois ", "", 1, 12, out int mois);
 
-            LireEntier("\tAnnée\t", "", out année);
+            // On détermine le nombre de jours dans le mois entré pour savoir le maximum de 
+            // jours possibles :
+            int nbJoursDsMois = NbJoursDsMois(année, mois); 
 
-            while (!LireEntier("\tMois\t", "", 1, 12, out mois)) ;
-
-            while (!LireEntier("\tJour\t", "", 1, 31, out jour)) ;
-
-            date = new Date
-            {
-                Année = année,
-                Mois = mois,
-                Jour = jour
-            };
+            LireEntier("\tJour ", "", 1, nbJoursDsMois, out int jour);
+            
+            date = New(année, mois, jour);
 
             return true;
         }
@@ -111,8 +103,6 @@ namespace Prog2
         /// <returns></returns>
         public static int NbJoursDsMois(this int année, int mois)
         {
-            int joursDsMois;    // Le nombre de jours selon le mois
-
             switch (mois)
             {
                 // Pour les mois de janvier, mars, mai, juillet, août, octobre et décembre :
@@ -123,25 +113,19 @@ namespace Prog2
                 case 8:
                 case 10:
                 case 12:
-                    joursDsMois = 31;
-                    break;
+                    return 31;
                 // Pour le mois de février :
                 case 2:
-                    joursDsMois = année.EstBissextile() ? 29 : 28;
-                    break;
+                    return année.EstBissextile() ? 29 : 28;
                 // Pour les mois d'avril, juin, septembre et novembre :
                 case 4:
                 case 6:
                 case 9:
                 case 11:
-                    joursDsMois = 30;
-                    break;
+                    return 30;
                 default:
-                    joursDsMois = 0;
-                    break;
+                    return 0;
             }
-
-            return joursDsMois;
         }
     }
 }

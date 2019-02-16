@@ -46,14 +46,31 @@ namespace Prog2
         }
         
         /// <summary>
+        /// Détermine si une date est valide.
+        /// </summary>
+        /// <param name="année">l'année</param>
+        /// <param name="mois">le mois</param>
+        /// <param name="jour">le jour</param>
+        /// <returns>vrai si la date est valide</returns>
+        public static bool EstValide(int année, int mois, int jour)
+            => 1 <= jour && jour <= DateUtil.NbJoursDsMois(année, mois) && 1 <= mois && mois <= 12;
+
+        /// <summary>
         /// Pour aider à construire une nouvelle date.
         /// </summary>
         /// <param name="année">l'année</param>
         /// <param name="mois">le mois, 1 = janvier</param>
         /// <param name="jour">le jour du mois</param>
-        /// <returns>une nouvelle date</returns>
+        /// <returns>une nouvelle date ou null si la date n'est pas valide</returns>
         public static Date New(int année, int mois, int jour)
-            => new Date { Année = année, Mois = mois, Jour = jour };
+        {
+            if (!EstValide(année, mois, jour))
+            {
+                return null;
+            }
+
+            return new Date { Année = année, Mois = mois, Jour = jour };
+        }
 
         /// <summary>
         /// Pour vérifier que deux dates sont pareilles.
