@@ -15,52 +15,13 @@ namespace Prog2
 
         // --- Méthodes ---
 
-        /// <summary>
-        /// Pour cloner une date en modifiant certains attributs au besoin.
-        /// </summary>
-        /// <param name="date">date à cloner</param>
-        /// <param name="année">année modifiée au besoin</param>
-        /// <param name="mois">mois modifié au besoin</param>
-        /// <param name="jour">jour modifié au besoin</param>
-        /// <returns>la date clonée</returns>
-        public static Date Cloner(this Date date, int année = 0, int mois = 0, int jour = 0)
-        {
-            Date clone = New(date.Année, date.Mois, date.Jour); // On clone la date entrée
-
-            if (année > 0)
-            {
-                clone.Année = année;
-            }
-
-            if (mois > 0)
-            {
-                clone.Mois = mois;
-            }
-
-            if (jour > 0)
-            {
-                clone.Jour = jour;
-            }
-
-            return clone;
-        }
-
-        /// <summary>
+            /// <summary>
         /// Renvoie si une année est bissextile.
         /// </summary>
         /// <param name="année">l'année</param>
         /// <returns>vrai si l'année est bissextile</returns>
         public static bool EstBissextile(this int année)
             => année % 4 == 0 && année % 100 != 0 || année % 400 == 0;
-
-        /// <summary>
-        /// Pour savoir si une date est très spéciale. Une date est très spéciale si le jour, le mois et
-        /// les deux derniers chiffres de l'année sont identiques.
-        /// </summary>
-        /// <param name="date">la date</param>
-        /// <returns>vrai si elle est très spéciale</returns>
-        public static bool EstTrèsSpéciale(this Date date)
-            => date.EstSpéciale() && date.Mois == date.Année % 100;
 
         /// <summary>
         /// Pour lire une date sur la console; année, mois et jour séparément. 

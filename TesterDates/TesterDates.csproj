@@ -62,6 +62,9 @@
     <Compile Include="TesterDate32_NbJoursDsMois.cs" />
     <Compile Include="TesterDate33_EstValide.cs" />
     <Compile Include="TesterDate34_New.cs" />
+    <Compile Include="TesterDate41_MettreÀJour.cs" />
+    <Compile Include="TesterDate42_Incrémenter.cs" />
+    <Compile Include="TesterDate43_IncrémenterPlus.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

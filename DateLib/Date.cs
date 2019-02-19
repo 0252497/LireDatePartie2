@@ -20,8 +20,40 @@ namespace Prog2
         /// Retourne la date d'aujourd'hui.
         /// </summary>
         /// <returns>aujourd'hui</returns>
-        public static Date Aujourdhui() 
-            => aujourdhui;
+        public static Date Aujourdhui()
+        {
+            aujourdhui.MettreÀJour();
+            return aujourdhui;
+        }
+        /// <summary>
+        /// Pour cloner une date en modifiant certains attributs au besoin.
+        /// </summary>
+        /// <param name="date">date à cloner</param>
+        /// <param name="année">année modifiée au besoin</param>
+        /// <param name="mois">mois modifié au besoin</param>
+        /// <param name="jour">jour modifié au besoin</param>
+        /// <returns>la date clonée</returns>
+        public Date Cloner(/* Date this*/ int année = 0, int mois = 0, int jour = 0)
+        {
+            Date clone = New(this.Année, this.Mois, this.Jour); // On clone la date entrée
+
+            if (année > 0)
+            {
+                clone.Année = année;
+            }
+
+            if (mois > 0)
+            {
+                clone.Mois = mois;
+            }
+
+            if (jour > 0)
+            {
+                clone.Jour = jour;
+            }
+
+            return clone;
+        }
 
         /// <summary>
         /// Fais afficher la date, soit le mois, le jour et l'année. Si aucune date n'est précisée, on fera 
@@ -49,10 +81,17 @@ namespace Prog2
         /// Pour savoir si une date est spéciale. Une date est spéciale si le mois et le jour sont
         /// identiques.
         /// </summary>
-        /// <param name="date">la date</param>
         /// <returns>vrai si elle est spéciale</returns>
         public bool EstSpéciale(/* Date this */)
             => this.Jour == this.Mois;
+
+        /// <summary>
+        /// Pour savoir si une date est très spéciale. Une date est très spéciale si le jour, le mois et
+        /// les deux derniers chiffres de l'année sont identiques.
+        /// </summary>
+        /// <returns>vrai si elle est très spéciale</returns>
+        public bool EstTrèsSpéciale(/* Date this */)
+            => this.EstSpéciale() && this.Mois == this.Année % 100;
 
         /// <summary>
         /// Détermine si une date est valide.
@@ -65,6 +104,34 @@ namespace Prog2
             => 1 <= jour && jour <= DateUtil.NbJoursDsMois(année, mois) && 1 <= mois && mois <= 12;
 
         /// <summary>
+        /// Permet d'incrémenter la date.
+        /// </summary>
+        public void Incrémenter(/* Date this*/ int incrément = 1)
+        {
+            for (int i = 0; i < incrément; ++i)
+            {
+                if (EstValide(this.Année, this.Mois, this.Jour + 1))
+                {
+                    ++this.Jour;
+                }
+                else
+                {
+                    if (this.Mois >= 12)
+                    {
+                        this.Jour = 1;
+                        this.Mois = 1;
+                        this.Année += 1;
+                    }
+                    else
+                    {
+                        this.Jour = 1;
+                        this.Mois += 1;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Pour aider à construire une nouvelle date.
         /// </summary>
         /// <param name="année">l'année</param>
@@ -73,6 +140,13 @@ namespace Prog2
         /// <returns>une nouvelle date ou null si la date n'est pas valide</returns>
         public static Date New(int année, int mois, int jour) 
             => !EstValide(année, mois, jour) ? null : new Date { Année = année, Mois = mois, Jour = jour };
+
+        public void MettreÀJour(/* Date this*/)
+        {
+            this.Année = DateTime.Today.Year;
+            this.Mois = DateTime.Today.Month;
+            this.Jour = DateTime.Today.Day;
+        }
 
         /// <summary>
         /// Pour vérifier que deux dates sont pareilles.
