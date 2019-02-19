@@ -54,15 +54,6 @@ namespace Prog2
             => année % 4 == 0 && année % 100 != 0 || année % 400 == 0;
 
         /// <summary>
-        /// Pour savoir si une date est spéciale. Une date est spéciale si le mois et le jour sont
-        /// identiques.
-        /// </summary>
-        /// <param name="date">la date</param>
-        /// <returns>vrai si elle est spéciale</returns>
-        public static bool EstSpéciale(this Date date)
-            => date.Jour == date.Mois;
-
-        /// <summary>
         /// Pour savoir si une date est très spéciale. Une date est très spéciale si le jour, le mois et
         /// les deux derniers chiffres de l'année sont identiques.
         /// </summary>
@@ -91,6 +82,8 @@ namespace Prog2
             LireEntier("\tJour ", "", 1, nbJoursDsMois, out int jour);
             
             date = New(année, mois, jour);
+
+            if (date == null) date = Aujourdhui();
 
             return true;
         }

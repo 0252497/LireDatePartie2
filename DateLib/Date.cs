@@ -44,7 +44,16 @@ namespace Prog2
                     séparateur);
             }
         }
-        
+
+        /// <summary>
+        /// Pour savoir si une date est spéciale. Une date est spéciale si le mois et le jour sont
+        /// identiques.
+        /// </summary>
+        /// <param name="date">la date</param>
+        /// <returns>vrai si elle est spéciale</returns>
+        public bool EstSpéciale(/* Date this */)
+            => this.Jour == this.Mois;
+
         /// <summary>
         /// Détermine si une date est valide.
         /// </summary>

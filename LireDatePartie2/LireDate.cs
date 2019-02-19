@@ -21,8 +21,6 @@ namespace Prog2
 
             if (LireDate("Entrez une date svp!", out Date date))
             {
-                if (date == null) date = Aujourdhui();
-
                 var message = $"\nDate = {EnTexte(date)}";
 
                 message += $"\n\nNB : Cette date est ";
