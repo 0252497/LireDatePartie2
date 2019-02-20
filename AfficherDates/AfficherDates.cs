@@ -27,10 +27,10 @@ namespace Prog2
 
             // Pour vérifier nos affichages!
             Title = "AfficherDates";
-            ColorWriteLine(Green, "\nAttentat du WTC:\t{0}", EnTexte(DateAttentatWTC, "/"));
+            ColorWriteLine(Green, "\nAttentat du WTC:\t{0}", EnTexte(DateAttentatWTC));
             ColorWriteLine(Yellow, "\nMort de MJ:\t\t{0}", EnTexte(DateDecesMJ, "/"));
-            ColorWriteLine(Cyan, "\nExplosion de la NC:\t{0}", EnTexte(DateExplosionNC, "/"));
-
+            ColorWriteLine(Cyan, "\nExplosion de la NC:\t{0}", EnTexte(DateExplosionNC, "."));
+            
             var aprèsDemain = New(
                 DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
             var avantHier = New(

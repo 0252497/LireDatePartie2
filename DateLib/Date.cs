@@ -12,9 +12,9 @@ namespace Prog2
         public int Année;
         public static readonly Date aujourdhui = New(
             DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
-        public static readonly Date demain = New(
+        private static readonly Date demain = New(
             DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
-        public static readonly Date hier = New(
+        private static readonly Date hier = New(
             DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
         public int Jour;
         public int Mois;
