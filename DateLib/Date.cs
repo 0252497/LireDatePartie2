@@ -158,8 +158,9 @@ namespace Prog2
         }
 
         /// <summary>
-        /// Permet d'incrémenter la date.
+        /// Ajoute des jours à la date
         /// </summary>
+        /// <param name="incrément">nombre de jours à ajouter</param>
         public void Incrémenter(/* Date this*/ int incrément = 1)
         {
             for (int i = 0; i < incrément; ++i)
