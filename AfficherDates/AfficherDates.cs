@@ -9,6 +9,7 @@ using static System.Console;
 using static System.ConsoleColor;
 using System.Diagnostics;
 using static Prog2.DateUtil;
+using static Prog2.Date;
 
 namespace Prog2
 {
@@ -16,27 +17,36 @@ namespace Prog2
     {
         static void Main(string[] args)
         {
-            var badAttentatWTC = Date.New(11, 09, 2001);
+            var badAttentatWTC = New(11, 09, 2001);
 
             // Parfaitement équivalent :
-            var D1 = Date.New(année: 2001, mois: 09, jour: 11);
-            var D2 = Date.New(jour: 11, mois: 09, année: 2001);
-            var D3 = Date.New(mois: 09, jour: 11, année: 2001);
-            var D4 = Date.New(2001, jour: 11, mois: 09);
-
-            // Parfaitement équivalent? ok on va valider ça!
-            Debug.Assert(Date.SontÉgales(DateAttentatWTC, D1));
-            Debug.Assert(Date.SontÉgales(DateAttentatWTC, D2));
-            Debug.Assert(Date.SontÉgales(DateAttentatWTC, D3));
-            Debug.Assert(Date.SontÉgales(DateAttentatWTC, D4));
-            Debug.Assert(!Date.SontÉgales(DateAttentatWTC, badAttentatWTC));
+            var D1 = New(année: 2001, mois: 09, jour: 11);
+            var D2 = New(jour: 11, mois: 09, année: 2001);
+            var D3 = New(mois: 09, jour: 11, année: 2001);
+            var D4 = New(2001, jour: 11, mois: 09);
 
             // Pour vérifier nos affichages!
             Title = "AfficherDates";
-            ColorWriteLine(Green, "\nAttentat du WTC:\t{0}", Date.EnTexte(DateAttentatWTC, "/"));
-            ColorWriteLine(Yellow, "\nMort de MJ:\t\t{0}", Date.EnTexte(DateDecesMJ, "/"));
-            ColorWriteLine(Cyan, "\nExplosion de la NC:\t{0}", Date.EnTexte(DateExplosionNC, "/"));
-            ColorWriteLine(Magenta, "\nAujourd'hui:\t\t{0}", Date.EnTexte());
+            ColorWriteLine(Green, "\nAttentat du WTC:\t{0}", EnTexte(DateAttentatWTC, "/"));
+            ColorWriteLine(Yellow, "\nMort de MJ:\t\t{0}", EnTexte(DateDecesMJ, "/"));
+            ColorWriteLine(Cyan, "\nExplosion de la NC:\t{0}", EnTexte(DateExplosionNC, "/"));
+
+            var aprèsDemain = New(
+                DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
+            var avantHier = New(
+                DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
+            var hier = Hier();
+            var demain = Demain();
+
+            aprèsDemain.Incrémenter(2);
+            avantHier.Décrémenter(2);
+
+            ColorWriteLine(Blue, "\nAvant-hier:\t\t{0}", EnTexte(avantHier));
+            ColorWriteLine(DarkYellow, "Hier:\t\t\t{0}", EnTexte(hier));
+            ColorWriteLine(Magenta, "Aujourd'hui:\t\t{0}", EnTexte(aujourdhui, "_"));
+            ColorWriteLine(DarkBlue, "Demain:\t\t\t{0}", EnTexte(demain));
+            ColorWriteLine(DarkMagenta, "Après-demain:\t\t{0}", EnTexte(aprèsDemain));
+
             Poursuivre();
         }
     }

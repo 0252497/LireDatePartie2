@@ -10,11 +10,11 @@ namespace Prog2
     {
         // --- Attributs ---
         public int Année;
-        private static readonly Date aujourdhui = New(
+        public static readonly Date aujourdhui = New(
             DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
-        private static Date demain = New(
+        public static readonly Date demain = New(
             DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
-        public static Date hier = New(
+        public static readonly Date hier = New(
             DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
         public int Jour;
         public int Mois;
@@ -88,6 +88,10 @@ namespace Prog2
             }
         }
 
+        /// <summary>
+        /// Retourne la date de demain.
+        /// </summary>
+        /// <returns>la date de demain</returns>
         public static Date Demain()
         {
             demain.MettreÀJour();
@@ -143,9 +147,9 @@ namespace Prog2
             => 1 <= jour && jour <= DateUtil.NbJoursDsMois(année, mois) && 1 <= mois && mois <= 12;
 
         /// <summary>
-        /// 
+        /// Retourne la date de hier.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>la date de hier</returns>
         public static Date Hier()
         {
             hier.MettreÀJour();
