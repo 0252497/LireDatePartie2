@@ -54,9 +54,9 @@
       <Project>{5954e0a4-2b05-415b-aa9c-07c7df1cecee}</Project>
       <Name>DateLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LireDatePartie2\LireDatePartie2.csproj">
+    <ProjectReference Include="..\LireDatePartie2\LireDate.csproj">
       <Project>{3fb8510e-7606-45d4-8d27-608701005e26}</Project>
-      <Name>LireDatePartie2</Name>
+      <Name>LireDate</Name>
     </ProjectReference>
     <ProjectReference Include="..\UtilitaireLib\UtilitaireLib.csproj">
       <Project>{d100541b-ae6a-457d-9597-ddcc0055e149}</Project>

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LireDatePartie2", "LireDatePartie2\LireDatePartie2.csproj", "{3FB8510E-7606-45D4-8D27-608701005E26}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LireDate", "LireDatePartie2\LireDate.csproj", "{3FB8510E-7606-45D4-8D27-608701005E26}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DateLib", "DateLib\DateLib.csproj", "{5954E0A4-2B05-415B-AA9C-07C7DF1CECEE}"
 EndProject

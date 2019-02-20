@@ -65,6 +65,8 @@
     <Compile Include="TesterDate41_MettreÀJour.cs" />
     <Compile Include="TesterDate42_Incrémenter.cs" />
     <Compile Include="TesterDate43_IncrémenterPlus.cs" />
+    <Compile Include="TesterDate44+45_Décrémenter.cs" />
+    <Compile Include="TesterDate46+47_DemainHier.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -78,9 +80,9 @@
       <Project>{5954e0a4-2b05-415b-aa9c-07c7df1cecee}</Project>
       <Name>DateLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LireDatePartie2\LireDatePartie2.csproj">
+    <ProjectReference Include="..\LireDatePartie2\LireDate.csproj">
       <Project>{3fb8510e-7606-45d4-8d27-608701005e26}</Project>
-      <Name>LireDatePartie2</Name>
+      <Name>LireDate</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

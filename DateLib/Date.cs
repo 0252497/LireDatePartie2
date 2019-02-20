@@ -10,10 +10,14 @@ namespace Prog2
     {
         // --- Attributs ---
         public int Année;
-        public int Mois;
-        public int Jour;
         private static readonly Date aujourdhui = New(
             DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
+        private static Date demain = New(
+            DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
+        public static Date hier = New(
+            DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
+        public int Jour;
+        public int Mois;
 
         // --- Méthodes ---
         /// <summary>
@@ -55,6 +59,41 @@ namespace Prog2
             return clone;
         }
 
+        /// <summary>
+        /// Retranche des jours à la date.
+        /// </summary>
+        /// <param name="décrément">nombre de jours à enlever</param>
+        public void Décrémenter(/* Date this */ int décrément = 1)
+        {
+            for (int i = 0; i < décrément; ++i)
+            {
+                if (EstValide(this.Année, this.Mois, this.Jour - 1))
+                {
+                    --this.Jour;
+                }
+                else
+                {
+                    if (this.Mois <= 1)
+                    {
+                        this.Mois = 12;
+                        --this.Année;
+                    }
+                    else
+                    {
+                        --this.Mois;
+                    }
+
+                    this.Jour = DateUtil.NbJoursDsMois(this.Année, this.Mois);
+                }
+            }
+        }
+
+        public static Date Demain()
+        {
+            demain.MettreÀJour();
+            demain.Incrémenter();
+            return demain;
+        }
         /// <summary>
         /// Fais afficher la date, soit le mois, le jour et l'année. Si aucune date n'est précisée, on fera 
         /// afficher la date d'aujourd'hui.
@@ -102,6 +141,17 @@ namespace Prog2
         /// <returns>vrai si la date est valide</returns>
         public static bool EstValide(int année, int mois, int jour)
             => 1 <= jour && jour <= DateUtil.NbJoursDsMois(année, mois) && 1 <= mois && mois <= 12;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static Date Hier()
+        {
+            hier.MettreÀJour();
+            hier.Décrémenter();
+            return hier;
+        }
 
         /// <summary>
         /// Permet d'incrémenter la date.

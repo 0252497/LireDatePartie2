@@ -15,7 +15,7 @@ namespace Prog2
 
         // --- Méthodes ---
 
-            /// <summary>
+        /// <summary>
         /// Renvoie si une année est bissextile.
         /// </summary>
         /// <param name="année">l'année</param>
