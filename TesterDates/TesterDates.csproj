@@ -67,6 +67,8 @@
     <Compile Include="TesterDate43_IncrémenterPlus.cs" />
     <Compile Include="TesterDate44+45_Décrémenter.cs" />
     <Compile Include="TesterDate46+47_DemainHier.cs" />
+    <Compile Include="TesterDate50_Util.cs" />
+    <Compile Include="TesterDate51_Fluidification.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

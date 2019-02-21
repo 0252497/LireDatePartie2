@@ -24,11 +24,9 @@ namespace Prog2
         /// Retourne la date d'aujourd'hui.
         /// </summary>
         /// <returns>aujourd'hui</returns>
-        public static Date Aujourdhui()
-        {
-            aujourdhui.MettreÀJour();
-            return aujourdhui;
-        }
+        public static Date Aujourdhui() 
+            => aujourdhui.MettreÀJour();
+
         /// <summary>
         /// Pour cloner une date en modifiant certains attributs au besoin.
         /// </summary>
@@ -63,7 +61,7 @@ namespace Prog2
         /// Retranche des jours à la date.
         /// </summary>
         /// <param name="décrément">nombre de jours à enlever</param>
-        public void Décrémenter(/* Date this */ int décrément = 1)
+        public Date Décrémenter(/* Date this */ int décrément = 1)
         {
             for (int i = 0; i < décrément; ++i)
             {
@@ -86,18 +84,17 @@ namespace Prog2
                     this.Jour = DateUtil.NbJoursDsMois(this.Année, this.Mois);
                 }
             }
+
+            return this;
         }
 
         /// <summary>
         /// Retourne la date de demain.
         /// </summary>
         /// <returns>la date de demain</returns>
-        public static Date Demain()
-        {
-            demain.MettreÀJour();
-            demain.Incrémenter();
-            return demain;
-        }
+        public static Date Demain() 
+            => demain.MettreÀJour().Incrémenter();
+
         /// <summary>
         /// Fais afficher la date, soit le mois, le jour et l'année. Si aucune date n'est précisée, on fera 
         /// afficher la date d'aujourd'hui.
@@ -150,18 +147,14 @@ namespace Prog2
         /// Retourne la date de hier.
         /// </summary>
         /// <returns>la date de hier</returns>
-        public static Date Hier()
-        {
-            hier.MettreÀJour();
-            hier.Décrémenter();
-            return hier;
-        }
+        public static Date Hier() 
+            => hier.MettreÀJour().Décrémenter();
 
         /// <summary>
         /// Ajoute des jours à la date
         /// </summary>
         /// <param name="incrément">nombre de jours à ajouter</param>
-        public void Incrémenter(/* Date this*/ int incrément = 1)
+        public Date Incrémenter(/* Date this*/ int incrément = 1)
         {
             for (int i = 0; i < incrément; ++i)
             {
@@ -184,6 +177,8 @@ namespace Prog2
                     }
                 }
             }
+
+            return this;
         }
 
         /// <summary>
@@ -196,11 +191,12 @@ namespace Prog2
         public static Date New(int année, int mois, int jour) 
             => !EstValide(année, mois, jour) ? null : new Date { Année = année, Mois = mois, Jour = jour };
 
-        public void MettreÀJour(/* Date this*/)
+        public Date MettreÀJour(/* Date this*/)
         {
             this.Année = DateTime.Today.Year;
             this.Mois = DateTime.Today.Month;
             this.Jour = DateTime.Today.Day;
+            return this;
         }
 
         /// <summary>
