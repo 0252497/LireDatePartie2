@@ -38,11 +38,11 @@ namespace Prog2
             var hier = Hier();
             var demain = Demain();
 
-            ColorWriteLine(Blue, "\nAvant-hier:\t\t{0}", EnTexte(avantHier.Décrémenter(2)));
-            ColorWriteLine(DarkYellow, "Hier:\t\t\t{0}", EnTexte(hier));
-            ColorWriteLine(Magenta, "Aujourd'hui:\t\t{0}", EnTexte(aujourdhui, "_"));
-            ColorWriteLine(DarkBlue, "Demain:\t\t\t{0}", EnTexte(demain));
-            ColorWriteLine(DarkMagenta, "Après-demain:\t\t{0}", EnTexte(aprèsDemain.Incrémenter(2)));
+            ColorWriteLine(Blue, "\nAvant-hier:\t\t{0}", avantHier.Décrémenter(2).EnTexteLong());
+            ColorWriteLine(DarkYellow, "Hier:\t\t\t{0}", Hier().EnTexteLong());
+            ColorWriteLine(Magenta, "Aujourd'hui:\t\t{0}", aujourdhui.EnTexteLong());
+            ColorWriteLine(DarkBlue, "Demain:\t\t\t{0}", Demain().EnTexteLong());
+            ColorWriteLine(DarkMagenta, "Après-demain:\t\t{0}", aprèsDemain.Incrémenter(2).EnTexteLong());
 
             Poursuivre();
         }

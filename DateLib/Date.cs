@@ -118,6 +118,13 @@ namespace Prog2
         }
 
         /// <summary>
+        /// Pour obtenir la représentation textuelle d'une date en format long.
+        /// </summary>
+        /// <returns>représentation textuelle</returns>
+        public string EnTexteLong(/* Date this */) 
+            => $"{this.Jour} {NomsDesMois.TableauDesMois[this.Mois - 1]} {this.Année}";
+
+        /// <summary>
         /// Pour savoir si une date est spéciale. Une date est spéciale si le mois et le jour sont
         /// identiques.
         /// </summary>

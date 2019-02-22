@@ -22,6 +22,44 @@ namespace Prog2
             Novembre    =   "novembre",
             Décembre    =   "décembre";
 
+        // --- Tables de conversion ---
+
+        public static readonly List<string>
+            ListeDesMois = new List<string>
+        {
+                Janvier,
+                Février,
+                Mars,
+                Avril,
+                Mai,
+                Juin,
+                Juillet,
+                Août,
+                Septembre,
+                Octobre,
+                Novembre,
+                Décembre,
+        };
+
+        public static readonly string[]
+            TableauDesMois = new string[]
+        {
+             Janvier,
+             Février,
+             Mars,
+             Avril,
+             Mai,
+             Juin,
+             Juillet,
+             Août,
+             Septembre,
+             Octobre,
+             Novembre,
+             Décembre,
+        };
+
+        // --- Méthodes ---
+
         /// <summary>
         /// Convertir un mois numérique en string.
         /// </summary>
@@ -85,32 +123,7 @@ namespace Prog2
                 return null;
             else
                 // Utiliser la table de conversion
-                return ListeDesMois[mois - 1];
+                return TableauDesMois[mois - 1];
         }
-
-        // --- Tables de conversion ---
-
-        public static readonly List<string>
-            ListeDesMois = new List<string>
-        {
-                Janvier,
-                Février,
-                Mars,
-                Avril,
-                Mai,
-                Juin,
-                Juillet,
-                Août,
-                Septembre,
-                Octobre,
-                Novembre,
-                Décembre,
-        };
-
-        public static readonly string[]
-            TableauDesMois = new string[]
-        {
-
-        };
     }
 }

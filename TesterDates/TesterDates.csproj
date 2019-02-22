@@ -69,6 +69,8 @@
     <Compile Include="TesterDate46+47_DemainHier.cs" />
     <Compile Include="TesterDate50_Util.cs" />
     <Compile Include="TesterDate51_Fluidification.cs" />
+    <Compile Include="TesterDate52+53+54_Convertir.cs" />
+    <Compile Include="TesterDate55_EnTexteLong.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
