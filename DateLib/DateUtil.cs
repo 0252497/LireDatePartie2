@@ -53,6 +53,13 @@ namespace Prog2
             return true;
         }
 
+        /// <summary>
+        /// Lis un mois sur la console.
+        /// </summary>
+        /// <param name="propriété">nom de la propriété à afficher</param>
+        /// <param name="défaut">valeur par défaut (null si aucune)</param>
+        /// <param name="mois">le mois lu</param>
+        /// <returns>vrai si ça marche</returns>
         public static bool LireMois(string propriété, string défaut, out int mois) 
             => TryParseMois(Demander(propriété, défaut), out mois) ? true : false;
 

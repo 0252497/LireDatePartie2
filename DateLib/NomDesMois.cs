@@ -117,7 +117,7 @@ namespace Prog2
         /// Convertit un mois numérique en string.
         /// </summary>
         /// <param name="mois">le mois (1 = janvier)</param>
-        /// <returns></returns>
+        /// <returns>le nom du mois, ou null si le mois numérique n'est pas valide</returns>
         public static string Convertir3(int mois)
         {
             if (1 > mois || mois > 12)
