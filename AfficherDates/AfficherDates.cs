@@ -27,7 +27,7 @@ namespace Prog2
 
             // Pour vérifier nos affichages!
             Title = "AfficherDates";
-            ColorWriteLine(Green, "\nAttentat du WTC:\t{0}", EnTexte(DateAttentatWTC));
+            ColorWriteLine(Green, "Attentat du WTC:\t{0}", EnTexte(DateAttentatWTC));
             ColorWriteLine(Yellow, "\nMort de MJ:\t\t{0}", EnTexte(DateDecesMJ, "/"));
             ColorWriteLine(Cyan, "\nExplosion de la NC:\t{0}", EnTexte(DateExplosionNC, "."));
             
@@ -35,12 +35,10 @@ namespace Prog2
                 DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
             var avantHier = New(
                 DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
-            var hier = Hier();
-            var demain = Demain();
 
             ColorWriteLine(Blue, "\nAvant-hier:\t\t{0}", avantHier.Décrémenter(2).EnTexteLong());
             ColorWriteLine(DarkYellow, "Hier:\t\t\t{0}", Hier().EnTexteLong());
-            ColorWriteLine(Magenta, "Aujourd'hui:\t\t{0}", aujourdhui.EnTexteLong());
+            ColorWriteLine(Magenta, "Aujourd'hui:\t\t{0}", Aujourdhui().EnTexteLong());
             ColorWriteLine(DarkBlue, "Demain:\t\t\t{0}", Demain().EnTexteLong());
             ColorWriteLine(DarkMagenta, "Après-demain:\t\t{0}", aprèsDemain.Incrémenter(2).EnTexteLong());
 

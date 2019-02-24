@@ -1,6 +1,7 @@
 ﻿/* Fichier d'utilitaires. */
 
 using System;
+using System.Text;
 using static System.Console;
 using static System.ConsoleColor;
 
@@ -108,10 +109,8 @@ namespace Prog2
         /// <param name="défaut">la valeur par défaut</param>
         /// <param name="entier">faux si une erreur se produit</param>
         /// <returns></returns>
-        public static bool LireEntier(string propriété, string défaut, out int entier)
-        {
-            return LireEntier(propriété, défaut, int.MinValue, int.MaxValue, out entier);
-        }
+        public static bool LireEntier(string propriété, string défaut, out int entier) 
+            => LireEntier(propriété, défaut, int.MinValue, int.MaxValue, out entier);
 
         /// <summary>
         /// Permet d'afficher un message d'erreur en rouge.
@@ -144,5 +143,8 @@ namespace Prog2
             ReadKey(true);
             WriteLine();
         }
+
+        public static string SansAccents(this string str) 
+            => Encoding.ASCII.GetString(Encoding.GetEncoding(1251).GetBytes(str));
     }
 }

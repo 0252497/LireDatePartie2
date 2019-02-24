@@ -71,6 +71,10 @@
     <Compile Include="TesterDate51_Fluidification.cs" />
     <Compile Include="TesterDate52+53+54_Convertir.cs" />
     <Compile Include="TesterDate55_EnTexteLong.cs" />
+    <Compile Include="TesterDate56._NuméroDuMois.cs" />
+    <Compile Include="TesterDate56d_SansAccents.cs" />
+    <Compile Include="TesterDate56e_CommencePar.cs" />
+    <Compile Include="TesterDate57_TryParseMois.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

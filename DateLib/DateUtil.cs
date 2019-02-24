@@ -8,6 +8,9 @@ namespace Prog2
 {
     public static class DateUtil
     {
+        const int MoisMin = 1;
+        const int MoisMax = 12;
+
         // --- Attributs ---
         public static readonly Date DateAttentatWTC = New(2001, 09, 11);
         public static readonly Date DateDecesMJ = New(2012, 01, 31);
@@ -34,7 +37,7 @@ namespace Prog2
             ColorWriteLine(Magenta, propriété);
 
             LireEntier("\tAnnée ", "", out int année);
-            LireEntier("\tMois ", "", 1, 12, out int mois);
+            LireMois("\tMois ", "", out int mois);
 
             // On détermine le nombre de jours dans le mois entré pour savoir le maximum de 
             // jours possibles :
@@ -44,10 +47,14 @@ namespace Prog2
             
             date = New(année, mois, jour);
 
-            if (date == null) date = Aujourdhui();
+            if (date == null)
+                date = Aujourdhui();
 
             return true;
         }
+
+        public static bool LireMois(string propriété, string défaut, out int mois) 
+            => TryParseMois(Demander(propriété, défaut), out mois) ? true : false;
 
         /// <summary>
         /// Renvoie le nombre de jours dans le mois entré.
@@ -80,6 +87,42 @@ namespace Prog2
                 default:
                     return 0;
             }
+        }
+
+        /// <summary>
+        /// Tente d'interpréter une string comme un mois. Le texte peut être un texte ou une nombre.
+        /// </summary>
+        /// <param name="strMois">le mois sous forme de texte</param>
+        /// <param name="mois">le mois numérique</param>
+        /// <returns>vrai si l'interprétation a réussi</returns>
+        public static bool TryParseMois(this string strMois, out int mois)
+        {
+            strMois = strMois.Trim();
+
+            if (strMois == "")
+                mois = 0;
+            else
+            {
+                char caractère = strMois.ToCharArray()[0];
+
+                if (char.IsLetter(caractère))
+                {
+                    mois = NomsDesMois.NuméroDuMois5(strMois);
+                }
+                else if (char.IsDigit(caractère))
+                {
+                    int.TryParse(strMois, out mois);
+
+                    if (mois < 1 || 12 < mois)
+                        mois = 0;
+                }
+                else
+                {
+                    mois = 0;
+                }
+            }
+
+            return mois != 0 ? true : false;
         }
     }
 }

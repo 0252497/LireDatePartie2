@@ -10,14 +10,14 @@ namespace Prog2
     {
         // --- Attributs ---
         public int Année;
-        public static readonly Date aujourdhui = New(
+        public int Jour;
+        public int Mois;
+        private static readonly Date aujourdhui = New(
             DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
         private static readonly Date demain = New(
             DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
         private static readonly Date hier = New(
             DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
-        public int Jour;
-        public int Mois;
 
         // --- Méthodes ---
         /// <summary>
