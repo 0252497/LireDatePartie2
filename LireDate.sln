@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TesterDates", "TesterDates\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UtilitaireLib", "UtilitaireLib\UtilitaireLib.csproj", "{D100541B-AE6A-457D-9597-DDCC0055E149}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AfficherMois", "AfficherMois\AfficherMois.csproj", "{0E533868-422C-449A-A7CB-9A0D3E683A44}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{D100541B-AE6A-457D-9597-DDCC0055E149}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D100541B-AE6A-457D-9597-DDCC0055E149}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D100541B-AE6A-457D-9597-DDCC0055E149}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E533868-422C-449A-A7CB-9A0D3E683A44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E533868-422C-449A-A7CB-9A0D3E683A44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E533868-422C-449A-A7CB-9A0D3E683A44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E533868-422C-449A-A7CB-9A0D3E683A44}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

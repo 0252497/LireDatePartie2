@@ -4,16 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5954E0A4-2B05-415B-AA9C-07C7DF1CECEE}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Prog2</RootNamespace>
-    <AssemblyName>DateLib</AssemblyName>
+    <ProjectGuid>{0E533868-422C-449A-A7CB-9A0D3E683A44}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>AfficherMois</RootNamespace>
+    <AssemblyName>AfficherMois</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -41,13 +42,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Date.cs" />
-    <Compile Include="DateUtil.cs" />
-    <Compile Include="Mois.cs" />
-    <Compile Include="NomDesMois.cs" />
+    <Compile Include="AfficherMois.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DateLib\DateLib.csproj">
+      <Project>{5954e0a4-2b05-415b-aa9c-07c7df1cecee}</Project>
+      <Name>DateLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UtilitaireLib\UtilitaireLib.csproj">
       <Project>{d100541b-ae6a-457d-9597-ddcc0055e149}</Project>
       <Name>UtilitaireLib</Name>
