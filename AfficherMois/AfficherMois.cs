@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using static System.Console;
 using static System.ConsoleColor;
 using static Prog2.ConsolePlus;
+using static Prog2.Mois;
+
 namespace Prog2
 {
     static class AfficherMois
@@ -17,35 +19,50 @@ namespace Prog2
 
             // --- Conversion entier/enum ---
             ColorWriteLine(White, "\nConvertion entier-enum :");
-            ColorWriteLine(Magenta, $"{Mois.Janvier,8} == {(int) Mois.Janvier}");
-            ColorWriteLine(DarkYellow, $"{Mois.Décembre,8} == {(int)Mois.Décembre}");
+            ColorWriteLine(Magenta, $"{Janvier,8} == {(int) Janvier}");
+            ColorWriteLine(DarkYellow, $"{Décembre,8} == {(int)Décembre}");
             ColorWriteLine(DarkGreen, $"{(Mois)4,8} == {4}");
-            Debug.Assert((int)Mois.Mars == 3);
-            Debug.Assert(Mois.Juin == (Mois)6);
+            Debug.Assert((int)Mars == 3);
+            Debug.Assert(Juin == (Mois)6);
 
             // --- Addition et soustraction ---
             ColorWriteLine(White, "\nAdditions & soustractions");
-            ColorWriteLine(DarkCyan, $"{Mois.Juin} + 1 == {Mois.Juin + 1}");
-            ColorWriteLine(DarkCyan, $"{Mois.Août} - 1 == {Mois.Août - 1}");
-            Mois mois = Mois.Décembre;
+            ColorWriteLine(DarkCyan, $"{Juin} + 1 == {Juin + 1}");
+            ColorWriteLine(DarkCyan, $"{Août} - 1 == {Août - 1}");
+            Mois mois = Décembre;
             mois -= 8;
-            Debug.Assert(mois == Mois.Avril);
-            ColorWriteLine(Blue, $"{Mois.Décembre} - 8 == {mois}");
-            ColorWriteLine(DarkGreen, $"{Mois.Août} - {Mois.Avril} == {Mois.Août - Mois.Avril}");
+            Debug.Assert(mois == Avril);
+            ColorWriteLine(Blue, $"{Décembre} - 8 == {mois}");
+            ColorWriteLine(DarkGreen, $"{Août} - {Avril} == {Août - Avril}");
 
             // --- Comparaisons ---
             ColorWriteLine(White, "\nComparaisons :");
-            ColorWriteLine(DarkMagenta, $"({Mois.Mars} == {Mois.Avril}) == {Mois.Mars == Mois.Avril}");
-            ColorWriteLine(DarkMagenta, $"({Mois.Mars} != {Mois.Avril}) == {Mois.Mars != Mois.Avril}");
-            ColorWriteLine(DarkMagenta, $"({Mois.Mars} < {Mois.Avril}) == {Mois.Mars < Mois.Avril}");
-            ColorWriteLine(DarkMagenta, $"({Mois.Mars} > {Mois.Avril}) == {Mois.Mars > Mois.Avril}");
+            ColorWriteLine(DarkMagenta, $"({Mars} == {Avril}) == {Mars == Avril}");
+            ColorWriteLine(DarkMagenta, $"({Mars} != {Avril}) == {Mars != Avril}");
+            ColorWriteLine(DarkMagenta, $"({Mars} < {Avril}) == {Mars < Avril}");
+            ColorWriteLine(DarkMagenta, $"({Mars} > {Avril}) == {Mars > Avril}");
 
             // --- Étrangetés ---
             ColorWriteLine(White, "\nBizarre... :");
-            ColorWriteLine(DarkCyan, $"({Mois.Décembre} + 1 == {Mois.Décembre + 1}");
-            ColorWriteLine(DarkCyan, $"({Mois.Décembre} + 2 == {Mois.Décembre + 2}");
+            ColorWriteLine(DarkCyan, $"({Décembre} + 1 == {Décembre + 1}");
+            ColorWriteLine(DarkCyan, $"({Décembre} + 2 == {Décembre + 2}");
             ColorWriteLine(DarkCyan, $"default(Mois) == {default(Mois)}");
             ColorWriteLine(DarkCyan, $"def(Mois) + 1 == {default(Mois) + 1}");
+
+            // --- Énumération ---
+            ColorWrite(White, "\nLes mois sont : ");
+
+            for (Mois m = Janvier; m <= Décembre; ++m)
+            {
+                ColorWrite(DarkRed, $"{m} ");
+            }
+
+            ColorWrite(DarkGray, "\nLes mois sont : ");
+
+            foreach (Mois m in Enum.GetValues(typeof(Mois)))
+            {
+                ColorWrite(DarkYellow, $"{m} ");
+            }
         }
     }
 }
