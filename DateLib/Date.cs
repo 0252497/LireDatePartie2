@@ -1,7 +1,7 @@
 ﻿/* Fichier pour les attributs et les méthodes de la classe Date. */
 using System;
 using static Prog2.Mois;
-
+using static Prog2.StringUtil;
 namespace Prog2
 {
     /// <summary>
@@ -25,7 +25,7 @@ namespace Prog2
         /// Retourne la date d'aujourd'hui.
         /// </summary>
         /// <returns>aujourd'hui</returns>
-        public static Date Aujourdhui() 
+        public static Date Aujourdhui()
             => aujourdhui.MettreÀJour();
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace Prog2
         /// Retourne la date de demain.
         /// </summary>
         /// <returns>la date de demain</returns>
-        public static Date Demain() 
+        public static Date Demain()
             => demain.MettreÀJour().Incrémenter();
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace Prog2
             else
             {
                 return string.Format(
-                    "{0:D4}{3}{1:D2}{3}{2:D2}", aujourdhui.Année, aujourdhui.Mois, aujourdhui.Jour, 
+                    "{0:D4}{3}{1:D2}{3}{2:D2}", aujourdhui.Année, aujourdhui.Mois, aujourdhui.Jour,
                     séparateur);
             }
         }
@@ -122,7 +122,7 @@ namespace Prog2
         /// Pour obtenir la représentation textuelle d'une date en format long.
         /// </summary>
         /// <returns>représentation textuelle</returns>
-        public string EnTexteLong(/* Date this */) 
+        public string EnTexteLong(/* Date this */)
             => $"{this.Jour} {((Mois)this.Mois).ToString().ToLower()} {this.Année}";
 
         /// <summary>
@@ -155,7 +155,7 @@ namespace Prog2
         /// Retourne la date de hier.
         /// </summary>
         /// <returns>la date de hier</returns>
-        public static Date Hier() 
+        public static Date Hier()
             => hier.MettreÀJour().Décrémenter();
 
         /// <summary>
@@ -196,7 +196,7 @@ namespace Prog2
         /// <param name="mois">le mois, 1 = janvier</param>
         /// <param name="jour">le jour du mois</param>
         /// <returns>une nouvelle date ou null si la date n'est pas valide</returns>
-        public static Date New(int année, int mois, int jour) 
+        public static Date New(int année, int mois, int jour)
             => !EstValide(année, mois, jour) ? null : new Date { Année = année, Mois = mois, Jour = jour };
 
         /// <summary>
@@ -206,8 +206,8 @@ namespace Prog2
         /// <param name="mois">le mois, 1 = janvier</param>
         /// <param name="jour">le jour du mois</param>
         /// <returns>une nouvelle date ou null si la date n'est pas valide</returns>
-        public static Date New(int année, Mois mois, int jour) 
-            => EstValide(année, (int)mois, jour) ? 
+        public static Date New(int année, Mois mois, int jour)
+            => EstValide(année, (int)mois, jour) ?
                 new Date { Année = année, Mois = (int)mois, Jour = jour } : null;
 
         public Date MettreÀJour(/* Date this*/)
@@ -222,7 +222,7 @@ namespace Prog2
         /// 
         /// </summary>
         /// <returns></returns>
-        public Mois MoisTypé(/* Date this */) 
+        public Mois MoisTypé(/* Date this */)
             => (Mois)this.Mois;
 
         /// <summary>
@@ -233,5 +233,76 @@ namespace Prog2
         /// <returns>vrai si égales</returns>
         public static bool SontÉgales(Date date1, Date date2)
             => date1.Année == date2.Année && date1.Mois == date2.Mois && date1.Jour == date2.Jour;
+        
+
+        private static bool
+            TrySplitDate(string strDate, out string strAnnée, out string strMois, out string strJour)
+        {
+            string[] date = strDate.Split(new[] { '-', '/', ',', ' ', ';', ':', '(', ')', '\'', '.'}, StringSplitOptions.RemoveEmptyEntries);
+
+            strAnnée = null;
+            strMois = null;
+            strJour = null;
+
+            if (date.Length != 3)
+            {
+                return false;
+            }
+            else if (EstAnnée(date[0]) && date[1].EstAlpha() && EstJour(date[2]))
+            {
+                strAnnée = date[0];
+                strMois = date[1];
+                strJour = date[2];
+                return true;
+            }
+            else if (EstAnnée(date[0]) && EstJour(date[1]) && date[2].EstAlpha())
+            {
+                strAnnée = date[0];
+                strJour = date[1];
+                strMois = date[2];
+                return true;
+            }
+            else if (date[0].EstAlpha() && EstAnnée(date[1]) && EstJour(date[2]))
+            {
+                strMois = date[0];
+                strAnnée = date[1];
+                strJour = date[2];
+                return true;
+            }
+            else if (date[0].EstAlpha() && EstJour(date[1]) && EstAnnée(date[2]))
+            {
+                strMois = date[0];
+                strJour = date[1];
+                strAnnée = date[2];
+                return true;
+            }
+            else if (EstJour(date[0]) && EstAnnée(date[1]) && date[2].EstAlpha())
+            {
+                strJour = date[0];
+                strAnnée = date[1];
+                strMois = date[2];
+                return true;
+            }
+            else if (EstJour(date[0]) && date[1].EstAlpha() && EstAnnée(date[2]))
+            {
+                strJour = date[0];
+                strMois = date[1];
+                strAnnée = date[2];
+                return true;
+            }
+            else if (EstAnnée(date[0]) && EstJour(date[1]) && EstJour(date[2]))
+            {
+                strJour = date[2];
+                strMois = date[1];
+                strAnnée = date[0];
+                return true;
+            }
+
+            return false;
+
+            // --- Fonctions locales ---
+            bool EstAnnée(string str) => str.EstNumérique() && str.Length >= 3;
+            bool EstJour(string str) => str.EstNumérique() && str.Length <= 2;
+        }
     }
 }
