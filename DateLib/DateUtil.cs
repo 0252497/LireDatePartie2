@@ -98,6 +98,11 @@ namespace Prog2
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nom"></param>
+        /// <returns></returns>
         public static int NuméroDuMois(string nom)
         {
             int numéroMois = 0;
@@ -132,7 +137,9 @@ namespace Prog2
             strMois = strMois.Trim();
 
             if (strMois == "")
+            {
                 mois = 0;
+            }
             else
             {
                 char caractère = strMois.ToCharArray()[0];
