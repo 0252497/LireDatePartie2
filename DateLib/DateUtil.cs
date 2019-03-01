@@ -3,6 +3,8 @@
 using static Prog2.ConsolePlus;
 using static System.ConsoleColor;
 using static Prog2.Date;
+using System;
+using static Prog2.Mois;
 
 namespace Prog2
 {
@@ -96,6 +98,29 @@ namespace Prog2
             }
         }
 
+        public static int NuméroDuMois(string nom)
+        {
+            int numéroMois = 0;
+
+            int tour = 0;
+
+            for (Mois mois = Janvier; mois <= Décembre; ++mois)
+            {
+                if (mois.ToString().ToLower().SansAccents().StartsWith(nom.ToLower().SansAccents()))
+                {
+                    numéroMois = (int)mois;
+                    ++tour;
+                }
+            }
+
+            if (tour > 1)
+            {
+                return 0;
+            }
+
+            return numéroMois;
+        }
+
         /// <summary>
         /// Tente d'interpréter une string comme un mois. Le texte peut être un texte ou une nombre.
         /// </summary>
@@ -114,7 +139,7 @@ namespace Prog2
 
                 if (char.IsLetter(caractère))
                 {
-                    mois = NomsDesMois.NuméroDuMois5(strMois);
+                    mois = NuméroDuMois(strMois);
                 }
                 else if (char.IsDigit(caractère))
                 {

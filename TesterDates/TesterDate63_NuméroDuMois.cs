@@ -3,7 +3,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using static Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 using System.Collections.Generic;
 using System.Linq;
-using static Prog2.NomsDesMois;
 
 
 namespace Prog2
@@ -11,13 +10,11 @@ namespace Prog2
 
     public partial class TesterDateBase
     {
-
- 
+   
         [TestMethod]
-        public void _56d_NuméroDuMois4()
+        public void _63_NuméroDuMois()
         {
-            TesterNuméroDuMoisInsemsibleAuxAccents(NuméroDuMois4);
-            AreEqual(0, NuméroDuMois4("déc"));
+            TesterNuméroDuMoisCommencePar(DateUtil.NuméroDuMois);
         }
 
     }

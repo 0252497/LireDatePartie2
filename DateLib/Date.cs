@@ -1,5 +1,6 @@
 ﻿/* Fichier pour les attributs et les méthodes de la classe Date. */
 using System;
+using static Prog2.Mois;
 
 namespace Prog2
 {
@@ -122,7 +123,7 @@ namespace Prog2
         /// </summary>
         /// <returns>représentation textuelle</returns>
         public string EnTexteLong(/* Date this */) 
-            => $"{this.Jour} {NomsDesMois.TableauDesMois[this.Mois - 1]} {this.Année}";
+            => $"{this.Jour} {((Mois)this.Mois).ToString().ToLower()} {this.Année}";
 
         /// <summary>
         /// Pour savoir si une date est spéciale. Une date est spéciale si le mois et le jour sont
@@ -198,6 +199,17 @@ namespace Prog2
         public static Date New(int année, int mois, int jour) 
             => !EstValide(année, mois, jour) ? null : new Date { Année = année, Mois = mois, Jour = jour };
 
+        /// <summary>
+        /// Pour aider à construire une nouvelle date.
+        /// </summary>
+        /// <param name="année">l'année</param>
+        /// <param name="mois">le mois, 1 = janvier</param>
+        /// <param name="jour">le jour du mois</param>
+        /// <returns>une nouvelle date ou null si la date n'est pas valide</returns>
+        public static Date New(int année, Mois mois, int jour) 
+            => EstValide(année, (int)mois, jour) ? 
+                new Date { Année = année, Mois = (int)mois, Jour = jour } : null;
+
         public Date MettreÀJour(/* Date this*/)
         {
             this.Année = DateTime.Today.Year;
@@ -205,6 +217,13 @@ namespace Prog2
             this.Jour = DateTime.Today.Day;
             return this;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public Mois MoisTypé(/* Date this */) 
+            => (Mois)this.Mois;
 
         /// <summary>
         /// Pour vérifier que deux dates sont pareilles.

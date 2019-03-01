@@ -69,12 +69,11 @@
     <Compile Include="TesterDate46+47_DemainHier.cs" />
     <Compile Include="TesterDate50_Util.cs" />
     <Compile Include="TesterDate51_Fluidification.cs" />
-    <Compile Include="TesterDate52+53+54_Convertir.cs" />
     <Compile Include="TesterDate55_EnTexteLong.cs" />
-    <Compile Include="TesterDate56._NuméroDuMois.cs" />
-    <Compile Include="TesterDate56d_SansAccents.cs" />
-    <Compile Include="TesterDate56e_CommencePar.cs" />
     <Compile Include="TesterDate57_TryParseMois.cs" />
+    <Compile Include="TesterDate61_MoisTypé.cs" />
+    <Compile Include="TesterDate62_NewSurchargé.cs" />
+    <Compile Include="TesterDate63_NuméroDuMois.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -83,6 +82,10 @@
     <ProjectReference Include="..\AfficherDates\AfficherDates.csproj">
       <Project>{0dde2513-3159-4508-9ae6-bf5d5c9dff32}</Project>
       <Name>AfficherDates</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AfficherMois\AfficherMois.csproj">
+      <Project>{0e533868-422c-449a-a7cb-9a0d3e683a44}</Project>
+      <Name>AfficherMois</Name>
     </ProjectReference>
     <ProjectReference Include="..\DateLib\DateLib.csproj">
       <Project>{5954e0a4-2b05-415b-aa9c-07c7df1cecee}</Project>
