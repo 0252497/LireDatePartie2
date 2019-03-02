@@ -10,12 +10,42 @@ using static System.ConsoleColor;
 using System.Diagnostics;
 using static Prog2.DateUtil;
 using static Prog2.Date;
+using System.IO;
 
 namespace Prog2
 {
     static class AfficherDates
     {
         static void Main(string[] args)
+        {
+            string nomFichier = "MonFichier.txt";
+
+            switch (args.Length)
+            {
+                case 0:
+                    // --- Aucun argument, on se rabat sur l'anicien programme ---
+                    var texte = File.ReadAllText(nomFichier);
+                    ColorWriteLine(DarkCyan, texte);
+                    AncienMain();
+                    break;
+
+                case 1:
+                    // --- On affiche le contenu du fichier spécifié en argument ---
+                    nomFichier = args[0];
+                    texte = File.ReadAllText(nomFichier);
+                    ColorWriteLine(Magenta, texte);
+                    break;
+
+                default:
+                    // --- Message d'usage ---
+                    ColorWriteLine(Yellow, "USAGE : AfficherDate [NomFichier]");
+                    break;
+            }
+
+            
+        }
+
+        private static void AncienMain()
         {
             var badAttentatWTC = New(11, 09, 2001);
 
@@ -30,17 +60,17 @@ namespace Prog2
             ColorWriteLine(Green, "Attentat du WTC:\t{0}", EnTexte(DateAttentatWTC));
             ColorWriteLine(Yellow, "\nMort de MJ:\t\t{0}", EnTexte(DateDecesMJ, "/"));
             ColorWriteLine(Cyan, "\nExplosion de la NC:\t{0}", EnTexte(DateExplosionNC, "."));
-            
+
             var aprèsDemain = New(
                 DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
             var avantHier = New(
                 DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
 
-            ColorWriteLine(Blue, "\nAvant-hier:\t\t{0}", avantHier.Décrémenter(2).EnTexteLong());
-            ColorWriteLine(DarkYellow, "Hier:\t\t\t{0}", Hier().EnTexteLong());
-            ColorWriteLine(Magenta, "Aujourd'hui:\t\t{0}", Aujourdhui().EnTexteLong());
-            ColorWriteLine(DarkBlue, "Demain:\t\t\t{0}", Demain().EnTexteLong());
-            ColorWriteLine(DarkMagenta, "Après-demain:\t\t{0}", aprèsDemain.Incrémenter(2).EnTexteLong());
+            ColorWriteLine(Magenta, "\nAvant-hier:\t\t{0}", avantHier.Décrémenter(2).EnTexteLong());
+            ColorWriteLine(Yellow, "Hier:\t\t\t{0}", Hier().EnTexteLong());
+            ColorWriteLine(Green, "Aujourd'hui:\t\t{0}", Aujourdhui().EnTexteLong());
+            ColorWriteLine(Cyan, "Demain:\t\t\t{0}", Demain().EnTexteLong());
+            ColorWriteLine(Magenta, "Après-demain:\t\t{0}", aprèsDemain.Incrémenter(2).EnTexteLong());
 
             Poursuivre();
         }
