@@ -1,4 +1,4 @@
-﻿/* Fichier de méthodes DateUtil. */
+﻿/* --- Utilitaire de méthodes DateUtil. --- */
 
 using static Prog2.ConsolePlus;
 using static System.ConsoleColor;
@@ -10,9 +10,6 @@ namespace Prog2
 {
     public static class DateUtil
     {
-        const int MoisMin = 1;
-        const int MoisMax = 12;
-
         // --- Attributs ---
         public static readonly Date DateAttentatWTC = New(2001, 09, 11);
         public static readonly Date DateDecesMJ = New(2012, 01, 31);
@@ -99,21 +96,24 @@ namespace Prog2
         }
 
         /// <summary>
-        /// 
+        /// Obtient le numéro correspondant au nom du mois spécifié. Les accents et la casse ne comptent
+        /// pas pour la recherche. On peut spécifier uniquement le début du mois, mais il ne doit pas
+        /// y avoir d'ambiguïté.
         /// </summary>
-        /// <param name="nom"></param>
-        /// <returns></returns>
+        /// <param name="nom">le nom du mois</param>
+        /// <returns>le numéro du mois ou zéro si non trouvé</returns>
         public static int NuméroDuMois(string nom)
         {
-            int numéroMois = 0;
+            int numéroDuMois = 0;   // Le numéro du mois à rechercher
 
-            int tour = 0;
+            // Pour s'assurer qu'il n'y ait pas d'ambiguïté si 2 mois débutent par les mêmes lettres :
+            int tour = 0;   
 
             for (Mois mois = Janvier; mois <= Décembre; ++mois)
             {
                 if (mois.ToString().ToLower().SansAccents().StartsWith(nom.ToLower().SansAccents()))
                 {
-                    numéroMois = (int)mois;
+                    numéroDuMois = (int)mois;
                     ++tour;
                 }
             }
@@ -123,7 +123,7 @@ namespace Prog2
                 return 0;
             }
 
-            return numéroMois;
+            return numéroDuMois;
         }
 
         /// <summary>

@@ -36,6 +36,7 @@ namespace Prog2
                 if (!TryParse(strArg, out date))
                 {
                     MessageErreur($"Date invalide : {strArg}");
+                    return;
                 }
             }
 

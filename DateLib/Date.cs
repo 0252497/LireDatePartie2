@@ -124,7 +124,7 @@ namespace Prog2
         /// </summary>
         /// <returns>représentation textuelle</returns>
         public string EnTexteLong(/* Date this */)
-            => $"{this.Jour} {((Mois)this.Mois).ToString().ToLower()} {this.Année}";
+            => $"{this.Jour} {MoisTypé().ToString().ToLower()} {this.Année}";
 
         /// <summary>
         /// Pour savoir si une date est spéciale. Une date est spéciale si le mois et le jour sont
@@ -204,13 +204,17 @@ namespace Prog2
         /// Pour aider à construire une nouvelle date.
         /// </summary>
         /// <param name="année">l'année</param>
-        /// <param name="mois">le mois, 1 = janvier</param>
+        /// <param name="mois">le mois en type Mois</param>
         /// <param name="jour">le jour du mois</param>
         /// <returns>une nouvelle date ou null si la date n'est pas valide</returns>
         public static Date New(int année, Mois mois, int jour)
             => EstValide(année, (int)mois, jour) ?
                 new Date { Année = année, Mois = (int)mois, Jour = jour } : null;
 
+        /// <summary>
+        /// Modifie la date pour la mettre au jour d'aujourd'hui.
+        /// </summary>
+        /// <returns>la date</returns>
         public Date MettreÀJour(/* Date this*/)
         {
             this.Année = DateTime.Today.Year;
@@ -220,9 +224,9 @@ namespace Prog2
         }
 
         /// <summary>
-        /// 
+        /// Retourne le mois sous forme de type Mois.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>mois typé en Mois</returns>
         public Mois MoisTypé(/* Date this */)
             => (Mois)this.Mois;
 
@@ -236,11 +240,11 @@ namespace Prog2
             => date1.Année == date2.Année && date1.Mois == date2.Mois && date1.Jour == date2.Jour;
 
         /// <summary>
-        /// 
+        /// Tente de décoder une date donnée en format texte.
         /// </summary>
-        /// <param name="strDate"></param>
-        /// <param name="date"></param>
-        /// <returns></returns>
+        /// <param name="strDate">la date textuelle</param>
+        /// <param name="date">la date ou null si ça ne marche pas</param>
+        /// <returns>vrai si la date est décodable et valide</returns>
         public static bool TryParse(string strDate, out Date date)
         {
             date = null;
@@ -248,17 +252,15 @@ namespace Prog2
             if (TrySplitDate(strDate, out string strAnnée, out string strMois, out string strJour) && 
                 strMois.TryParseMois(out int mois))
             {
-                int année = Parse(strAnnée);
+                // Pour l'année et le jour numériques :
+                int année = Parse(strAnnée);   
                 int jour = Parse(strJour);
 
-                if (EstValide(année, mois, jour))
-                {
-                    date = New(année, mois, jour);
-                    return true;
-                }
+                // On crée une nouvelle date qui sera null si non valide :
+                date = New(année, mois, jour);
             }
 
-            return false;
+            return date != null; 
         }
 
         private static bool
