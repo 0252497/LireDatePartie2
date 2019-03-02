@@ -2,6 +2,7 @@
 using System;
 using static Prog2.Mois;
 using static Prog2.StringUtil;
+using static System.Int32;
 namespace Prog2
 {
     /// <summary>
@@ -233,12 +234,38 @@ namespace Prog2
         /// <returns>vrai si égales</returns>
         public static bool SontÉgales(Date date1, Date date2)
             => date1.Année == date2.Année && date1.Mois == date2.Mois && date1.Jour == date2.Jour;
-        
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="strDate"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public static bool TryParse(string strDate, out Date date)
+        {
+            date = null;
+
+            if (TrySplitDate(strDate, out string strAnnée, out string strMois, out string strJour) && 
+                strMois.TryParseMois(out int mois))
+            {
+                int année = Parse(strAnnée);
+                int jour = Parse(strJour);
+
+                if (EstValide(année, mois, jour))
+                {
+                    date = New(année, mois, jour);
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
         private static bool
             TrySplitDate(string strDate, out string strAnnée, out string strMois, out string strJour)
         {
-            string[] date = strDate.Split(new[] { '-', '/', ',', ' ', ';', ':', '(', ')', '\'', '.'}, StringSplitOptions.RemoveEmptyEntries);
+            string[] date = strDate.Split(new[] { '-', '/', ',', ' ', ';', ':', '(', ')', '\'', '.'}, 
+                StringSplitOptions.RemoveEmptyEntries);
 
             strAnnée = null;
             strMois = null;
