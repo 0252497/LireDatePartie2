@@ -10,6 +10,12 @@ namespace Prog2
     public static class ConsolePlus
     {
         /// <summary>
+        /// Précise si les messages d'erreurs ou ok sont bloquants ou pas. Un message bloquant demande
+        /// à l'utilisateur d'appuyer sur une touche avant de poursuivre.
+        /// </summary>
+        public static bool Bloquant = false;
+
+        /// <summary>
         /// Permet d'afficher un message en couleur.
         /// </summary>
         /// <param name="color">la couleur désirée</param>
@@ -119,8 +125,8 @@ namespace Prog2
         /// <param name="args">argument facultatif</param>
         public static void MessageErreur(string message, params object[] args)
         {
-            ColorWriteLine(Red, message);
-            Poursuivre();
+            ColorWriteLine(Red, message, args);
+            if (Bloquant) Poursuivre();
         }
 
         /// <summary>
@@ -130,8 +136,8 @@ namespace Prog2
         /// <param name="args">argument facultatif</param>
         public static void MessageOk(string message, params object[] args)
         {
-            ColorWrite(Green, message);
-            Poursuivre();
+            ColorWrite(Green, message, args);
+            if (Bloquant) Poursuivre();
         }
 
         /// <summary>

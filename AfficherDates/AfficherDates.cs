@@ -20,11 +20,31 @@ namespace Prog2
         {
             string nomFichier = "MonFichier.txt";
 
+            try
+            {
+                nomFichier = MainSwitch(args, nomFichier);
+            }
+            catch(ArgumentException ex)
+            {
+                MessageErreur(ex.Message);
+            }
+            catch (FileNotFoundException exception)
+            {
+                MessageErreur($"Le nom '{nomFichier}' est introuvable.");
+                ColorWriteLine(Magenta, "\nMESSAGE:\n{0}", exception.Message);
+                ColorWriteLine(Yellow, "\nSTACK TRACE:\n{0}", exception.StackTrace);
+            }
+        }
+
+        private static string MainSwitch(string[] args, string nomFichier)
+        {
+            var texte = "bidon";
+
             switch (args.Length)
             {
                 case 0:
                     // --- Aucun argument, on se rabat sur l'anicien programme ---
-                    var texte = File.ReadAllText(nomFichier);
+                    texte = File.ReadAllText(nomFichier);
                     ColorWriteLine(DarkCyan, texte);
                     AncienMain();
                     break;
@@ -42,7 +62,7 @@ namespace Prog2
                     break;
             }
 
-            
+            return nomFichier;
         }
 
         private static void AncienMain()
