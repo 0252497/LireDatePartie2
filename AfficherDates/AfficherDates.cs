@@ -22,21 +22,25 @@ namespace Prog2
 
             try
             {
-                nomFichier = MainSwitch(args, nomFichier);
+                nomFichier = MainSwitch(args, ref nomFichier);
             }
-            catch(ArgumentException ex)
+            catch (FileNotFoundException)
+            {
+                MessageErreur($"Le nom '{nomFichier}' est introuvable.");
+            }
+            //catch (FormatException exception)
+            //{
+            //    MessageErreur(exception.Message);
+            //    ResetColor();
+            //}
+            // --- catchall ---
+            catch (Exception ex)
             {
                 MessageErreur(ex.Message);
             }
-            catch (FileNotFoundException exception)
-            {
-                MessageErreur($"Le nom '{nomFichier}' est introuvable.");
-                ColorWriteLine(Magenta, "\nMESSAGE:\n{0}", exception.Message);
-                ColorWriteLine(Yellow, "\nSTACK TRACE:\n{0}", exception.StackTrace);
-            }
         }
 
-        private static string MainSwitch(string[] args, string nomFichier)
+        private static string MainSwitch(string[] args, ref string nomFichier)
         {
             var texte = "bidon";
 

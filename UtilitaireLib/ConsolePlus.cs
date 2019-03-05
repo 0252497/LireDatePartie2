@@ -38,8 +38,7 @@ namespace Prog2
                 couleurPropriété = Cyan;
             }
 
-            Write(offsetString);
-            ColorWrite(couleurPropriété, propriété);
+            ColorWrite(couleurPropriété, $"{offsetString}{propriété}");
             ColorWriteLine(couleurValeur, $": {valeur}");
         }
         /// <summary>
@@ -58,8 +57,15 @@ namespace Prog2
         {
             var couleurInitiale = ForegroundColor;
             ForegroundColor = color;
-            Write(message, args);
-            ForegroundColor = couleurInitiale;
+
+            try
+            {
+                Write(message, args);
+            }
+            finally
+            {
+                ForegroundColor = couleurInitiale;
+            }
         }
 
         /// <summary>
@@ -72,8 +78,15 @@ namespace Prog2
         {
             var couleurInitiale = ForegroundColor;
             ForegroundColor = color;
-            WriteLine(message, args);
-            ForegroundColor = couleurInitiale;
+
+            try
+            {
+                WriteLine(message, args);
+            }
+            finally
+            {
+                ForegroundColor = couleurInitiale;
+            }
         }
 
         /// <summary>
