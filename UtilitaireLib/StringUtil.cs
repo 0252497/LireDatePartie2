@@ -36,6 +36,12 @@ namespace Prog2
         public static string SansAccents(this string str)
             => Encoding.ASCII.GetString(Encoding.GetEncoding(1251).GetBytes(str));
 
+        /// <summary>
+        /// Tente de convertir un mot en booléen.
+        /// </summary>
+        /// <param name="strBool">le mot à convertir</param>
+        /// <param name="booléen">le mot converti</param>
+        /// <returns>vrai si la convertion réussit</returns>
         public static bool TryParseBool(this string strBool, out bool booléen)
         {
             strBool = strBool.Trim().ToLower().SansAccents();

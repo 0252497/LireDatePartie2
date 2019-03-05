@@ -10,6 +10,39 @@ namespace Prog2
     public static class ConsolePlus
     {
         /// <summary>
+        /// Affiche une propriété et sa valeur à l'écran.
+        /// </summary>
+        /// <param name="propriété">le nom de la propriété</param>
+        /// <param name="valeur">sa valeur</param>
+        /// <param name="offset">l'offset (0 pour aucun offset)</param>
+        /// <param name="couleurValeur">la couleur de la valeur (0 pour la valeur par défaut)</param>
+        /// <param name="couleurPropriété">la couleur de la propriété (0 pour la valeur par défaut)</param>
+        public static void Afficher(
+            string propriété, string valeur, int offset = 0, ConsoleColor couleurValeur = 0,
+            ConsoleColor couleurPropriété = 0)
+        {
+            string offsetString = "";
+
+            for (int i = 0; i <= offset; ++i)
+            {
+                offsetString += " ";
+            }
+
+            if (couleurValeur == 0)
+            {
+                couleurValeur = White;
+            }
+
+            if (couleurPropriété == 0)
+            {
+                couleurPropriété = Cyan;
+            }
+
+            Write(offsetString);
+            ColorWrite(couleurPropriété, propriété);
+            ColorWriteLine(couleurValeur, $": {valeur}");
+        }
+        /// <summary>
         /// Précise si les messages d'erreurs ou ok sont bloquants ou pas. Un message bloquant demande
         /// à l'utilisateur d'appuyer sur une touche avant de poursuivre.
         /// </summary>
@@ -58,10 +91,10 @@ namespace Prog2
 
             if (défaut != "")
             {
-                propriété += $"[{défaut}]";
+                propriété += $" [{défaut}]";
             }
 
-            ColorWrite(Cyan, $"{propriété}: ");
+            ColorWrite(Cyan, $"{propriété} ? ");
             var réponse = ReadLine().Trim();
 
             if (réponse == "")
@@ -72,6 +105,26 @@ namespace Prog2
             {
                 return réponse;
             }
+        }
+
+        /// <summary>
+        /// Demande et tente de lire une propriété booléenne à la console. Affiche un message d'erreur 
+        /// si ça ne marche pas.
+        /// </summary>
+        /// <param name="propriété">la propriété</param>
+        /// <param name="booléen">le booléen lu</param>
+        /// <param name="défaut">la valeur par défaut, null ou vide si aucune</param>
+        /// <returns>vrai si la lecture réussi</returns>
+        public static bool LireBooléen(string propriété, out bool booléen, string défaut = null)
+        {
+            if (!StringUtil.TryParseBool(Demander(propriété, défaut), out booléen))
+            {
+                MessageErreur($"Il faut entrer oui/non ou o/n ou en anglais!");
+                return false;
+            }
+
+
+            return true;
         }
 
         /// <summary>
@@ -143,9 +196,17 @@ namespace Prog2
         /// <summary>
         /// Demande à l'utilisateur d'appuyer sur une touche pour poursuivre.
         /// </summary>
-        public static void Poursuivre()
+        public static void Poursuivre(string message = null)
         {
-            ColorWrite(Gray, "\nAppuyez sur une touche pour poursuivre...");
+            if (message != null)
+            {
+                ColorWrite(White, message);
+            }
+            else
+            {
+                ColorWrite(Magenta, "\nAppuyez sur une touche pour poursuivre...");
+            }
+            
             ReadKey(true);
             WriteLine();
         }
