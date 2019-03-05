@@ -19,6 +19,7 @@ namespace Prog2
         static void Main(string[] args)
         {
             string nomFichier = "MonFichier.txt";
+            string fichierDates = "Dates.txt";
 
             try
             {
@@ -28,11 +29,6 @@ namespace Prog2
             {
                 MessageErreur($"Le nom '{nomFichier}' est introuvable.");
             }
-            //catch (FormatException exception)
-            //{
-            //    MessageErreur(exception.Message);
-            //    ResetColor();
-            //}
             // --- catchall ---
             catch (Exception ex)
             {
@@ -47,7 +43,7 @@ namespace Prog2
             switch (args.Length)
             {
                 case 0:
-                    // --- Aucun argument, on se rabat sur l'anicien programme ---
+                    // --- Aucun argument, on se rabat sur l'ancien programme ---
                     texte = File.ReadAllText(nomFichier);
                     ColorWriteLine(DarkCyan, texte);
                     AncienMain();
