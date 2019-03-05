@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Prog2.BoolUtil;
 
 namespace Prog2
 {
@@ -34,5 +35,37 @@ namespace Prog2
         /// <returns>une nouvelle chaîne sans les accents</returns>
         public static string SansAccents(this string str)
             => Encoding.ASCII.GetString(Encoding.GetEncoding(1251).GetBytes(str));
+
+        public static bool TryParseBool(this string strBool, out bool booléen)
+        {
+            strBool = strBool.Trim().ToLower().SansAccents();
+            booléen = false;
+
+            if (bool.TryParse(strBool, out booléen))
+                return true;
+
+            switch (strBool)
+            {
+                case "vrai":
+                case "yes":
+                case "y":
+                case "t":
+                case "v":
+                case "oui":
+                case "o":
+                case "1":
+                    booléen = true;
+                    return true;
+                case "faux":
+                case "non":
+                case "n":
+                case "no":
+                case "f":
+                case "0":
+                    return true;
+                default:
+                    return false;
+            }
+        }
     }
 }

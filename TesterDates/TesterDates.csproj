@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TesterBoolUtil.cs" />
     <Compile Include="TesterDate00.cs" />
     <Compile Include="TesterDate11_EnTexte.cs" />
     <Compile Include="TesterDate12_EstTrèsSpéciale.cs" />
@@ -96,6 +97,10 @@
     <ProjectReference Include="..\LireDatePartie2\LireDate.csproj">
       <Project>{3fb8510e-7606-45d4-8d27-608701005e26}</Project>
       <Name>LireDate</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UtilitaireLib\UtilitaireLib.csproj">
+      <Project>{d100541b-ae6a-457d-9597-ddcc0055e149}</Project>
+      <Name>UtilitaireLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
