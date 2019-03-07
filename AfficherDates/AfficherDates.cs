@@ -54,84 +54,80 @@ namespace Prog2
 
                     string[] lignes = File.ReadAllLines(nomFichier);
 
+                    StreamWriter html = new StreamWriter(nomFichier + ".html");
 
-                    var html = new StreamWriter(nomFichier + ".html", true, Encoding.UTF8);
+                    html.Write(@"<html>" + html.NewLine + @"<body style='font-family:Arial'>" + html.NewLine);
+                    html.Write(@"<h1 style='padding-left:5px'>Dates et événements</h1>");
+                    html.Write(@"<table width='100%' cellpadding='15' style='margin-top:10px'");
+                    html.Write(@"<thead >" + html.NewLine + "<tr style='background-color:#D3D3D3'>");
+                    html.Write(@"<th style='text-align:left'>Évènement</th>");
+                    html.Write(@"<th style='text-align:left'>Année</th>");
+                    html.Write(@"<th style ='text-align:left'>Mois</th>");
+                    html.Write(@"<th style = 'text-align:left'>Jour</th>");
+                    html.Write(@"<tr>" + html.NewLine + "</thead>" + html.NewLine + "<tbody>");
 
-                    for (int i = 0; i != lignes.Length; i++)
+                    for (int i = 0; i != lignes.Length; ++i)
                     {
                         if (lignes[i] != null && lignes[i] != "")
                         {
-                            string[] parties = lignes[i].Split(new[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
-                            
-                            if (3 <= parties.Length || parties.Length < 1) 
+                            string[] parties = lignes[i].Split(new[] { ':' }, 
+                                StringSplitOptions.RemoveEmptyEntries);
+
+                            if (!(1 > parties.Length || parties.Length >= 3))
                             {
-                                MessageErreur($"Format erroné: {lignes[i]}");
-                            }
-                            else
-                            {
-                                
-                                if (!TryParse(parties[0], out Date date))
+                                if (TryParse(parties[0], out Date date))
                                 {
-                                    MessageErreur($"Date invalide: {lignes[i]}");
-                                }
-                                else
-                                {
-                                    if (parties.Length != 1)
-                                    {
-                                        html.Write($"{parties[1]}");
-                                    }
-                                    else
-                                    {
-                                        html.Write("???");
-                                    }
-                                    
-                                    html.Write(@"<html>" + html.NewLine + @"<body>" + html.NewLine);
-                                    html.Write(@"<h1><span style = 'font-family:Verdana'>Dates et événements</span></ h1>");
-                                    html.Write(@"<table width='100%' cellpadding='10' style='margin-top:10px' cellspacing='3' border='1' rules='all'>
-                                    <thead>
-                                        <tr>
-                                            <th>Événement</th>
-                                            <th>Année</th>
-                                            <th>Mois</th>
-                                            <th>Jour</th>
-                                        <tr>
-                                    </thead>
+                                    html.Write(@"<tr border'0'>");
 
-                                    <tbody>
-                                        <tr>
-                                            <td>");
-
-                                    html.Write(@"</td>
-                                                <td>");
-                                    html.Write(date.Année);
-                                    html.Write(@"</td>
-                                                <td>");
-                                    html.Write(date.Mois);
-                                    html.Write(@"</td>
-                                                <td>");
-                                    html.Write(date.Jour);
-                                    html.Write(@"</td>
-                                        <tr>
-                                    </tbody>
-
-                                        </table>" + html.NewLine + "</body>" + html.NewLine + "</html>");
                                     if (parties.Length != 1)
                                     {
                                         Afficher(EnTexte(date), parties[1], 1, Yellow, Cyan);
 
+                                        html.Write(
+                                            @"<td>" + html.NewLine + $"{parties[1]}" + html.NewLine +
+                                            "</td>");
                                     }
                                     else
                                     {
                                         Afficher(EnTexte(date), " ???", 1, Yellow, Cyan);
+
+                                        html.Write(
+                                            @"<td>" + html.NewLine + "???" + html.NewLine + "</td>");
                                     }
 
-                                    html.Flush();
+                                    html.Write(
+                                            @"<td>" + html.NewLine + $"{date.Année}" + html.NewLine +
+                                            "</td>");
+                                    html.Write(
+                                        @"<td>" + html.NewLine + $"{date.Mois}" + html.NewLine +
+                                        "</td>");
+                                    html.Write(
+                                        @"<td>" + html.NewLine + $"{date.Jour}" + html.NewLine +
+                                        "</td>");
 
-                                    html.Close();
+                                    html.Write(@"</tr>");
                                 }
+                                else
+                                {
+                                    MessageErreur($"Date invalide: {lignes[i]}");
+                                }
+                            }
+                            else
+                            {
+                                MessageErreur($"Format erroné: {lignes[i]}");
                             }
                         }
                     }
+
+                    html.Write(
+                        @"</tbody>" + html.NewLine +  "</table>" + html.NewLine + "</body>" + 
+                        html.NewLine + "</html>");
+
+                    html.Flush();
+
+                    html.Close();
+
+                    MessageOk($"Fichier HTML généré: {nomFichier}.html");
                     break;
 
                 default:
