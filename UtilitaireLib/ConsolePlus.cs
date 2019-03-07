@@ -21,13 +21,6 @@ namespace Prog2
             string propriété, string valeur, int offset = 0, ConsoleColor couleurValeur = 0,
             ConsoleColor couleurPropriété = 0)
         {
-            string offsetString = "";
-
-            for (int i = 0; i <= offset; ++i)
-            {
-                offsetString += " ";
-            }
-
             if (couleurValeur == 0)
             {
                 couleurValeur = White;
@@ -38,8 +31,8 @@ namespace Prog2
                 couleurPropriété = Cyan;
             }
 
-            ColorWrite(couleurPropriété, $"{offsetString}{propriété}");
-            ColorWriteLine(couleurValeur, $": {valeur}");
+            ColorWrite(couleurPropriété, $"{propriété.PadLeft(offset)}:");
+            ColorWriteLine(couleurValeur, $" {valeur}");
         }
         /// <summary>
         /// Précise si les messages d'erreurs ou ok sont bloquants ou pas. Un message bloquant demande

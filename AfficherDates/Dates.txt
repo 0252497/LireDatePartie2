@@ -3,3 +3,6 @@
 1986 26 janv : Explosion de la navette spatiale Challenger
 
 dec 2 1960 : Naissance de Anders Hejlsberg, le créateur du langage C#
+1999-12-31
+1999-12-32 : Date impossible
+2001-09-11 : 11 septembre 2001 : Attentat ridicule!

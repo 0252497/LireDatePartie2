@@ -18,12 +18,11 @@ namespace Prog2
     {
         static void Main(string[] args)
         {
-            string nomFichier = "MonFichier.txt";
-            string fichierDates = "Dates.txt";
+            string nomFichier = "Dates.txt";
 
             try
             {
-                nomFichier = MainSwitch(args, ref nomFichier);
+                MainSwitch(args, ref nomFichier);
             }
             catch (FileNotFoundException)
             {
@@ -36,7 +35,7 @@ namespace Prog2
             }
         }
 
-        private static string MainSwitch(string[] args, ref string nomFichier)
+        private static void MainSwitch(string[] args, ref string nomFichier)
         {
             var texte = "bidon";
 
@@ -52,8 +51,87 @@ namespace Prog2
                 case 1:
                     // --- On affiche le contenu du fichier spécifié en argument ---
                     nomFichier = args[0];
-                    texte = File.ReadAllText(nomFichier);
-                    ColorWriteLine(Magenta, texte);
+
+                    string[] lignes = File.ReadAllLines(nomFichier);
+
+
+                    var html = new StreamWriter(nomFichier + ".html", true, Encoding.UTF8);
+
+                    for (int i = 0; i != lignes.Length; i++)
+                    {
+                        if (lignes[i] != null && lignes[i] != "")
+                        {
+                            string[] parties = lignes[i].Split(new[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
+                            
+                            if (3 <= parties.Length || parties.Length < 1) 
+                            {
+                                MessageErreur($"Format erroné: {lignes[i]}");
+                            }
+                            else
+                            {
+                                
+                                if (!TryParse(parties[0], out Date date))
+                                {
+                                    MessageErreur($"Date invalide: {lignes[i]}");
+                                }
+                                else
+                                {
+                                    if (parties.Length != 1)
+                                    {
+                                        html.Write($"{parties[1]}");
+                                    }
+                                    else
+                                    {
+                                        html.Write("???");
+                                    }
+                                    
+                                    html.Write(@"<html>" + html.NewLine + @"<body>" + html.NewLine);
+                                    html.Write(@"<h1><span style = 'font-family:Verdana'>Dates et événements</span></ h1>");
+                                    html.Write(@"<table width='100%' cellpadding='10' style='margin-top:10px' cellspacing='3' border='1' rules='all'>
+                                    <thead>
+                                        <tr>
+                                            <th>Événement</th>
+                                            <th>Année</th>
+                                            <th>Mois</th>
+                                            <th>Jour</th>
+                                        <tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr>
+                                            <td>");
+
+                                    html.Write(@"</td>
+                                                <td>");
+                                    html.Write(date.Année);
+                                    html.Write(@"</td>
+                                                <td>");
+                                    html.Write(date.Mois);
+                                    html.Write(@"</td>
+                                                <td>");
+                                    html.Write(date.Jour);
+                                    html.Write(@"</td>
+                                        <tr>
+                                    </tbody>
+
+                                        </table>" + html.NewLine + "</body>" + html.NewLine + "</html>");
+                                    if (parties.Length != 1)
+                                    {
+                                        Afficher(EnTexte(date), parties[1], 1, Yellow, Cyan);
+
+                                    }
+                                    else
+                                    {
+                                        Afficher(EnTexte(date), " ???", 1, Yellow, Cyan);
+                                    }
+
+                                    html.Flush();
+
+                                    html.Close();
+                                }
+                            }
+                        }
+                    }
                     break;
 
                 default:
@@ -61,8 +139,6 @@ namespace Prog2
                     ColorWriteLine(Yellow, "USAGE : AfficherDate [NomFichier]");
                     break;
             }
-
-            return nomFichier;
         }
 
         private static void AncienMain()
