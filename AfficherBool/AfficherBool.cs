@@ -1,8 +1,11 @@
-﻿using static System.Console;
-using static Prog2.DateUtil;
+﻿/* Programme faisant afficher divers booléens.
+ * 
+ * Auteure : Véronique Giguère
+ * Création : 5 février 2019
+ */
+using static System.Console;
 using static Prog2.ConsolePlus;
 using static System.ConsoleColor;
-using static Prog2.Date;
 
 namespace Prog2
 {

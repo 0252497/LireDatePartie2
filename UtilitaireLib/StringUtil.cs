@@ -1,10 +1,6 @@
-﻿/* --- Utilitaires StringUtil --- */
-using System;
-using System.Collections.Generic;
+﻿/* Fichier d'utilitaires StringUtil. */
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using static Prog2.BoolUtil;
 
 namespace Prog2
 {

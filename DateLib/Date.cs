@@ -1,7 +1,5 @@
 ﻿/* Fichier pour les attributs et les méthodes de la classe Date. */
 using System;
-using static Prog2.Mois;
-using static Prog2.StringUtil;
 using static System.Int32;
 namespace Prog2
 {

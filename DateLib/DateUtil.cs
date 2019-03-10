@@ -1,9 +1,7 @@
-﻿/* --- Utilitaire de méthodes DateUtil. --- */
-
+﻿/* Utilitaire de méthodes DateUtil. */
 using static Prog2.ConsolePlus;
 using static System.ConsoleColor;
 using static Prog2.Date;
-using System;
 using static Prog2.Mois;
 
 namespace Prog2

@@ -1,7 +1,5 @@
-﻿/* Fichier d'utilitaires. */
-
+﻿/* Fichier d'utilitaires ConsolePlus. */
 using System;
-using System.Text;
 using static System.Console;
 using static System.ConsoleColor;
 
@@ -128,7 +126,6 @@ namespace Prog2
                 MessageErreur($"Il faut entrer oui/non ou o/n ou en anglais!");
                 return false;
             }
-
 
             return true;
         }

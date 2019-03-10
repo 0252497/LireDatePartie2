@@ -1,10 +1,10 @@
-﻿/* --- Affichages de mois --- */
+﻿/* Programme affichant divers mois grâce à l'enum Mois. 
+ * 
+ * Auteure : Véronique Giguère
+ * Création : Février 2019
+ */
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static System.Console;
 using static System.ConsoleColor;
 using static Prog2.ConsolePlus;

@@ -1,13 +1,14 @@
-﻿/* Programme qui fait afficher diverses dates. */
+﻿/* Programme qui fait afficher diverses dates. Si un fichier texte est passé en argument, le programme
+ * analyse les dates contenues dans ce fichier et produit un fichier html descrivant les dates traitées.
+ * Il permet aussi d'intercepter les exceptions qui pourraient survenir durant son exécution.
+ * 
+ * Auteure : Véronique Giguère
+ * Création : 5 mars 2019
+ */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static Prog2.ConsolePlus;
 using static System.Console;
 using static System.ConsoleColor;
-using System.Diagnostics;
 using static Prog2.DateUtil;
 using static Prog2.Date;
 using System.IO;
@@ -56,17 +57,23 @@ namespace Prog2
 
                     StreamWriter html = new StreamWriter(nomFichier + ".html");
 
-                    html.Write(@"<html>" + html.NewLine + @"<head>" + html.NewLine);
-                    html.Write(@"<link rel='stylesheet' href='styles.css'/>" + html.NewLine);
-                    html.Write(@"</head>" + html.NewLine + "<body>" + html.NewLine);
+                    html.Write(@"<html>");
+                    html.Write(@"<head>");
+                    html.Write(@"<link rel='stylesheet' href='styles.css'/>");
+                    html.Write(@"</head>"); 
+                    html.Write(@"<body>");
                     html.Write(@"<h1>Dates et événements</h1>");
                     html.Write(@"<table>");
-                    html.Write(@"<thead>" + html.NewLine + "<tr>");
+                    html.Write(@"<thead>");
+                    html.Write(@"<tr>");
                     html.Write(@"<th>Évènement</th>");
                     html.Write(@"<th>Année</th>");
                     html.Write(@"<th>Mois</th>");
                     html.Write(@"<th>Jour</th>");
-                    html.Write(@"<tr>" + html.NewLine + "</thead>" + html.NewLine + "<tbody>");
+                    html.Write(@"</tr>");
+                    html.Write(@"</thead>");
+
+                    html.Write(@"<tbody>");
 
                     for (int i = 0; i != lignes.Length; ++i)
                     {
@@ -85,27 +92,18 @@ namespace Prog2
                                     {
                                         Afficher(EnTexte(date), parties[1], 1, DarkYellow, Cyan);
 
-                                        html.Write(
-                                            @"<td>" + html.NewLine + $"{parties[1]}" + html.NewLine +
-                                            "</td>");
+                                        html.Write(@"<td>" + $"{parties[1]}" + "</td>");
                                     }
                                     else
                                     {
                                         Afficher(EnTexte(date), " ???", 1, DarkYellow, Cyan);
 
-                                        html.Write(
-                                            @"<td>" + html.NewLine + "???" + html.NewLine + "</td>");
+                                        html.Write(@"<td>" + "???" + "</td>");
                                     }
 
-                                    html.Write(
-                                            @"<td>" + html.NewLine + $"{date.Année}" + html.NewLine +
-                                            "</td>");
-                                    html.Write(
-                                        @"<td>" + html.NewLine + $"{date.Mois}" + html.NewLine +
-                                        "</td>");
-                                    html.Write(
-                                        @"<td>" + html.NewLine + $"{date.Jour}" + html.NewLine +
-                                        "</td>");
+                                    html.Write(@"<td>" + $"{date.Année}" + "</td>");
+                                    html.Write(@"<td>" + $"{date.Mois}" + "</td>");
+                                    html.Write(@"<td>" + $"{date.Jour}" + "</td>");
 
                                     html.Write(@"</tr>");
                                 }
@@ -121,9 +119,10 @@ namespace Prog2
                         }
                     }
 
-                    html.Write(
-                        @"</tbody>" + html.NewLine +  "</table>" + html.NewLine + "</body>" + 
-                        html.NewLine + "</html>");
+                    html.Write(@"</tbody>");
+                    html.Write(@"</table>");
+                    html.Write(@"</body>");
+                    html.Write(@"</html>");
 
                     html.Flush();
 
