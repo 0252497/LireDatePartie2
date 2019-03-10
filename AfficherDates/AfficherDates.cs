@@ -56,14 +56,16 @@ namespace Prog2
 
                     StreamWriter html = new StreamWriter(nomFichier + ".html");
 
-                    html.Write(@"<html>" + html.NewLine + @"<body style='font-family:Arial'>" + html.NewLine);
-                    html.Write(@"<h1 style='padding-left:5px'>Dates et événements</h1>");
-                    html.Write(@"<table width='100%' cellpadding='15' style='margin-top:10px'");
-                    html.Write(@"<thead >" + html.NewLine + "<tr style='background-color:#D3D3D3'>");
-                    html.Write(@"<th style='text-align:left'>Évènement</th>");
-                    html.Write(@"<th style='text-align:left'>Année</th>");
-                    html.Write(@"<th style ='text-align:left'>Mois</th>");
-                    html.Write(@"<th style = 'text-align:left'>Jour</th>");
+                    html.Write(@"<html>" + html.NewLine + @"<head>" + html.NewLine);
+                    html.Write(@"<link rel='stylesheet' href='styles.css'/>" + html.NewLine);
+                    html.Write(@"</head>" + html.NewLine + "<body>" + html.NewLine);
+                    html.Write(@"<h1>Dates et événements</h1>");
+                    html.Write(@"<table>");
+                    html.Write(@"<thead>" + html.NewLine + "<tr>");
+                    html.Write(@"<th>Évènement</th>");
+                    html.Write(@"<th>Année</th>");
+                    html.Write(@"<th>Mois</th>");
+                    html.Write(@"<th>Jour</th>");
                     html.Write(@"<tr>" + html.NewLine + "</thead>" + html.NewLine + "<tbody>");
 
                     for (int i = 0; i != lignes.Length; ++i)
@@ -77,11 +79,11 @@ namespace Prog2
                             {
                                 if (TryParse(parties[0], out Date date))
                                 {
-                                    html.Write(@"<tr border'0'>");
+                                    html.Write(@"<tr>");
 
                                     if (parties.Length != 1)
                                     {
-                                        Afficher(EnTexte(date), parties[1], 1, Yellow, Cyan);
+                                        Afficher(EnTexte(date), parties[1], 1, DarkYellow, Cyan);
 
                                         html.Write(
                                             @"<td>" + html.NewLine + $"{parties[1]}" + html.NewLine +
@@ -89,7 +91,7 @@ namespace Prog2
                                     }
                                     else
                                     {
-                                        Afficher(EnTexte(date), " ???", 1, Yellow, Cyan);
+                                        Afficher(EnTexte(date), " ???", 1, DarkYellow, Cyan);
 
                                         html.Write(
                                             @"<td>" + html.NewLine + "???" + html.NewLine + "</td>");
@@ -127,7 +129,7 @@ namespace Prog2
 
                     html.Close();
 
-                    MessageOk($"Fichier HTML généré: {nomFichier}.html");
+                    MessageOk($"\nFichier HTML généré: {nomFichier}.html");
                     break;
 
                 default:

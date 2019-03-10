@@ -1,0 +1,26 @@
+﻿/* Fichier CSS pour AfficherDates. */
+
+body
+{
+    font-family: Arial;
+    margin-left: 15px;
+}
+
+table {
+    border: none;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    text-align: left;
+    padding: 15px;
+}
+
+thead {
+    background-color: #F0F0F0;
+}
+
+tr:nth-child(even) {
+    background-color: #F0F0F0;
+}
