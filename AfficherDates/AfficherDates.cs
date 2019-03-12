@@ -31,6 +31,9 @@ namespace Prog2
             }
             // --- catchall ---
             catch (Exception ex)
+            #if DEBUG
+            when (!ex.Message.StartsWith("##"))
+            #endif
             {
                 MessageErreur(ex.Message);
             }
@@ -38,14 +41,10 @@ namespace Prog2
 
         private static void MainSwitch(string[] args, ref string nomFichier)
         {
-            var texte = "bidon";
-
             switch (args.Length)
             {
                 case 0:
                     // --- Aucun argument, on se rabat sur l'ancien programme ---
-                    texte = File.ReadAllText(nomFichier);
-                    ColorWriteLine(DarkCyan, texte);
                     AncienMain();
                     break;
 
@@ -150,6 +149,9 @@ namespace Prog2
 
             // Pour vérifier nos affichages!
             Title = "AfficherDates";
+
+            DateAttentatWTC.Jour = 30;
+
             ColorWriteLine(Green, "Attentat du WTC:\t{0}", EnTexte(DateAttentatWTC));
             ColorWriteLine(Yellow, "\nMort de MJ:\t\t{0}", EnTexte(DateDecesMJ, "/"));
             ColorWriteLine(Cyan, "\nExplosion de la NC:\t{0}", EnTexte(DateExplosionNC, "."));

@@ -1,6 +1,7 @@
 ﻿/* Fichier pour les attributs et les méthodes de la classe Date. */
 using System;
 using static System.Int32;
+
 namespace Prog2
 {
     /// <summary>
@@ -8,16 +9,40 @@ namespace Prog2
     /// </summary>
     public class Date
     {
-        // --- Attributs ---
-        public int Année;
-        public int Jour;
-        public int Mois;
+        private int _mois;
+        private int _jour;
+
         private static readonly Date aujourdhui = New(
             DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
         private static readonly Date demain = New(
             DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
         private static readonly Date hier = New(
             DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
+
+        // --- Propriétés ---
+        public int Année { get; set; }
+
+        public int Mois
+        {
+            get => _mois;
+            set
+            {
+                if (value < 1 || value > 12)
+                    throw new ArgumentOutOfRangeException(nameof(Mois), $"## Invalide : {value}");
+                _mois = value;
+            }
+        }
+
+        public int Jour
+        {
+            get => _jour;
+            set
+            {
+                if (1 > value || value > DateUtil.NbJoursDsMois(Année, _mois))
+                    throw new ArgumentOutOfRangeException(nameof(Jour), $"## Invalide : {value}");
+                _jour = value;
+            }
+        }
 
         // --- Méthodes ---
         /// <summary>

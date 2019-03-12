@@ -82,6 +82,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AfficherBool\AfficherBool.csproj">
+      <Project>{1b8c917b-d43e-4e20-bd7b-1b292d351e84}</Project>
+      <Name>AfficherBool</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AfficherDates\AfficherDates.csproj">
       <Project>{0dde2513-3159-4508-9ae6-bf5d5c9dff32}</Project>
       <Name>AfficherDates</Name>
