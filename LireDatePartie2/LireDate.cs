@@ -7,6 +7,7 @@ using static System.Console;
 using static Prog2.DateUtil;
 using static Prog2.ConsolePlus;
 using static Prog2.Date;
+using static System.ConsoleColor;
 
 namespace Prog2
 {
@@ -59,6 +60,9 @@ namespace Prog2
             message += " bissextile.";
 
             MessageOk(message);
+
+            // Afficher si Noël ou pas
+            ColorWriteLine(DarkYellow, "\nNoël : {0}", date.EstNoël ? "oui" : "non");
         }
     }
 }

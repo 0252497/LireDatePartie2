@@ -356,5 +356,14 @@ namespace Prog2
             bool EstAnnée(string str) => str.EstNumérique() && str.Length >= 3;
             bool EstJour(string str) => str.EstNumérique() && str.Length <= 2;
         }
+
+        // --- Propriétés calculables --- 
+        public bool EstNoël
+        {
+            get
+            {
+                return this.Mois == 12 && this.Jour == 25;
+            }
+        }
     }
 }
