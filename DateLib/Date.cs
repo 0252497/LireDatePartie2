@@ -9,8 +9,18 @@ namespace Prog2
     /// </summary>
     public class Date
     {
+        // --- Constructeur par défaut ---
+        public Date()
+        {
+            this._mois = 1;
+            this._jour = 1;
+            this.Année = 1;
+        }
+
         private int _mois;
         private int _jour;
+        private int _jourDeLAnnée;
+
         private static readonly Date aujourdhui = New(
             DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
         private static readonly Date demain = New(
@@ -111,17 +121,17 @@ namespace Prog2
                 Date date = New(Année, _mois, _jour);
                 Date dernier = New(Année - 1, 12, 31);
 
-                int jourDeLAnnée = 0;
+                _jourDeLAnnée = 0;
 
                 if (SontÉgales(date, dernier))
                 {
                     if (Année.EstBissextile())
                     {
-                        jourDeLAnnée = 366;
+                        _jourDeLAnnée = 366;
                     }
                     else
                     {
-                        jourDeLAnnée = 365;
+                        _jourDeLAnnée = 365;
                     }
                 }
                 else
@@ -129,16 +139,17 @@ namespace Prog2
                     while (!SontÉgales(date, dernier))
                     {
                         date.Décrémenter();
-                        ++jourDeLAnnée;
+                        ++_jourDeLAnnée;
                     }
                 }
 
-                return jourDeLAnnée;
+                return _jourDeLAnnée;
             }
             set
             {
                 _mois = 1;
                 _jour = 1;
+
                 for (int i = 1; i < value; i++)
                     Incrémenter();
 
