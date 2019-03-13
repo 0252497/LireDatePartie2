@@ -65,7 +65,7 @@ namespace Prog2
             ColorWriteLine(DarkYellow, "\n\nJour de l'an : {0}", date.EstJourDeLAn ? "oui" : "non");
             ColorWriteLine(DarkYellow, "     St-Jean : {0}", date.EstStJean ? "oui" : "non");
             ColorWriteLine(DarkYellow, "        Noël : {0}", date.EstNoël ? "oui" : "non");
-            ConsolePlus.ColorWriteLine(DarkMagenta, $"Jour numéro: {date.JourDeLAnnée}");
+            ColorWriteLine(DarkMagenta, $"\n  Jour numéro: {date.JourDeLAnnée}");
         }
     }
 }
