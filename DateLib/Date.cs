@@ -1,4 +1,4 @@
-﻿/* Fichier pour les attributs et les méthodes de la classe Date. */
+﻿/* Fichier pour les attributs, les méthodes et les propriétés de la classe Date. */
 using System;
 using static System.Int32;
 
@@ -11,6 +11,7 @@ namespace Prog2
     {
         private int _mois;
         private int _jour;
+        private int _jourDeLAnnée;
 
         private static readonly Date aujourdhui = New(
             DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
@@ -20,8 +21,16 @@ namespace Prog2
             DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
 
         // --- Propriétés ---
+        
+        // --- Autopropriétés ---
+        /// <summary>
+        /// L'année.
+        /// </summary>
         public int Année { get; set; }
 
+        /// <summary>
+        /// Le mois de l'année. (janvier = 1)
+        /// </summary>
         public int Mois
         {
             get => _mois;
@@ -33,6 +42,9 @@ namespace Prog2
             }
         }
 
+        /// <summary>
+        /// Le jour du mois.
+        /// </summary>
         public int Jour
         {
             get => _jour;
@@ -44,14 +56,100 @@ namespace Prog2
             }
         }
 
-        // --- Méthodes ---
+        // --- Propriétés calculables --- 
         /// <summary>
-        /// Retourne la date d'aujourd'hui.
+        /// Date d'aujourd'hui.
+        /// NB: Le même objet est retourné chaque fois.
         /// </summary>
-        /// <returns>aujourd'hui</returns>
-        public static Date Aujourdhui()
-            => aujourdhui.MettreÀJour();
+        public static Date Aujourdhui => aujourdhui.MettreÀJour();
 
+        /// <summary>
+        /// Date de demain.
+        /// </summary>
+        public static Date Demain => demain.MettreÀJour().Incrémenter();
+
+        /// <summary>
+        /// Vrai si la date est le premier jour de l'an.
+        /// </summary>
+        public bool EstJourDeLAn
+            => this.Mois == 1 && this.Jour == 1;
+
+        /// <summary>
+        /// Vrai si la date est Noël.
+        /// </summary>
+        public bool EstNoël
+            => this.Mois == 12 && this.Jour == 25;
+
+        /// <summary>
+        /// Vrai si une date est spéciale. Une date est spéciale si le mois et le jour sont
+        /// identiques.
+        /// </summary>
+        public bool EstSpéciale => this.Jour == this.Mois;
+
+        /// <summary>
+        /// Vrai si la date est la St-Jean-Baptiste.
+        /// </summary>
+        public bool EstStJean
+            => this.Mois == 6 && this.Jour == 24;
+
+        /// <summary>
+        /// Vrai si une date est très spéciale. Une date est très spéciale si le jour, le mois et
+        /// les deux derniers chiffres de l'année sont identiques.
+        /// </summary>
+        public bool EstTrèsSpéciale => this.EstSpéciale && this.Mois == this.Année % 100;
+
+        /// <summary>
+        /// Date de hier.
+        /// </summary>
+        public static Date Hier => hier.MettreÀJour().Décrémenter();
+
+        public int JourDeLAnnée
+        {
+            get
+            {
+                return new DateTime(Année, _mois, _jour).DayOfYear;
+            }
+            set
+            {
+                int nbJour = 0;
+
+                Date date = New(Année, _mois, _jour);
+
+
+                for (int i = 1; i <= date._mois; i++)
+                {
+                    if (date._mois == 1)
+                    {
+                        nbJour = _jour;
+                    }
+                    else
+                    {
+                        int jourMois = DateUtil.NbJoursDsMois(Année, i);
+                        nbJour += jourMois;
+                        nbJour += _jour;
+                    }
+                }
+
+                value = nbJour;
+            }
+        }
+
+        /// <summary>
+        /// Le mois sous forme de type Mois.
+        /// </summary>
+        public Mois MoisTypé
+        {
+            get
+            {
+                return (Mois)this.Mois;
+            }
+            set
+            {
+                this.Mois = (int)value;
+            }
+        }
+
+        // --- Méthodes ---
         /// <summary>
         /// Pour cloner une date en modifiant certains attributs au besoin.
         /// </summary>
@@ -114,13 +212,6 @@ namespace Prog2
         }
 
         /// <summary>
-        /// Retourne la date de demain.
-        /// </summary>
-        /// <returns>la date de demain</returns>
-        public static Date Demain()
-            => demain.MettreÀJour().Incrémenter();
-
-        /// <summary>
         /// Fais afficher la date, soit le mois, le jour et l'année. Si aucune date n'est précisée, on fera 
         /// afficher la date d'aujourd'hui.
         /// </summary>
@@ -147,23 +238,7 @@ namespace Prog2
         /// </summary>
         /// <returns>représentation textuelle</returns>
         public string EnTexteLong(/* Date this */)
-            => $"{this.Jour} {MoisTypé().ToString().ToLower()} {this.Année}";
-
-        /// <summary>
-        /// Pour savoir si une date est spéciale. Une date est spéciale si le mois et le jour sont
-        /// identiques.
-        /// </summary>
-        /// <returns>vrai si elle est spéciale</returns>
-        public bool EstSpéciale(/* Date this */)
-            => this.Jour == this.Mois;
-
-        /// <summary>
-        /// Pour savoir si une date est très spéciale. Une date est très spéciale si le jour, le mois et
-        /// les deux derniers chiffres de l'année sont identiques.
-        /// </summary>
-        /// <returns>vrai si elle est très spéciale</returns>
-        public bool EstTrèsSpéciale(/* Date this */)
-            => this.EstSpéciale() && this.Mois == this.Année % 100;
+            => $"{this.Jour} {MoisTypé.ToString().ToLower()} {this.Année}";
 
         /// <summary>
         /// Détermine si une date est valide.
@@ -174,13 +249,6 @@ namespace Prog2
         /// <returns>vrai si la date est valide</returns>
         public static bool EstValide(int année, int mois, int jour)
             => 1 <= jour && jour <= DateUtil.NbJoursDsMois(année, mois) && 1 <= mois && mois <= 12;
-
-        /// <summary>
-        /// Retourne la date de hier.
-        /// </summary>
-        /// <returns>la date de hier</returns>
-        public static Date Hier()
-            => hier.MettreÀJour().Décrémenter();
 
         /// <summary>
         /// Ajoute des jours à la date
@@ -214,6 +282,18 @@ namespace Prog2
         }
 
         /// <summary>
+        /// Modifie la date pour la mettre au jour d'aujourd'hui.
+        /// </summary>
+        /// <returns>la date</returns>
+        public Date MettreÀJour(/* Date this*/)
+        {
+            this.Année = DateTime.Today.Year;
+            this.Mois = DateTime.Today.Month;
+            this.Jour = DateTime.Today.Day;
+            return this;
+        }
+
+        /// <summary>
         /// Pour aider à construire une nouvelle date.
         /// </summary>
         /// <param name="année">l'année</param>
@@ -234,24 +314,6 @@ namespace Prog2
             => EstValide(année, (int)mois, jour) ?
                 new Date { Année = année, Mois = (int)mois, Jour = jour } : null;
 
-        /// <summary>
-        /// Modifie la date pour la mettre au jour d'aujourd'hui.
-        /// </summary>
-        /// <returns>la date</returns>
-        public Date MettreÀJour(/* Date this*/)
-        {
-            this.Année = DateTime.Today.Year;
-            this.Mois = DateTime.Today.Month;
-            this.Jour = DateTime.Today.Day;
-            return this;
-        }
-
-        /// <summary>
-        /// Retourne le mois sous forme de type Mois.
-        /// </summary>
-        /// <returns>mois typé en Mois</returns>
-        public Mois MoisTypé(/* Date this */)
-            => (Mois)this.Mois;
 
         /// <summary>
         /// Pour vérifier que deux dates sont pareilles.
@@ -355,15 +417,6 @@ namespace Prog2
             // --- Fonctions locales ---
             bool EstAnnée(string str) => str.EstNumérique() && str.Length >= 3;
             bool EstJour(string str) => str.EstNumérique() && str.Length <= 2;
-        }
-
-        // --- Propriétés calculables --- 
-        public bool EstNoël
-        {
-            get
-            {
-                return this.Mois == 12 && this.Jour == 25;
-            }
         }
     }
 }

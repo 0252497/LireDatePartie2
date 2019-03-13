@@ -77,6 +77,7 @@
     <Compile Include="TesterDate63_NuméroDuMois.cs" />
     <Compile Include="TesterDate64_TrySplitDate.cs" />
     <Compile Include="TesterDate65_TryParseDate.cs" />
+    <Compile Include="TesterDate80_Propriétés.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

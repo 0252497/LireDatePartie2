@@ -15,8 +15,8 @@ namespace Prog2
         [TestMethod]
         public void _25_EnTexte__DateParDéfaut()
         {
-            AreEqual(EnTexte(Aujourdhui()), EnTexte());
-            AreEqual(EnTexte(Aujourdhui(), "."), EnTexte(séparateur:"."));
+            AreEqual(EnTexte(Aujourdhui), EnTexte());
+            AreEqual(EnTexte(Aujourdhui, "."), EnTexte(séparateur:"."));
         }
 
     }

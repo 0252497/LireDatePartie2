@@ -98,7 +98,7 @@ namespace Prog2
                 propriété += $" [{défaut}]";
             }
 
-            ColorWrite(Cyan, $"{propriété} ? ");
+            ColorWrite(Cyan, $"{propriété} : ");
             var réponse = ReadLine().Trim();
 
             if (réponse == "")

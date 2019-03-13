@@ -151,6 +151,7 @@ namespace Prog2
             Title = "AfficherDates";
 
             DateAttentatWTC.Jour = 30;
+            DateAttentatWTC.MoisTypé = Mois.Janvier;
 
             ColorWriteLine(Green, "Attentat du WTC:\t{0}", EnTexte(DateAttentatWTC));
             ColorWriteLine(Yellow, "\nMort de MJ:\t\t{0}", EnTexte(DateDecesMJ, "/"));
@@ -162,9 +163,9 @@ namespace Prog2
                 DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
 
             ColorWriteLine(Magenta, "\nAvant-hier:\t\t{0}", avantHier.Décrémenter(2).EnTexteLong());
-            ColorWriteLine(Yellow, "Hier:\t\t\t{0}", Hier().EnTexteLong());
-            ColorWriteLine(Green, "Aujourd'hui:\t\t{0}", Aujourdhui().EnTexteLong());
-            ColorWriteLine(Cyan, "Demain:\t\t\t{0}", Demain().EnTexteLong());
+            ColorWriteLine(Yellow, "Hier:\t\t\t{0}", Hier.EnTexteLong());
+            ColorWriteLine(Green, "Aujourd'hui:\t\t{0}", Aujourdhui.EnTexteLong());
+            ColorWriteLine(Cyan, "Demain:\t\t\t{0}", Demain.EnTexteLong());
             ColorWriteLine(Magenta, "Après-demain:\t\t{0}", aprèsDemain.Incrémenter(2).EnTexteLong());
 
             Poursuivre();

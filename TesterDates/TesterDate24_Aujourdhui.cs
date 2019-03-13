@@ -12,8 +12,8 @@ namespace Prog2
         [TestMethod]
         public void _24_Aujourdhui()
         {
-            var D1 = Aujourdhui();
-            var D2 = Aujourdhui();
+            var D1 = Aujourdhui;
+            var D2 = Aujourdhui;
             IsTrue(D1 == D2, "Il faut retourner le même objet");
             AreEqual(DateTime.Today.Year, D1.Année);
             AreEqual(DateTime.Today.Month, D1.Mois);

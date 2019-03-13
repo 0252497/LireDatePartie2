@@ -34,18 +34,18 @@ namespace Prog2
             ColorWriteLine(Magenta, propriété);
 
             LireEntier("\tAnnée ", "", out int année);
-            LireMois("\tMois ", "", out int mois);
+            LireMois("   \tMois  ", "", out int mois);
 
             // On détermine le nombre de jours dans le mois entré pour savoir le maximum de 
             // jours possibles :
             int nbJoursDsMois = NbJoursDsMois(année, mois); 
 
-            LireEntier("\tJour ", "", 1, nbJoursDsMois, out int jour);
+            LireEntier("  \tJour  ", "", 1, nbJoursDsMois, out int jour);
             
             date = New(année, mois, jour);
 
             if (date == null)
-                date = Aujourdhui();
+                date = Aujourdhui;
 
             return true;
         }

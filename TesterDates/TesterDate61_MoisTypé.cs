@@ -14,8 +14,8 @@ namespace Prog2
         [TestMethod]
         public void _61_MoisTypé()
         {
-            AreEqual(Mois.Janvier, D(2001, 01, 01).MoisTypé());
-            AreEqual(Mois.Décembre, D(2001, 12, 01).MoisTypé());
+            AreEqual(Mois.Janvier, D(2001, 01, 01).MoisTypé);
+            AreEqual(Mois.Décembre, D(2001, 12, 01).MoisTypé);
         }
 
     }

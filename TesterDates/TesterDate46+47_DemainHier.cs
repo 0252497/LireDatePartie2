@@ -12,9 +12,9 @@ namespace Prog2
         [TestMethod]
         public void _46_Demain()
         {
-            var demain = Demain();
-            IsTrue(demain == Demain(), "Il faut retourner le même objet à chaque appel");
-            var d2 = Aujourdhui();
+            var demain = Demain;
+            IsTrue(demain == Demain, "Il faut retourner le même objet à chaque appel");
+            var d2 = Aujourdhui;
             d2.Incrémenter();
             AreEqual(EnTexte(d2), EnTexte(demain));
         }
@@ -22,9 +22,9 @@ namespace Prog2
         [TestMethod]
         public void _47_Hier()
         {
-            var hier = Hier();
-            IsTrue(hier == Hier(), "Il faut retourner le même objet à chaque appel");
-            var d2 = Aujourdhui();
+            var hier = Hier;
+            IsTrue(hier == Hier, "Il faut retourner le même objet à chaque appel");
+            var d2 = Aujourdhui;
             d2.Décrémenter();
             AreEqual(EnTexte(d2), EnTexte(hier));
         }
