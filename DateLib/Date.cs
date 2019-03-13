@@ -11,8 +11,6 @@ namespace Prog2
     {
         private int _mois;
         private int _jour;
-        private int _jourDeLAnnée;
-
         private static readonly Date aujourdhui = New(
             DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
         private static readonly Date demain = New(
@@ -103,34 +101,52 @@ namespace Prog2
         /// </summary>
         public static Date Hier => hier.MettreÀJour().Décrémenter();
 
+        /// <summary>
+        /// Le jour de l'année.
+        /// </summary>
         public int JourDeLAnnée
         {
             get
             {
-                return new DateTime(Année, _mois, _jour).DayOfYear;
-            }
-            set
-            {
-                int nbJour = 0;
-
                 Date date = New(Année, _mois, _jour);
+                Date dernier = New(Année - 1, 12, 31);
 
+                int jourDeLAnnée = 0;
 
-                for (int i = 1; i <= date._mois; i++)
+                if (SontÉgales(date, dernier))
                 {
-                    if (date._mois == 1)
+                    if (Année.EstBissextile())
                     {
-                        nbJour = _jour;
+                        jourDeLAnnée = 366;
                     }
                     else
                     {
-                        int jourMois = DateUtil.NbJoursDsMois(Année, i);
-                        nbJour += jourMois;
-                        nbJour += _jour;
+                        jourDeLAnnée = 365;
+                    }
+                }
+                else
+                {
+                    while (!SontÉgales(date, dernier))
+                    {
+                        date.Décrémenter();
+                        ++jourDeLAnnée;
                     }
                 }
 
-                value = nbJour;
+                return jourDeLAnnée;
+            }
+            set
+            {
+                _mois = 1;
+                _jour = 1;
+                for (int i = 1; i < value; i++)
+                    Incrémenter();
+
+                if (1 > value || value > 366)
+                {
+                    throw new ArgumentOutOfRangeException(
+                        nameof(JourDeLAnnée), $"## Invalide: {value}");
+                }
             }
         }
 
