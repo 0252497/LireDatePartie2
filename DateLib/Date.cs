@@ -37,7 +37,7 @@ namespace Prog2
         {
             if (TryParse(strDate, out Date date))
             {
-                Année = date.Année;
+                _année = date.Année;
                 _mois = date.Mois;
                 _jour = date.Jour;
             }
@@ -47,6 +47,7 @@ namespace Prog2
             }
         }
 
+        private int _année;
         private int _mois;
         private int _jour;
         private int _jourDeLAnnée;
@@ -64,7 +65,16 @@ namespace Prog2
         /// <summary>
         /// L'année.
         /// </summary>
-        public int Année { get; set; }
+        public int Année
+        {
+            get => _année;
+            set
+            {
+                if (value < 1 || !AnnéeValide(value, _mois, _jour) || _jour > value.NbJoursDsMois(_mois))
+                    throw new ArgumentOutOfRangeException(nameof(Année), $"## Invalide : {value}");
+                _année = value;
+            }
+        }
 
         /// <summary>
         /// Le mois de l'année. (janvier = 1)
@@ -74,7 +84,7 @@ namespace Prog2
             get => _mois;
             set
             {
-                if (value < 1 || value > 12)
+                if (value < 1 || value > 12 || _jour > _année.NbJoursDsMois(value))
                     throw new ArgumentOutOfRangeException(nameof(Mois), $"## Invalide : {value}");
                 _mois = value;
             }
@@ -88,7 +98,7 @@ namespace Prog2
             get => _jour;
             set
             {
-                if (1 > value || value > DateUtil.NbJoursDsMois(Année, _mois))
+                if (1 > value || value > _année.NbJoursDsMois(_mois))
                     throw new ArgumentOutOfRangeException(nameof(Jour), $"## Invalide : {value}");
                 _jour = value;
             }
@@ -474,6 +484,16 @@ namespace Prog2
             // --- Fonctions locales ---
             bool EstAnnée(string str) => str.EstNumérique() && str.Length >= 3;
             bool EstJour(string str) => str.EstNumérique() && str.Length <= 2;
+        }
+
+        private bool AnnéeValide(int année, int mois, int jour)
+        {
+            if (jour > année.NbJoursDsMois(mois))
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
