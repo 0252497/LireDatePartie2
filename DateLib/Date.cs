@@ -70,7 +70,7 @@ namespace Prog2
             get => _année;
             set
             {
-                if (value < 1 || !AnnéeValide(value, _mois, _jour) || _jour > value.NbJoursDsMois(_mois))
+                if (value < 1 || _jour > value.NbJoursDsMois(_mois))
                     throw new ArgumentOutOfRangeException(nameof(Année), $"## Invalide : {value}");
                 _année = value;
             }
@@ -484,16 +484,6 @@ namespace Prog2
             // --- Fonctions locales ---
             bool EstAnnée(string str) => str.EstNumérique() && str.Length >= 3;
             bool EstJour(string str) => str.EstNumérique() && str.Length <= 2;
-        }
-
-        private bool AnnéeValide(int année, int mois, int jour)
-        {
-            if (jour > année.NbJoursDsMois(mois))
-            {
-                return false;
-            }
-
-            return true;
         }
     }
 }
