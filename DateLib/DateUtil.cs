@@ -9,7 +9,8 @@ namespace Prog2
     public static class DateUtil
     {
         // --- Attributs ---
-        public static readonly Date DateAttentatWTC = New(2001, 09, 11);
+        // public static readonly Date DateAttentatWTC = New(2001, 09, 11);
+        public static readonly Date DateAttentatWTC = new Date(2001, 09, 11);
         public static readonly Date DateDecesMJ = New(2012, 01, 31);
         public static readonly Date DateExplosionNC = New(2018, 07, 11);
 

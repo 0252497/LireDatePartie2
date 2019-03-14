@@ -78,6 +78,7 @@
     <Compile Include="TesterDate64_TrySplitDate.cs" />
     <Compile Include="TesterDate65_TryParseDate.cs" />
     <Compile Include="TesterDate80_Propriétés.cs" />
+    <Compile Include="TesterDate87_Constructeur.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

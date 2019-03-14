@@ -17,6 +17,36 @@ namespace Prog2
             this.Année = 1;
         }
 
+        // --- Constructeurs paramétrés ---
+        public Date(int année, int mois, int jour)
+        {
+            Année = année;
+            Mois = mois;
+            Jour = jour;
+        }
+
+        public Date(int année, Mois moisTypé, int jour) : this(année, (int)moisTypé, jour) {}
+
+
+        /// <summary>
+        /// Exemple : new Date("11 septembre 2011").
+        /// </summary>
+        /// <param name="strDate">la date en format texte</param>
+        /// <exception cref="System.ArgumentException">date</exception>
+        public Date(string strDate)
+        {
+            if (TryParse(strDate, out Date date))
+            {
+                Année = date.Année;
+                _mois = date.Mois;
+                _jour = date.Jour;
+            }
+            else
+            {
+                throw new ArgumentException(strDate, $"## Invalide : {strDate}");
+            }
+        }
+
         private int _mois;
         private int _jour;
         private int _jourDeLAnnée;

@@ -162,11 +162,12 @@ namespace Prog2
             var avantHier = New(
                 DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
 
-            ColorWriteLine(Magenta, "\nAvant-hier:\t\t{0}", avantHier.Décrémenter(2).EnTexteLong());
-            ColorWriteLine(Yellow, "Hier:\t\t\t{0}", Hier.EnTexteLong());
-            ColorWriteLine(Green, "Aujourd'hui:\t\t{0}", Aujourdhui.EnTexteLong());
-            ColorWriteLine(Cyan, "Demain:\t\t\t{0}", Demain.EnTexteLong());
-            ColorWriteLine(Magenta, "Après-demain:\t\t{0}", aprèsDemain.Incrémenter(2).EnTexteLong());
+            ColorWriteLine(Magenta, $"\nAvant-hier:\t\t{avantHier.Décrémenter(2).EnTexteLong()}");
+            ColorWriteLine(Yellow, $"Hier:\t\t\t{Hier.EnTexteLong()}");
+            ColorWriteLine(Green, $"Aujourd'hui:\t\t{Aujourdhui.EnTexteLong()}");
+            ColorWriteLine(Cyan, $"Demain:\t\t\t{Demain.EnTexteLong()}");
+            ColorWriteLine(Magenta, $"Après-demain:\t\t{aprèsDemain.Incrémenter(2).EnTexteLong()}");
+            ColorWriteLine(DarkYellow, $"\nDate par défaut:        {new Date {Année = 2019, JourDeLAnnée = 100}.EnTexteLong()}");
 
             Poursuivre();
         }
