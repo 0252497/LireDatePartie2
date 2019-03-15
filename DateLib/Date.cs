@@ -158,6 +158,7 @@ namespace Prog2
         {
             get
             {
+                // Pour la date entrée et le dernier jour de l'année précédente :
                 Date date = New(Année, _mois, _jour);
                 Date dernier = New(Année - 1, 12, 31);
 
@@ -190,7 +191,7 @@ namespace Prog2
                 _mois = 1;
                 _jour = 1;
 
-                for (int i = 1; i < value; i++)
+                for (int i = 1; i < value; ++i)
                     Incrémenter();
 
                 if (1 > value || value > 366)
@@ -248,6 +249,31 @@ namespace Prog2
         }
 
         /// <summary>
+        /// Compare cette date-ci (this) avec une autre date => +1 ou 0 ou 1.
+        /// </summary>
+        /// <param name="autre">l'autre date</param>
+        /// <returns>0 si égaux, +1 si this > autre, -1 si autre > this</returns>
+        public int ComparerAvec(/* Date this */ Date autre)
+        {
+            if (_année.ComparerAvec(autre._année) == 0 && _mois.ComparerAvec(autre._mois) == 0 &&
+                _jour.ComparerAvec(autre._jour) == 0)
+            {
+                return 0;
+            }
+            else if (_année.ComparerAvec(autre._année) == 1 || 
+                (_année.ComparerAvec(autre._année) == 0 && this._mois > autre._mois) || 
+                (_année.ComparerAvec(autre._année) == 0 && _mois.ComparerAvec(autre._mois) == 0 
+                && _jour.ComparerAvec(autre._jour) == 1))
+            {
+                return +1;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        /// <summary>
         /// Retranche des jours à la date.
         /// </summary>
         /// <param name="décrément">nombre de jours à enlever</param>
@@ -286,20 +312,10 @@ namespace Prog2
         /// <param name="séparateur">le séparateur</param>
         /// <returns>la date à afficher</returns>
         public static string EnTexte(Date date = null, string séparateur = "-")
-        {
-            if (date != null)
-            {
-                return string.Format(
-                    "{0:D4}{3}{1:D2}{3}{2:D2}", date.Année, date.Mois, date.Jour, séparateur);
-            }
-            else
-            {
-                return string.Format(
-                    "{0:D4}{3}{1:D2}{3}{2:D2}", aujourdhui.Année, aujourdhui.Mois, aujourdhui.Jour,
-                    séparateur);
-            }
-        }
-
+            => (date != null) ? string.Format(
+                    $"{date.Année:D4}{séparateur}{date.Mois:D2}{séparateur}{date.Jour:D2}") : string.Format(
+                    $"{aujourdhui.Année:D4}{séparateur}{aujourdhui.Mois:D2}{séparateur}{aujourdhui.Jour:D2}");
+  
         /// <summary>
         /// Pour obtenir la représentation textuelle d'une date en format long.
         /// </summary>
@@ -315,7 +331,7 @@ namespace Prog2
         /// <param name="jour">le jour</param>
         /// <returns>vrai si la date est valide</returns>
         public static bool EstValide(int année, int mois, int jour)
-            => 1 <= jour && jour <= DateUtil.NbJoursDsMois(année, mois) && 1 <= mois && mois <= 12;
+            => 1 <= jour && jour <= année.NbJoursDsMois(mois) && 1 <= mois && mois <= 12;
 
         /// <summary>
         /// Ajoute des jours à la date
