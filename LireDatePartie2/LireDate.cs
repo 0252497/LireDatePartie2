@@ -23,9 +23,8 @@ namespace Prog2
 
             if (args.Length == 0)
             {
-                if (!LireDate("Entrez une date svp!", out date))
+                if (!LireDate("Date à analyser", "1000-01-01", "3000-12-31", out date))
                 {
-                    MessageErreur($"Date invalide : {strArg}");
                     return;
                 }
             }    

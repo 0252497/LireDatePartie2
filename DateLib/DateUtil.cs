@@ -25,12 +25,47 @@ namespace Prog2
             => année % 4 == 0 && année % 100 != 0 || année % 400 == 0;
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propriété"></param>
+        /// <param name="min"></param>
+        /// <param name="max"></param>
+        /// <param name="date"></param>
+        /// <param name="défaut"></param>
+        /// <returns></returns>
+        public static bool LireDate(string propriété, string min, string max, out Date date, string défaut = null)
+        {
+            if (!TryParse(Demander(propriété, défaut), out date))
+            {
+                MessageErreur("Vous devez entrer une date valide svp!");
+                return false;
+            }
+
+            TryParse(min, out Date dateMin);
+            TryParse(max, out Date dateMax);
+
+            if (date.ComparerAvec(dateMin) == -1)
+            {
+                MessageErreur($"La date doit être plus grande ou égale à {min}");
+                return false;
+            }
+
+            if (date.ComparerAvec(dateMax) == 1)
+            {
+                MessageErreur($"La date doit être plus petite ou égale à {max}");
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
         /// Pour lire une date sur la console; année, mois et jour séparément. 
         /// </summary>
         /// <param name="propriété">nom de la propriété</param>
         /// <param name="date">date lue</param>
         /// <returns>faux si la date ne peut être lue</returns>
-        public static bool LireDate(string propriété, out Date date)
+        public static bool LireDateSéparée(string propriété, out Date date)
         {
             ColorWriteLine(Magenta, propriété);
 
