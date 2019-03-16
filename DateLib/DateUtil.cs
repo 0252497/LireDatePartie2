@@ -41,8 +41,8 @@ namespace Prog2
                 return false;
             }
 
-            TryParse(min, out Date dateMin);
-            TryParse(max, out Date dateMax);
+            Date dateMin = new Date(min);
+            Date dateMax = new Date(max);
 
             if (date.ComparerAvec(dateMin) == -1)
             {
@@ -74,7 +74,7 @@ namespace Prog2
 
             // On détermine le nombre de jours dans le mois entré pour savoir le maximum de 
             // jours possibles :
-            int nbJoursDsMois = NbJoursDsMois(année, mois); 
+            int nbJoursDsMois = année.NbJoursDsMois(mois); 
 
             LireEntier("  \tJour  ", "", 1, nbJoursDsMois, out int jour);
             

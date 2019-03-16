@@ -144,7 +144,8 @@ namespace Prog2
         /// Vrai si une date est très spéciale. Une date est très spéciale si le jour, le mois et
         /// les deux derniers chiffres de l'année sont identiques.
         /// </summary>
-        public bool EstTrèsSpéciale => this.EstSpéciale && this.Mois == this.Année % 100;
+        public bool EstTrèsSpéciale 
+            => this.EstSpéciale && this.Mois == this.Année % 100;
 
         /// <summary>
         /// Date de hier.
@@ -159,14 +160,14 @@ namespace Prog2
             get
             {
                 // Pour la date entrée et le dernier jour de l'année précédente :
-                Date date = New(Année, _mois, _jour);
-                Date dernier = New(Année - 1, 12, 31);
+                Date date = New(_année, _mois, _jour);
+                Date dernier = New(_année - 1, 12, 31);
 
                 _jourDeLAnnée = 0;
 
                 if (SontÉgales(date, dernier))
                 {
-                    if (Année.EstBissextile())
+                    if (_année.EstBissextile())
                     {
                         _jourDeLAnnée = 366;
                     }
@@ -297,7 +298,7 @@ namespace Prog2
                         --this.Mois;
                     }
 
-                    this.Jour = DateUtil.NbJoursDsMois(this.Année, this.Mois);
+                    this.Jour = this.Année.NbJoursDsMois(this.Mois);
                 }
             }
 
