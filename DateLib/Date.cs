@@ -1,6 +1,7 @@
 ﻿/* Fichier pour les attributs, les méthodes et les propriétés de la classe Date. */
 using System;
 using static System.Int32;
+using static Prog2.Mois;
 
 namespace Prog2
 {
@@ -219,6 +220,97 @@ namespace Prog2
         }
 
         // --- Méthodes ---
+
+        /// <summary>
+        /// Génère une date aléatoire comprise entre les années spécifiées.
+        /// NB : La distribution est uniforme et toutes les dates sont possibles.
+        /// </summary>
+        /// <param name="random">Générateur utilisé pour générer la date</param>
+        /// <param name="annéeMin">année minimum</param>
+        /// <param name="annéeMax">année maximum</param>
+        /// <returns>une nouvelle date aléatoire</returns>
+        public static Date Aléatoire(Random random, int annéeMin, int annéeMax)
+        {
+            if (annéeMax < annéeMin)
+            {
+                throw new ArgumentException("## Max doit être plus grand que min");
+            }
+
+            // On génère une année, un mois et un jour aléatoires :
+            int annéeAléatoire = random.Next(annéeMin, annéeMax + 1);
+            int moisAléatoire = random.Next(1, 13);
+            int jourAléatoire = random.Next(1, annéeAléatoire.NbJoursDsMois(moisAléatoire) + 1);
+
+            return new Date(annéeAléatoire, moisAléatoire, jourAléatoire);
+        }
+
+        /// <summary>
+        /// Génère une date aléatoire comprise entre les années spécifiées.
+        /// NB : La distribution est uniforme et toutes les dates sont possibles.
+        /// </summary>
+        /// <param name="random">Générateur utilisé pour générer la date</param>
+        /// <param name="dateMin">date minimum</param>
+        /// <param name="dateMax">date maximum</param>
+        /// <returns>une nouvelle date aléatoire</returns>
+        public static Date Aléatoire(Random random, Date dateMin, Date dateMax)
+        {
+            int moisMax = 12;
+            int moisMin = 1;
+
+            int annéeAléatoire = random.Next(dateMin._année, dateMax._année + 1);
+            int jourMin = 1;
+            int jourMax = annéeAléatoire.NbJoursDsMois(moisMax);
+
+            if (dateMax.ComparerAvec(dateMin) == -1)
+            {
+                throw new ArgumentException("## Max doit être plus grand que min");
+            }
+
+            if (dateMin._année.ComparerAvec(dateMax._année) == 0)
+            {
+                moisMin = dateMin._mois;
+                moisMax = dateMax._mois;
+            }
+            else if (dateMin._année + 1.ComparerAvec(dateMax._année) == 0)
+            {
+                if (dateMin._mois.ComparerAvec(dateMax._mois) == -1)
+                {
+                    moisMin = dateMin._mois;
+                    moisMax = dateMax._mois;
+                }
+            }
+
+            if (new Date(annéeAléatoire, moisMax, jourMax).Moins(dateMin) == 0)
+            {
+                moisMin = dateMin._mois;
+                moisMax = dateMax._mois;
+            }
+            else if (new Date(annéeAléatoire, moisMax, jourMax).Moins(dateMin) < 0)
+            {
+                moisMax = dateMin._mois;
+            }
+
+            Date dateMinTemporaire = new Date(annéeAléatoire, moisMin, jourMin);
+            Date dateMaxTemporaire = new Date(annéeAléatoire, moisMax, jourMax);
+
+
+
+            while (dateMinTemporaire.Moins(dateMax) >= 0)
+            {
+                dateMinTemporaire.Décrémenter();
+            }
+            while (dateMinTemporaire.Moins(dateMin) <= 0)
+            {
+                dateMinTemporaire.Incrémenter();
+            }
+
+            int moisAléatoire = random.Next(moisMin, moisMax + 1);
+
+            int jourAléatoire = random.Next(1, dateMinTemporaire._jour + 1);
+
+            return new Date(annéeAléatoire, moisAléatoire, jourAléatoire);
+        }
+
         /// <summary>
         /// Pour cloner une date en modifiant certains attributs au besoin.
         /// </summary>
@@ -375,6 +467,35 @@ namespace Prog2
             this.Mois = DateTime.Today.Month;
             this.Jour = DateTime.Today.Day;
             return this;
+        }
+
+        /// <summary>
+        /// Calcule le nombre de jours qui séparent deux dates, positif ou négatif.
+        /// </summary>
+        /// <param name="autre">l'autre date</param>
+        /// <returns>la différence</returns>
+        public int Moins(/* Date this */ Date autre)
+        {
+            int différence = 0;
+
+            if (ComparerAvec(autre) == 1)
+            {
+                while (!SontÉgales(this, autre))
+                {
+                    Décrémenter();
+                    ++différence;
+                }
+            }
+            else if (ComparerAvec(autre) == -1)
+            {
+                while (!SontÉgales(this, autre))
+                {
+                    Incrémenter();
+                    --différence;
+                }
+            }
+
+            return différence;
         }
 
         /// <summary>

@@ -81,6 +81,9 @@
     <Compile Include="TesterDate87_Constructeur.cs" />
     <Compile Include="TesterDate89B_FailleDeSécurité.cs" />
     <Compile Include="TesterDate91_ComparerAvec.cs" />
+    <Compile Include="TesterDate92_AléatoireEntreDeuxAnnées.cs" />
+    <Compile Include="TesterDate93_Moins.cs" />
+    <Compile Include="TesterDate94_AléatoireEntreDeuxDates.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -97,6 +100,10 @@
     <ProjectReference Include="..\AfficherMois\AfficherMois.csproj">
       <Project>{0e533868-422c-449a-a7cb-9a0d3e683a44}</Project>
       <Name>AfficherMois</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AfficherRandom\AfficherRandom.csproj">
+      <Project>{c39794a4-ca96-4339-89fb-58224848548b}</Project>
+      <Name>AfficherRandom</Name>
     </ProjectReference>
     <ProjectReference Include="..\DateLib\DateLib.csproj">
       <Project>{5954e0a4-2b05-415b-aa9c-07c7df1cecee}</Project>

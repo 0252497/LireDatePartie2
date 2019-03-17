@@ -15,16 +15,17 @@ namespace Prog2
         static void Main(string[] args)
         {
             Title = "Afficher Random --- Nombres Aléatoires";
-
-            LireEntier("Germe", "0", out int germe);
-            LireEntier("Quantité", "10", out int quantitéNb);
-            LireEntier("Nb faces", "6", out int nbFacesDuDé);
+            
+            LireEntier("Germe", "0", out int germe);    // Le germe, 0 par défaut
+            
+            LireEntier("Quantité", "10", out int quantitéNb);   // Le nombre de fois où le dé sera lancé
+            LireEntier("Nb faces", "6", 2, 6, out int nbFacesDuDé);   // Le nombre de faces du dé
 
             ColorWriteLine(DarkYellow, $"\nGerme : {germe}");
 
-            var random = new Random(germe);
+            var random = new Random(germe); // On crée un random avec le germe fourni
 
-            ColorWriteLine(Cyan, $"Nombres aléatoires de 1 à 6");
+            ColorWriteLine(Cyan, $"Nombres aléatoires de 1 à {nbFacesDuDé}");
 
             List<int> nombres = new List<int>();
             
