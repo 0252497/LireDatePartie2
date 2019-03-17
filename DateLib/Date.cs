@@ -254,61 +254,18 @@ namespace Prog2
         /// <returns>une nouvelle date aléatoire</returns>
         public static Date Aléatoire(Random random, Date dateMin, Date dateMax)
         {
-            int moisMax = 12;
-            int moisMin = 1;
-
-            int annéeAléatoire = random.Next(dateMin._année, dateMax._année + 1);
-            int jourMin = 1;
-            int jourMax = annéeAléatoire.NbJoursDsMois(moisMax);
-
             if (dateMax.ComparerAvec(dateMin) == -1)
             {
                 throw new ArgumentException("## Max doit être plus grand que min");
             }
 
-            if (dateMin._année.ComparerAvec(dateMax._année) == 0)
-            {
-                moisMin = dateMin._mois;
-                moisMax = dateMax._mois;
-            }
-            else if (dateMin._année + 1.ComparerAvec(dateMax._année) == 0)
-            {
-                if (dateMin._mois.ComparerAvec(dateMax._mois) == -1)
-                {
-                    moisMin = dateMin._mois;
-                    moisMax = dateMax._mois;
-                }
-            }
+            int nbJours = dateMax.Moins(dateMin) + 1;
 
-            if (new Date(annéeAléatoire, moisMax, jourMax).Moins(dateMin) == 0)
-            {
-                moisMin = dateMin._mois;
-                moisMax = dateMax._mois;
-            }
-            else if (new Date(annéeAléatoire, moisMax, jourMax).Moins(dateMin) < 0)
-            {
-                moisMax = dateMin._mois;
-            }
+            Date cloneDateMin = dateMin.Cloner();
 
-            Date dateMinTemporaire = new Date(annéeAléatoire, moisMin, jourMin);
-            Date dateMaxTemporaire = new Date(annéeAléatoire, moisMax, jourMax);
+            int nombreAléatoire = random.Next(0, nbJours);
 
-
-
-            while (dateMinTemporaire.Moins(dateMax) >= 0)
-            {
-                dateMinTemporaire.Décrémenter();
-            }
-            while (dateMinTemporaire.Moins(dateMin) <= 0)
-            {
-                dateMinTemporaire.Incrémenter();
-            }
-
-            int moisAléatoire = random.Next(moisMin, moisMax + 1);
-
-            int jourAléatoire = random.Next(1, dateMinTemporaire._jour + 1);
-
-            return new Date(annéeAléatoire, moisAléatoire, jourAléatoire);
+            return cloneDateMin.Incrémenter(nombreAléatoire);
         }
 
         /// <summary>
