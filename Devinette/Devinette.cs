@@ -33,9 +33,8 @@ namespace Prog2
                     if (nbEssais % 3 == 0 && nbEssais != 0)
                     {
                         /***/
-                        if (!LireBooléen("\nDésirez-vous quitter", out bool quitter))
+                        if (!LireBooléen("\nDésirez-vous quitter", out bool quitter)) break;
                         /***/
-                        break;
                     }
                     
                     ++nbEssais;
@@ -45,7 +44,7 @@ namespace Prog2
                     /***/
                     if (SontÉgales(dateUtilisateur, dateAléatoire)) break;
                     /***/
-
+                    
                     if (dateUtilisateur.ComparerAvec(dateAléatoire) == 1)
                     {
                         ColorWriteLine(DarkYellow, "Trop grand!");
