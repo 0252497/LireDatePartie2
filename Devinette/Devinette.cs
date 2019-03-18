@@ -19,6 +19,7 @@ namespace Prog2
             Date dateAléatoire = Aléatoire(random, dateMin, Aujourdhui);
             Date dateUtilisateur;
             bool choix;
+            bool réussi = true;
 
             do
             {
@@ -33,7 +34,9 @@ namespace Prog2
                     if (nbEssais % 3 == 0 && nbEssais != 0)
                     {
                         /***/
-                        if (!LireBooléen("\nDésirez-vous quitter", out bool quitter)) break;
+                        if (LireBooléen("\nDésirez-vous quitter", out bool quitter))
+                            réussi = false;
+                            break;
                         /***/
                     }
                     
@@ -55,9 +58,19 @@ namespace Prog2
                     }
                 }
 
-                MessageOk($"Bravo! Vous avec trouvé après {nbEssais} essai(s)!\n\n");
-                LireBooléen("Rejouer", out choix);
-                dateAléatoire = Aléatoire(random, dateMin, Aujourdhui);
+                if (réussi)
+                {
+                    MessageOk($"Bravo! Vous avec trouvé après {nbEssais} essai(s)!\n\n");
+                }
+                else
+                {
+                    MessageOk("Vous n'avez pas réussi...\n\n");
+                }
+
+                if(LireBooléen("Rejouer", out choix))
+                { 
+                    dateAléatoire = Aléatoire(random, dateMin, Aujourdhui);
+                }
             }
             while (choix);
 
