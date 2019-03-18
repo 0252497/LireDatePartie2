@@ -49,8 +49,7 @@ namespace Prog2
                 MessageErreur($"La date doit être plus grande ou égale à {min}");
                 return false;
             }
-
-            if (date.ComparerAvec(dateMax) == 1)
+            else if (date.ComparerAvec(dateMax) == 1)
             {
                 MessageErreur($"La date doit être plus petite ou égale à {max}");
                 return false;

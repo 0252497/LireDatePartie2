@@ -14,13 +14,22 @@ namespace Prog2
     {
         static void Main(string[] args)
         {
+            int germe = 0;
+
+            if (args.Length != 0)
+            {
+                germe = Parse(args[0]);
+            }
+            
+            Random random = new Random(germe);
+
             Date dateMin = new Date(1700, 01, 01);
-            Random random = new Random();
             Date dateAléatoire = Aléatoire(random, dateMin, Aujourdhui);
             Date dateUtilisateur;
             bool choix;
             bool réussi = true;
-
+            bool quitter = false;
+            
             do
             {
                 int nbEssais = 0;
@@ -28,18 +37,22 @@ namespace Prog2
                 ColorWriteLine(DarkYellow,
                     "J'ai choisi une date aléatoirement, entre le 1er janvier 1700 et aujourd'hui...");
                 ColorWriteLine(DarkYellow, "\nPouvez-vous trouver laquelle?");
-                
+
                 for (; ; )
                 {
                     if (nbEssais % 3 == 0 && nbEssais != 0)
                     {
-                        /***/
-                        if (LireBooléen("\nDésirez-vous quitter", out bool quitter))
-                            réussi = false;
-                            break;
-                        /***/
+                        while (!LireBooléen("\nDésirez-vous quitter", out quitter));
                     }
-                    
+
+                    /***/
+                    if (quitter)
+                    {
+                        réussi = false;
+                        break;
+                    }
+                    /***/
+
                     ++nbEssais;
 
                     LireDate("\nDate", "1700-01-01", EnTexte(Aujourdhui), out dateUtilisateur);
@@ -47,25 +60,19 @@ namespace Prog2
                     /***/
                     if (SontÉgales(dateUtilisateur, dateAléatoire)) break;
                     /***/
-                    
+
                     if (dateUtilisateur.ComparerAvec(dateAléatoire) == 1)
                     {
                         ColorWriteLine(DarkYellow, "Trop grand!");
                     }
-                    else if (dateUtilisateur.ComparerAvec(dateAléatoire) == -1)
+                    else if (dateAléatoire.ComparerAvec(dateUtilisateur) == 1)
                     {
                         ColorWriteLine(DarkYellow, "Trop petit!");
                     }
                 }
 
-                if (réussi)
-                {
-                    MessageOk($"Bravo! Vous avec trouvé après {nbEssais} essai(s)!\n\n");
-                }
-                else
-                {
-                    MessageOk("Vous n'avez pas réussi...\n\n");
-                }
+                MessageOk(réussi ? $"Bravo! Vous avec trouvé après {nbEssais} essai(s)!" : "Vous n'avez pas réussi...");
+                WriteLine("\n");
 
                 if(LireBooléen("Rejouer", out choix))
                 { 
