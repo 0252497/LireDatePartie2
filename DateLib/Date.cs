@@ -261,11 +261,9 @@ namespace Prog2
 
             int nbJours = dateMax.Moins(dateMin) + 1;
 
-            Date cloneDateMin = dateMin.Cloner();
+            int jourAléatoire = random.Next(0, nbJours);
 
-            int nombreAléatoire = random.Next(0, nbJours);
-
-            return cloneDateMin.Incrémenter(nombreAléatoire);
+            return dateMin.Cloner().Incrémenter(jourAléatoire);
         }
 
         /// <summary>
