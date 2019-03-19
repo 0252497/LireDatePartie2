@@ -15,29 +15,79 @@ namespace Prog2
         static void Main(string[] args)
         {
             int germe = 0;
+            bool verbeux = false;
+            Random random;
 
-            if (args.Length != 0)
+            switch (args.Length)
             {
-                germe = Parse(args[0]);
+                case 0:
+                    random = new Random();
+                    break;
+
+                case 1:
+                    if (args[0].EstNumérique())
+                    {
+                        germe = Parse(args[0]);
+                        random = new Random(germe);
+                        ColorWrite(Red, $"\tGerme: ");
+                        ColorWriteLine(DarkYellow, $"{germe}\n");
+                    }
+                    else
+                    {
+                        MessageErreur($"L'argument entier '{args[0]}' n'est pas valide\n");
+                        random = new Random();
+                    }
+                    break;
+
+                case 2:
+                    if (args[0].EstNumérique())
+                    {
+                        germe = Parse(args[0]);
+                        random = new Random(germe);
+                        ColorWrite(Red, $"\tGerme: ");
+                        ColorWriteLine(DarkYellow, $"{germe}\n");
+                    }
+                    else
+                    {
+                        MessageErreur($"L'argument entier '{args[0]}' n'est pas valide\n");
+                        random = new Random();
+                    }
+
+                    if (!args[1].TryParseBool(out verbeux))
+                    {
+                        MessageErreur($"L'argument booléen '{args[1]}' n'est pas valide\n");
+                    }
+
+                    break;
+                    
+                default:
+                    random = new Random();
+                    ColorWriteLine(DarkYellow, "USAGE: DEVINETTE [germe:int [verbeux:bool]]\n");
+                    break;
             }
-            
-            Random random = new Random(germe);
 
             Date dateMin = new Date(1700, 01, 01);
-            Date dateAléatoire = Aléatoire(random, dateMin, Aujourdhui);
             Date dateUtilisateur;
             bool choix;
             bool réussi = true;
             bool quitter = false;
+            Date dateAléatoire = Aléatoire(random, dateMin, Aujourdhui);
+
             
+
             do
             {
+                if (verbeux)
+                {
+                    ColorWrite(Red, "\tChoix: ");
+                    ColorWriteLine(DarkYellow, $"{EnTexte(dateAléatoire)}\n");
+                }
+
                 int nbEssais = 0;
-                ColorWriteLine(Magenta, EnTexte(dateAléatoire));
                 ColorWriteLine(DarkYellow,
                     "J'ai choisi une date aléatoirement, entre le 1er janvier 1700 et aujourd'hui...");
                 ColorWriteLine(DarkYellow, "\nPouvez-vous trouver laquelle?");
-
+                ColorWriteLine(Magenta, EnTexte(dateAléatoire));
                 for (; ; )
                 {
                     if (nbEssais % 3 == 0 && nbEssais != 0)
@@ -55,7 +105,7 @@ namespace Prog2
 
                     ++nbEssais;
 
-                    LireDate("\nDate", "1700-01-01", EnTexte(Aujourdhui), out dateUtilisateur);
+                    while(!LireDate("\nDate", "1700-01-01", EnTexte(Aujourdhui), out dateUtilisateur));
 
                     /***/
                     if (SontÉgales(dateUtilisateur, dateAléatoire)) break;
@@ -81,7 +131,7 @@ namespace Prog2
             }
             while (choix);
 
-            WriteLine("Merci d'avoir jouer...");
+            Poursuivre("Merci d'avoir jouer...");
         }
     }
 }
