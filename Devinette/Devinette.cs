@@ -126,10 +126,7 @@ namespace Prog2
                 MessageOk(réussi ? $"Bravo! Vous avec trouvé après {nbEssais} essai(s)!" : "Vous n'avez pas réussi...");
                 WriteLine("\n");
 
-                if(LireBooléen("Rejouer", out choix))
-                { 
-                    dateAléatoire = Aléatoire(random, dateMin, Aujourdhui);
-                }
+                while (!LireBooléen("Rejouer", out choix));
             }
             while (choix);
 
