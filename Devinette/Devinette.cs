@@ -112,10 +112,14 @@ namespace Prog2
 
                 for (; ; )
                 {
-                    // À tous les 3 essais, on demande à l'utilisateur s'il préfère quitter :
-                    if (nbEssais % 3 == 0 && nbEssais != 0)
+                    while (!LireDate("\nDate", "1700-01-01", EnTexte(Aujourdhui), out dateUtilisateur))
                     {
-                        while (!LireBooléen("\nDésirez-vous quitter", out quitter));
+                        ++nbEssais;
+
+                        if (nbEssais % 3 == 0 && nbEssais != 0)
+                        {
+                            while (!LireBooléen("\nDésirez-vous quitter", out quitter)) ;
+                        }
                     }
 
                     /***/
@@ -123,14 +127,10 @@ namespace Prog2
                     {
                         // Si l'utilisateur quitte ici, çela veut dire qu'il n'a pas trouvé 
                         // la date recherchée... :
-                        réussi = false; 
+                        réussi = false;
                         break;
                     }
                     /***/
-
-                    ++nbEssais;
-
-                    while(!LireDate("\nDate", "1700-01-01", EnTexte(Aujourdhui), out dateUtilisateur));
 
                     /***/
                     if (SontÉgales(dateUtilisateur, dateAléatoire)) break;
@@ -144,6 +144,22 @@ namespace Prog2
                     {
                         ColorWriteLine(DarkYellow, "Trop petit!");
                     }
+
+                    // À tous les 3 essais, on demande à l'utilisateur s'il préfère quitter :
+                    if (nbEssais % 3 == 0 && nbEssais != 0)
+                    {
+                        while (!LireBooléen("\nDésirez-vous quitter", out quitter)) ;
+                    }
+
+                    /***/
+                    if (quitter)
+                    {
+                        // Si l'utilisateur quitte ici, çela veut dire qu'il n'a pas trouvé 
+                        // la date recherchée... :
+                        réussi = false;
+                        break;
+                    }
+                    /***/
                 }
 
                 MessageOk(réussi ? $"Bravo! Vous avec trouvé après {nbEssais} essai(s)!" : "Vous n'avez pas réussi...");
