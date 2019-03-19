@@ -40,13 +40,9 @@ namespace Prog2
         /// <returns>vrai si la convertion réussit</returns>
         public static bool TryParseBool(this string strBool, out bool booléen)
         {
-            strBool = strBool.Trim().ToLower().SansAccents();
             booléen = false;
 
-            if (bool.TryParse(strBool, out booléen))
-                return true;
-
-            switch (strBool)
+            switch (strBool.ToLower().Trim())
             {
                 case "vrai":
                 case "yes":
@@ -56,6 +52,7 @@ namespace Prog2
                 case "oui":
                 case "o":
                 case "1":
+                case "true":
                     booléen = true;
                     return true;
                 case "faux":
@@ -64,6 +61,7 @@ namespace Prog2
                 case "no":
                 case "f":
                 case "0":
+                case "false":
                     return true;
                 default:
                     return false;

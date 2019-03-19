@@ -3,6 +3,7 @@
  * Auteure : Véronique Giguère
  * Création : 5 février 2019
  */
+
 using static System.Console;
 using static Prog2.ConsolePlus;
 using static System.ConsoleColor;

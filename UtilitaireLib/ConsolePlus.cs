@@ -86,7 +86,7 @@ namespace Prog2
         /// <param name="propriété">la propriété de la question à demander</param>
         /// <param name="défaut">la propriété par défaut</param>
         /// <returns></returns>
-        public static string Demander(string propriété, string défaut)
+        public static string Demander(string propriété, string défaut, string caractère = ": ")
         {
             if (défaut == null)
             {
@@ -98,38 +98,7 @@ namespace Prog2
                 propriété += $" [{défaut}]";
             }
 
-            ColorWrite(Cyan, $"{propriété}: ");
-            var réponse = ReadLine().Trim();
-
-            if (réponse == "")
-            {
-                return défaut;
-            }
-            else
-            {
-                return réponse;
-            }
-        }
-
-        /// <summary>
-        /// Demande une question quelconque à l'utilisateur.
-        /// </summary>
-        /// <param name="propriété">la propriété de la question à demander</param>
-        /// <param name="défaut">la propriété par défaut</param>
-        /// <returns></returns>
-        public static string DemanderBooléen(string propriété, string défaut)
-        {
-            if (défaut == null)
-            {
-                défaut = "";
-            }
-
-            if (défaut != "")
-            {
-                propriété += $" [{défaut}]";
-            }
-
-            ColorWrite(Cyan, $"{propriété}? ");
+            ColorWrite(Cyan, $"{propriété}{caractère} ");
             var réponse = ReadLine().Trim();
 
             if (réponse == "")
@@ -152,7 +121,7 @@ namespace Prog2
         /// <returns>vrai si la lecture réussi</returns>
         public static bool LireBooléen(string propriété, out bool booléen, string défaut = null)
         {
-            if (!StringUtil.TryParseBool(DemanderBooléen(propriété, défaut), out booléen))
+            if (!StringUtil.TryParseBool(Demander(propriété, défaut, " ? "), out booléen))
             {
                 MessageErreur($"Il faut entrer oui/non ou o/n ou en anglais!");
                 return false;
