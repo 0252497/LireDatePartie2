@@ -308,9 +308,9 @@ namespace Prog2
             {
                 return 0;
             }
-            else if (_année.ComparerAvec(autre._année) == 1 || 
-                (_année.ComparerAvec(autre._année) == 0 && (_année.ComparerAvec(autre._année) == 1)) || 
-                (_année.ComparerAvec(autre._année) == 0 && _mois.ComparerAvec(autre._mois) == 0 
+            else if (_année.ComparerAvec(autre._année) == 1 ||
+                (_année.ComparerAvec(autre._année) == 0 && (_mois.ComparerAvec(autre._mois) == 1))||
+                (_année.ComparerAvec(autre._année) == 0 && _mois.ComparerAvec(autre._mois) == 0
                 && _jour.ComparerAvec(autre._jour) == 1))
             {
                 return +1;

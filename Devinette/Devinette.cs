@@ -32,9 +32,13 @@ namespace Prog2
                         ColorWrite(Red, $"\tGerme: ");
                         ColorWriteLine(DarkYellow, $"{germe}\n");
                     }
+                    else if (args[0].TryParseBool(out verbeux))
+                    {
+                        random = new Random();
+                    }
                     else
                     {
-                        MessageErreur($"L'argument entier '{args[0]}' n'est pas valide\n");
+                        MessageErreur($"L'argument '{args[0]}' n'est pas valide\n");
                         random = new Random();
                     }
                     break;
@@ -57,7 +61,6 @@ namespace Prog2
                     {
                         MessageErreur($"L'argument booléen '{args[1]}' n'est pas valide\n");
                     }
-
                     break;
                     
                 default:
