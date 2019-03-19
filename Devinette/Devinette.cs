@@ -71,12 +71,12 @@ namespace Prog2
             bool choix;
             bool réussi = true;
             bool quitter = false;
-            Date dateAléatoire = Aléatoire(random, dateMin, Aujourdhui);
-
+            Date dateAléatoire;
             
-
             do
             {
+                dateAléatoire = Aléatoire(random, dateMin, Aujourdhui);
+
                 if (verbeux)
                 {
                     ColorWrite(Red, "\tChoix: ");
@@ -84,10 +84,12 @@ namespace Prog2
                 }
 
                 int nbEssais = 0;
+
                 ColorWriteLine(DarkYellow,
                     "J'ai choisi une date aléatoirement, entre le 1er janvier 1700 et aujourd'hui...");
                 ColorWriteLine(DarkYellow, "\nPouvez-vous trouver laquelle?");
                 ColorWriteLine(Magenta, EnTexte(dateAléatoire));
+
                 for (; ; )
                 {
                     if (nbEssais % 3 == 0 && nbEssais != 0)
