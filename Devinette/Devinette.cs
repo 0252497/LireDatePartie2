@@ -8,6 +8,7 @@ using static Prog2.Date;
 using static System.Int32;
 using System.Collections.Generic;
 using System.Linq;
+using static System.String;
 
 namespace Prog2
 {
@@ -103,17 +104,24 @@ namespace Prog2
                 }
 
                 // Le nombre d'essais de l'utilisateur, sera incrémenté à chaque tour de boucle :
-                int nbEssais = 0;  
+                int nbEssais = 0;
 
                 ColorWriteLine(DarkYellow,
                     "J'ai choisi une date aléatoirement, entre le 1er janvier 1700 et aujourd'hui...");
                 ColorWriteLine(DarkYellow, "\nPouvez-vous trouver laquelle?");
-                // ColorWriteLine(Magenta, EnTexte(dateAléatoire));
+                ColorWriteLine(Magenta, EnTexte(dateAléatoire));
 
                 for (; ; )
                 {
-                    while (!LireDate("\nDate", "1700-01-01", EnTexte(Aujourdhui), out dateUtilisateur))
+                    // À tous les 3 essais, on demande à l'utilisateur s'il préfère quitter :
+                    if (nbEssais % 3 == 0 && nbEssais != 0)
                     {
+                        while (!LireBooléen("\nDésirez-vous quitter", out quitter)) ;
+                    }
+
+                    do
+                    {
+                        LireDate("\nDate", "1700-01-01", EnTexte(Aujourdhui), out dateUtilisateur);
                         ++nbEssais;
 
                         if (nbEssais % 3 == 0 && nbEssais != 0)
@@ -121,6 +129,7 @@ namespace Prog2
                             while (!LireBooléen("\nDésirez-vous quitter", out quitter)) ;
                         }
                     }
+                    while ((dateUtilisateur == null || EnTexte(dateUtilisateur) == "") && !quitter);
 
                     /***/
                     if (quitter)
@@ -144,27 +153,11 @@ namespace Prog2
                     {
                         ColorWriteLine(DarkYellow, "Trop petit!");
                     }
-
-                    // À tous les 3 essais, on demande à l'utilisateur s'il préfère quitter :
-                    if (nbEssais % 3 == 0 && nbEssais != 0)
-                    {
-                        while (!LireBooléen("\nDésirez-vous quitter", out quitter)) ;
-                    }
-
-                    /***/
-                    if (quitter)
-                    {
-                        // Si l'utilisateur quitte ici, çela veut dire qu'il n'a pas trouvé 
-                        // la date recherchée... :
-                        réussi = false;
-                        break;
-                    }
-                    /***/
                 }
 
                 MessageOk(réussi ? $"Bravo! Vous avec trouvé après {nbEssais} essai(s)!" : "Vous n'avez pas réussi...");
 
-                while (!LireBooléen("\n\nRejouer", out choix));
+                while (!LireBooléen("\n\nRejouer", out choix)) ;
             }
             while (choix);
 

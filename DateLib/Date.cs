@@ -303,15 +303,15 @@ namespace Prog2
         /// <returns>0 si égaux, +1 si this > autre, -1 si autre > this</returns>
         public int ComparerAvec(/* Date this */ Date autre)
         {
-            if (_année.ComparerAvec(autre._année) == 0 && _mois.ComparerAvec(autre._mois) == 0 &&
-                _jour.ComparerAvec(autre._jour) == 0)
+            if (Année.ComparerAvec(autre.Année) == 0 && Mois.ComparerAvec(autre.Mois) == 0 &&
+                Jour.ComparerAvec(autre.Jour) == 0)
             {
                 return 0;
             }
-            else if (_année.ComparerAvec(autre._année) == 1 ||
-                (_année.ComparerAvec(autre._année) == 0 && (_mois.ComparerAvec(autre._mois) == 1))||
-                (_année.ComparerAvec(autre._année) == 0 && _mois.ComparerAvec(autre._mois) == 0
-                && _jour.ComparerAvec(autre._jour) == 1))
+            else if (Année.ComparerAvec(autre.Année) == 1 ||
+                (Année.ComparerAvec(autre.Année) == 0 && (Mois.ComparerAvec(autre.Mois) == 1))||
+                (Année.ComparerAvec(autre.Année) == 0 && Mois.ComparerAvec(autre.Mois) == 0
+                && Jour.ComparerAvec(autre.Jour) == 1))
             {
                 return +1;
             }
