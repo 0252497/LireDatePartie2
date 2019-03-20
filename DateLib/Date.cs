@@ -259,9 +259,11 @@ namespace Prog2
                 throw new ArgumentException("## Max doit être plus grand que min");
             }
 
+            // Le nombre de jours qui se retrouvent entre la date maximum et la date minimum :
             int nbJours = dateMax.Moins(dateMin) + 1;
 
-            int jourAléatoire = random.Next(0, nbJours);
+            // Pour le jour aléatoire qu'on ajoutera à un clone de la date minimum :
+            int jourAléatoire = random.Next(0, nbJours);    
 
             return dateMin.Cloner().Incrémenter(jourAléatoire);
         }

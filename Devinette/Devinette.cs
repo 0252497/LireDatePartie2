@@ -110,7 +110,6 @@ namespace Prog2
                 ColorWriteLine(DarkYellow,
                     "J'ai choisi une date aléatoirement, entre le 1er janvier 1700 et aujourd'hui...");
                 ColorWriteLine(DarkYellow, "\nPouvez-vous trouver laquelle?");
-                ColorWriteLine(Magenta, EnTexte(dateAléatoire));
 
                 for (; ; )
                 {
@@ -156,17 +155,22 @@ namespace Prog2
                     if (SontÉgales(dateUtilisateur, dateAléatoire)) break;
                     /***/
 
-                    if (dateUtilisateur.ComparerAvec(dateAléatoire) == 1)
+                    if (dateUtilisateur.ComparerAvec(dateMin) == 1 && 
+                        dateUtilisateur.ComparerAvec(Aujourdhui) == -1)
                     {
-                        ColorWriteLine(DarkYellow, "Trop grand!");
-                    }
-                    else if (dateAléatoire.ComparerAvec(dateUtilisateur) == 1)
-                    {
-                        ColorWriteLine(DarkYellow, "Trop petit!");
+                        if (dateUtilisateur.ComparerAvec(dateAléatoire) == 1)
+                        {
+                            ColorWriteLine(DarkYellow, "Trop grand!");
+                        }
+                        else if (dateAléatoire.ComparerAvec(dateUtilisateur) == 1)
+                        {
+                            ColorWriteLine(DarkYellow, "Trop petit!");
+                        }
                     }
                 }
 
-                MessageOk(réussi ? $"Bravo! Vous avec trouvé après {nbEssais} essai(s)!" : "Vous n'avez pas réussi...");
+                MessageOk(
+                    réussi ? $"Bravo! Vous avec trouvé après {nbEssais} essai(s)!" : "Vous n'avez pas réussi...");
 
                 while (!LireBooléen("\n\nRejouer", out choix)) ;
             }
