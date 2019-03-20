@@ -85,16 +85,17 @@ namespace Prog2
             Date dateMin = new Date(1700, 01, 01);  // La date minimale
             bool choix; // Pour l'arrêt du jeu
             Date dateAléatoire; // La date aléatoire générée à chaque partie
-            bool quitter = false; // Pour la sortie rapide
-
-            // Pour savoir si l'utilisateur a réussi ou s'il a utilisé la sortie rapide :
-            bool réussi = true;
             Date dateUtilisateur;   // Pour les essais de dates de l'utilisateur
 
             do
             {
                 // Initialisation de la date aléatoire :
                 dateAléatoire = Aléatoire(random, dateMin, Aujourdhui);
+
+                bool quitter = false; // Pour la sortie rapide
+
+                // Pour savoir si l'utilisateur a réussi ou s'il a utilisé la sortie rapide :
+                bool réussi = true;
 
                 // Affichage de la date, si le booléen verbeux est vrai :
                 if (verbeux)
@@ -118,6 +119,16 @@ namespace Prog2
                     {
                         while (!LireBooléen("\nDésirez-vous quitter", out quitter)) ;
                     }
+
+                    /***/
+                    if (quitter)
+                    {
+                        // Si l'utilisateur quitte ici, çela veut dire qu'il n'a pas trouvé 
+                        // la date recherchée... :
+                        réussi = false;
+                        break;
+                    }
+                    /***/
 
                     do
                     {
