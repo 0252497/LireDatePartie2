@@ -13,8 +13,8 @@ namespace Prog2
         // --- Constructeur par défaut ---
         public Date()
         {
-            this._mois = 1;
-            this._jour = 1;
+            this.Mois = 1;
+            this.Jour = 1;
             this.Année = 1;
         }
 
@@ -161,14 +161,14 @@ namespace Prog2
             get
             {
                 // Pour la date entrée et le dernier jour de l'année précédente :
-                Date date = New(_année, _mois, _jour);
-                Date dernier = New(_année - 1, 12, 31);
+                Date date = New(Année, Mois, Jour);
+                Date dernier = New(Année - 1, 12, 31);
 
                 _jourDeLAnnée = 0;
 
                 if (SontÉgales(date, dernier))
                 {
-                    if (_année.EstBissextile())
+                    if (Année.EstBissextile())
                     {
                         _jourDeLAnnée = 366;
                     }
