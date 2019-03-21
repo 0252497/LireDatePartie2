@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Date.cs" />
     <Compile Include="DateUtil.cs" />
+    <Compile Include="JourDeLaSemaine.cs" />
     <Compile Include="Mois.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

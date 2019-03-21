@@ -61,10 +61,11 @@ namespace Prog2
             MessageOk(message);
 
             // Afficher si Noël, jour de l'an, St-Jean-Baptiste ou pas, et le jour de l'année :
-            ColorWriteLine(DarkYellow, "\n\nJour de l'an : {0}", date.EstJourDeLAn ? "oui" : "non");
-            ColorWriteLine(DarkYellow, "     St-Jean : {0}", date.EstStJean ? "oui" : "non");
-            ColorWriteLine(DarkYellow, "        Noël : {0}", date.EstNoël ? "oui" : "non");
-            ColorWriteLine(DarkMagenta, $" Jour numéro : {date.JourDeLAnnée}");
+            ColorWriteLine(DarkYellow, "\n\n Jour de l'an : {0}", date.EstJourDeLAn ? "oui" : "non");
+            ColorWriteLine(DarkYellow, "      St-Jean : {0}", date.EstStJean ? "oui" : "non");
+            ColorWriteLine(DarkYellow, "         Noël : {0}", date.EstNoël ? "oui" : "non");
+            ColorWriteLine(DarkMagenta, $"  Jour numéro : {date.JourDeLAnnée}");
+            ColorWriteLine(Blue, $" Jour semaine : {date.JourDeLaSemaine}");
         }
     }
 }

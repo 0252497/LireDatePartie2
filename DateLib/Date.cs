@@ -205,6 +205,33 @@ namespace Prog2
         }
 
         /// <summary>
+        /// Jour de la semaine associé à la date. Calculé grâce à l'algorithme des congruences de Zeller.
+        /// </summary>
+        public JourDeLaSemaine JourDeLaSemaine
+        {
+            get
+            {
+                int m = Mois;
+                int a = Année;
+                int q = Jour;
+
+                if (m == 1 || m == 2)
+                {
+                    m += 12;
+                    --a;
+                }
+
+                int k = a % 100;
+                int j = a / 100;
+
+                int h = (q + 13 * (m + 1) / 5 + k + k / 4 + j / 4 + 5 * j) % 7;
+                int d = ((h + 5) % 7) + 1;
+
+                return (JourDeLaSemaine)d;
+            }
+        }
+
+        /// <summary>
         /// Le mois sous forme de type Mois.
         /// </summary>
         public Mois MoisTypé

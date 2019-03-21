@@ -84,6 +84,7 @@
     <Compile Include="TesterDate92_AléatoireEntreDeuxAnnées.cs" />
     <Compile Include="TesterDate93_Moins.cs" />
     <Compile Include="TesterDate94_AléatoireEntreDeuxDates.cs" />
+    <Compile Include="TesterDate_101_JourDeLaSemaine.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
