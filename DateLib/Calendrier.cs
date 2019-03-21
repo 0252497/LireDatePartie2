@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Prog2.JourDeLaSemaine;
+using static System.Console;
 
 namespace Prog2
 {
     public class Calendrier
     {
-        private const int NbRangées = 6;
-        private const int NbColonnes = 7;
+        public const int NbRangées = 6;
+        public const int NbColonnes = 7;
 
         public int Année { get; }
         public Mois Mois { get; }
@@ -34,6 +36,22 @@ namespace Prog2
             Jours[2, 5] = 20;
 
             Jours[NbRangées - 1, NbColonnes - 1] = 42;
+
+            int jour = 22;
+
+            for (int colonne = 0; colonne < NbColonnes; ++colonne)
+            {
+                Jours[3, colonne] = jour;
+                ++jour;
+            }
+
+            jour = 5;
+
+            for (int rangée = 0; rangée < NbRangées; ++rangée)
+            {
+                Jours[rangée, 4] = jour;
+                jour += 7;
+            }
         }
     }
 }

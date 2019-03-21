@@ -3,6 +3,8 @@ using static Prog2.ConsolePlus;
 using static System.ConsoleColor;
 using static Prog2.Date;
 using static Prog2.Mois;
+using static System.Console;
+using static Prog2.Calendrier;
 
 namespace Prog2
 {
@@ -15,6 +17,32 @@ namespace Prog2
         public static readonly Date DateExplosionNC = New(2018, 07, 11);
 
         // --- Méthodes ---
+
+        /// <summary>
+        /// Affiche un calendrier couleur sur la console.
+        /// </summary>
+        /// <param name="calendrier">le calendrier à afficher</param>
+        public static void Afficher(this Calendrier calendrier)
+        {
+            ColorWriteLine(DarkYellow, $"Calendrier: {calendrier.Mois} {calendrier.Année}");
+
+            for (int rangée = 0; rangée < NbRangées; ++rangée)
+            {
+                for (int colonne = 0; colonne < NbColonnes; ++colonne)
+                {
+                    if (calendrier.Jours[rangée, colonne] != 0)
+                    {
+                        Write("{0, 3}", calendrier.Jours[rangée, colonne]);
+                    }
+                    else
+                    {
+                        Write("  .");
+                    }
+                }
+
+                WriteLine();
+            }
+        }
 
         /// <summary>
         /// Renvoie si une année est bissextile.
