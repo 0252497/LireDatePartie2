@@ -30,9 +30,9 @@ namespace Prog2
             {
                 for (int colonne = 0; colonne < NbColonnes; ++colonne)
                 {
-                    if (calendrier.Jours[rangée, colonne] != 0)
+                    if (calendrier[rangée, colonne] != 0)
                     {
-                        Write("{0, 3}", calendrier.Jours[rangée, colonne]);
+                        Write("{0, 3}", calendrier[rangée, colonne]);
                     }
                     else
                     {
