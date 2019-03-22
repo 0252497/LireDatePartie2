@@ -51,38 +51,52 @@ namespace Prog2
         public int this[int rangée, int colonne]
             => Jours[rangée, colonne];
 
+        public bool Localiser(Date date, out int rangée, out int colonne)
+        {
+            colonne = 0;
+            rangée = 0;
+
+            if (date == null || Année != date.Année || Mois != date.MoisTypé)
+            {
+                return false;
+            }
+            else
+            {
+                int jourDate = (int)date.JourDeLaSemaine;
+
+                if (date.JourDeLaSemaine == Dimanche)
+                {
+                    colonne = 0;
+                }
+                else
+                {
+                    colonne = jourDate;
+                }
+
+                for (int i = 0; i < NbRangées; ++i)
+                {
+                    if (Jours[i, colonne] == date.Jour)
+                    {
+                        rangée = i;
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+        }
+
         private void RemplirTableau()
         {
-            ////! Code temporaire
-
-            //// Première case du tableau, en haut à gauche :
-            //Jours[0, 0] = 1;
-
-            //// Rangée 3, colonne 6 :
-            //Jours[2, 5] = 20;
-
-            //Jours[NbRangées - 1, NbColonnes - 1] = 42;
-
-            //int jour = 22;
-
-            //for (int colonne = 0; colonne < NbColonnes; ++colonne)
-            //{
-            //    Jours[3, colonne] = jour;
-            //    ++jour;
-            //}
-
-            //jour = 5;
-
-            //for (int rangée = 0; rangée < NbRangées; ++rangée)
-            //{
-            //    Jours[rangée, 4] = jour;
-            //    jour += 7;
-            //}
-
             Date datePremier = new Date(Année, Mois, 1);
 
             int rangée = 0;
             int colonne = (int)datePremier.JourDeLaSemaine;
+
+            if (datePremier.JourDeLaSemaine == Dimanche)
+            {
+                colonne = 0;
+            }
 
             for (int i = 1; i <= Année.NbJoursDsMois((int)Mois); ++i)
             {

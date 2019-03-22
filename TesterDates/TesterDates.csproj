@@ -87,6 +87,7 @@
     <Compile Include="TesterDate_101_JourDeLaSemaine.cs" />
     <Compile Include="TesterDate_102_ConstructeurCalendrier.cs" />
     <Compile Include="TesterDate_103_RemplirTableau.cs" />
+    <Compile Include="TesterDate_104_Localiser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
