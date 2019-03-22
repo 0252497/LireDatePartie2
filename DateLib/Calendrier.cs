@@ -80,7 +80,6 @@ namespace Prog2
             //}
 
             Date datePremier = new Date(Année, Mois, 1);
-            JourDeLaSemaine premier = datePremier.JourDeLaSemaine;
 
             int rangée = 0;
             int colonne = (int)datePremier.JourDeLaSemaine;
