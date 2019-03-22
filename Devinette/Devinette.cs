@@ -144,8 +144,6 @@ namespace Prog2
                     /***/
                     if (quitter)
                     {
-                        // Si l'utilisateur quitte ici, çela veut dire qu'il n'a pas trouvé 
-                        // la date recherchée... :
                         réussi = false;
                         break;
                     }

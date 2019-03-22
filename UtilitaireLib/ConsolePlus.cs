@@ -85,7 +85,8 @@ namespace Prog2
         /// </summary>
         /// <param name="propriété">la propriété de la question à demander</param>
         /// <param name="défaut">la propriété par défaut</param>
-        /// <returns></returns>
+        /// <param name="caractère">le caractère par défaut</param>
+        /// <returns>la réponse de l'utilisateur</returns>
         public static string Demander(string propriété, string défaut, string caractère = ": ")
         {
             if (défaut == null)
