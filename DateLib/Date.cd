@@ -14,5 +14,12 @@
       <FileName>JourDeLaSemaine.cs</FileName>
     </TypeIdentifier>
   </Enum>
+  <Enum Name="Prog2.Mois">
+    <Position X="6.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAABAAgAAAAAAAAQAQEAAIAEAABAAAAACgAAA=</HashCode>
+      <FileName>Mois.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
