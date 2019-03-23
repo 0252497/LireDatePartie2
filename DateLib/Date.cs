@@ -1,7 +1,6 @@
 ﻿/* Fichier pour les attributs, les méthodes et les propriétés de la classe Date. */
 using System;
 using static System.Int32;
-using static Prog2.Mois;
 
 namespace Prog2
 {
@@ -13,9 +12,9 @@ namespace Prog2
         // --- Constructeur par défaut ---
         public Date()
         {
-            this.Mois = 1;
-            this.Jour = 1;
-            this.Année = 1;
+            Mois = 1;
+            Jour = 1;
+            Année = 1;
         }
 
         // --- Constructeurs paramétrés ---
@@ -121,32 +120,32 @@ namespace Prog2
         /// Vrai si la date est le premier jour de l'an.
         /// </summary>
         public bool EstJourDeLAn
-            => this.Mois == 1 && this.Jour == 1;
+            => Mois == 1 && Jour == 1;
 
         /// <summary>
         /// Vrai si la date est Noël.
         /// </summary>
         public bool EstNoël
-            => this.Mois == 12 && this.Jour == 25;
+            => Mois == 12 && Jour == 25;
 
         /// <summary>
         /// Vrai si une date est spéciale. Une date est spéciale si le mois et le jour sont
         /// identiques.
         /// </summary>
-        public bool EstSpéciale => this.Jour == this.Mois;
+        public bool EstSpéciale => Jour == Mois;
 
         /// <summary>
         /// Vrai si la date est la St-Jean-Baptiste.
         /// </summary>
         public bool EstStJean
-            => this.Mois == 6 && this.Jour == 24;
+            => Mois == 6 && Jour == 24;
 
         /// <summary>
         /// Vrai si une date est très spéciale. Une date est très spéciale si le jour, le mois et
         /// les deux derniers chiffres de l'année sont identiques.
         /// </summary>
         public bool EstTrèsSpéciale 
-            => this.EstSpéciale && this.Mois == this.Année % 100;
+            => EstSpéciale && Mois == Année % 100;
 
         /// <summary>
         /// Date de hier.
@@ -196,7 +195,7 @@ namespace Prog2
                 for (int i = 1; i < value; ++i)
                     Incrémenter();
 
-                if (1 > value || value > 366)
+                if (1 > value || value > (Année.EstBissextile() ? 366 : 365))
                 {
                     throw new ArgumentOutOfRangeException(
                         nameof(JourDeLAnnée), $"## Invalide: {value}");
@@ -238,11 +237,11 @@ namespace Prog2
         {
             get
             {
-                return (Mois)this.Mois;
+                return (Mois)Mois;
             }
             set
             {
-                this.Mois = (int)value;
+                Mois = (int)value;
             }
         }
 
@@ -358,23 +357,23 @@ namespace Prog2
         {
             for (int i = 0; i < décrément; ++i)
             {
-                if (EstValide(this.Année, this.Mois, this.Jour - 1))
+                if (EstValide(Année, Mois, Jour - 1))
                 {
-                    --this.Jour;
+                    --Jour;
                 }
                 else
                 {
-                    if (this.Mois <= 1)
+                    if (Mois <= 1)
                     {
-                        this.Mois = 12;
-                        --this.Année;
+                        Mois = 12;
+                        --Année;
                     }
                     else
                     {
-                        --this.Mois;
+                        --Mois;
                     }
 
-                    this.Jour = this.Année.NbJoursDsMois(this.Mois);
+                    Jour = Année.NbJoursDsMois(Mois);
                 }
             }
 
@@ -398,7 +397,7 @@ namespace Prog2
         /// </summary>
         /// <returns>représentation textuelle</returns>
         public string EnTexteLong(/* Date this */)
-            => $"{this.Jour} {MoisTypé.ToString().ToLower()} {this.Année}";
+            => $"{Jour} {MoisTypé.ToString().ToLower()} {Année}";
 
         /// <summary>
         /// Détermine si une date est valide.
@@ -418,22 +417,22 @@ namespace Prog2
         {
             for (int i = 0; i < incrément; ++i)
             {
-                if (EstValide(this.Année, this.Mois, this.Jour + 1))
+                if (EstValide(Année, Mois, Jour + 1))
                 {
-                    ++this.Jour;
+                    ++Jour;
                 }
                 else
                 {
-                    if (this.Mois >= 12)
+                    if (Mois >= 12)
                     {
-                        this.Jour = 1;
-                        this.Mois = 1;
-                        this.Année += 1;
+                        Jour = 1;
+                        Mois = 1;
+                        Année += 1;
                     }
                     else
                     {
-                        this.Jour = 1;
-                        this.Mois += 1;
+                        Jour = 1;
+                        Mois += 1;
                     }
                 }
             }
@@ -447,9 +446,9 @@ namespace Prog2
         /// <returns>la date</returns>
         public Date MettreÀJour(/* Date this*/)
         {
-            this.Année = DateTime.Today.Year;
-            this.Mois = DateTime.Today.Month;
-            this.Jour = DateTime.Today.Day;
+            Année = DateTime.Today.Year;
+            Mois = DateTime.Today.Month;
+            Jour = DateTime.Today.Day;
             return this;
         }
 

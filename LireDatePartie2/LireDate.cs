@@ -35,6 +35,7 @@ namespace Prog2
                     MessageErreur($"Date invalide : {strArg}");
                     return;
                 }
+
             }
 
             var message = $"\nDate = {EnTexte(date)}";
@@ -64,15 +65,17 @@ namespace Prog2
             ColorWriteLine(DarkYellow, "\n\n Jour de l'an : {0}", date.EstJourDeLAn ? "oui" : "non");
             ColorWriteLine(DarkYellow, "      St-Jean : {0}", date.EstStJean ? "oui" : "non");
             ColorWriteLine(DarkYellow, "         Noël : {0}", date.EstNoël ? "oui" : "non");
-            ColorWriteLine(DarkMagenta, $"  Jour numéro : {date.JourDeLAnnée}");
+            ColorWriteLine(Magenta, $"  Jour numéro : {date.JourDeLAnnée}");
             ColorWriteLine(Blue, $" Jour semaine : {date.JourDeLaSemaine}");
 
             WriteLine("");
 
             // Afficher le calendrier :
             Calendrier calendrier = new Calendrier(date.Année, date.MoisTypé);
-            calendrier.Afficher();
+            calendrier.Afficher(date);
             WriteLine("");
+
+            Poursuivre();
         }
     }
 }

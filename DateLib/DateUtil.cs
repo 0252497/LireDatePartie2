@@ -1,10 +1,13 @@
 ﻿/* Utilitaire de méthodes DateUtil. */
+using static System.Enum;
 using static Prog2.ConsolePlus;
 using static System.ConsoleColor;
 using static Prog2.Date;
 using static Prog2.Mois;
 using static System.Console;
 using static Prog2.Calendrier;
+using static Prog2.JourDeLaSemaine;
+using System;
 
 namespace Prog2
 {
@@ -22,9 +25,26 @@ namespace Prog2
         /// Affiche un calendrier couleur sur la console.
         /// </summary>
         /// <param name="calendrier">le calendrier à afficher</param>
-        public static void Afficher(this Calendrier calendrier)
+        public static void Afficher(this Calendrier calendrier, Date dateÀSurligner = null)
         {
-            ColorWriteLine(DarkYellow, $"Calendrier: {calendrier.Mois} {calendrier.Année}");
+            string moisAnnée = $"{calendrier.Mois} {calendrier.Année}";
+            int longueurBackground = 20;
+
+            Write(" ");
+
+            BackgroundColor = DarkYellow;
+            ColorWriteLine(Black, moisAnnée.PadLeft(((longueurBackground - moisAnnée.Length) / 2)
+                + moisAnnée.Length).PadRight(longueurBackground));
+            ResetColor();
+            
+            int[] jours = { 7, 1, 2, 3, 4, 5, 6 };
+
+            foreach (int jour in jours)
+            {
+                ColorWrite(DarkYellow, $" {((JourDeLaSemaine)jour).ToString().Substring(0, 2)}");
+            }
+
+            WriteLine("");
 
             for (int rangée = 0; rangée < NbRangées; ++rangée)
             {
@@ -32,7 +52,17 @@ namespace Prog2
                 {
                     if (calendrier[rangée, colonne] != 0)
                     {
-                        Write("{0, 3}", calendrier[rangée, colonne]);
+                        if (dateÀSurligner != null && calendrier[rangée, colonne] == dateÀSurligner.Jour)
+                        {
+                            BackgroundColor = Green;
+                            ForegroundColor = Black;
+                            ColorWrite(Black, "{0, 3}", calendrier[rangée, colonne]);
+                            ResetColor();
+                        }
+                        else
+                        {
+                            Write("{0, 3}", calendrier[rangée, colonne]);
+                        }
                     }
                     else
                     {
