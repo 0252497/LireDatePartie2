@@ -304,7 +304,7 @@ namespace Prog2
         /// <returns>la date clonée</returns>
         public Date Cloner(/* Date this*/ int année = 0, int mois = 0, int jour = 0)
         {
-            Date clone = New(this.Année, this.Mois, this.Jour); // On clone la date entrée
+            Date clone = New(Année, Mois, Jour); // On clone la date entrée
 
             if (année > 0)
             {

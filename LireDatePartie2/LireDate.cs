@@ -1,7 +1,7 @@
 ﻿/* Ce programme permet de lire une date, soit l'année, le mois et le jour, et la fait ensuite afficher en texte.
  * 
  * Auteure : Véronique Giguère
- * Création : 8 février 2019
+ * Création : 8 février 2019 - ...
  */
 using static System.Console;
 using static Prog2.DateUtil;

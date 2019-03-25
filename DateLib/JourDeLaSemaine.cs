@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿/* Fichier pour l'enum des jours de la semaine. */
 
 namespace Prog2
 {

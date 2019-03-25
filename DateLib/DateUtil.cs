@@ -6,7 +6,6 @@ using static Prog2.Date;
 using static Prog2.Mois;
 using static System.Console;
 using static Prog2.Calendrier;
-using static Prog2.JourDeLaSemaine;
 using System;
 
 namespace Prog2
@@ -14,10 +13,11 @@ namespace Prog2
     public static class DateUtil
     {
         // --- Attributs ---
+
         // public static readonly Date DateAttentatWTC = New(2001, 09, 11);
         public static readonly Date DateAttentatWTC = new Date(2001, 09, 11);
-        public static readonly Date DateDecesMJ = New(2012, 01, 31);
-        public static readonly Date DateExplosionNC = New(2018, 07, 11);
+        public static readonly Date DateDecesMJ = new Date(2012, 01, 31);
+        public static readonly Date DateExplosionNC = new Date(2018, 07, 11);
 
         // --- Méthodes ---
 
@@ -25,38 +25,48 @@ namespace Prog2
         /// Affiche un calendrier couleur sur la console.
         /// </summary>
         /// <param name="calendrier">le calendrier à afficher</param>
+        /// <param name="dateÀSurligner">la date à surligner, null si non fournie</param>
         public static void Afficher(this Calendrier calendrier, Date dateÀSurligner = null)
         {
+            // J'ai créé une string avec le mois et l'année pour en connaître sa longueur qui variera 
+            // selon la longueur du mois. Ensuite, vu qu'on connaît la longueur de l'arrière-plan de
+            // l'entête, on peut s'assurer qu'elle aura toujours un centrage uniforme :
             string moisAnnée = $"{calendrier.Mois} {calendrier.Année}";
             int longueurBackground = 20;
 
             Write(" ");
 
+            // Affichage de l'entête :
             BackgroundColor = DarkYellow;
             ColorWriteLine(Black, moisAnnée.PadLeft(((longueurBackground - moisAnnée.Length) / 2)
                 + moisAnnée.Length).PadRight(longueurBackground));
             ResetColor();
-            
+
+            // Array de jours qui correspondent aux valeurs des jours de l'enum JourDeLaSemaine...
             int[] jours = { 7, 1, 2, 3, 4, 5, 6 };
 
+            // ... pour en afficher les deux premières lettres de leur contenu en string :
             foreach (int jour in jours)
             {
                 ColorWrite(DarkYellow, $" {((JourDeLaSemaine)jour).ToString().Substring(0, 2)}");
             }
 
-            WriteLine("");
+            WriteLine();
 
+            // Affichage du calendrier, avec la date entrée surlignée, si celle-ci est spécifiée en 
+            // paramètre :
             for (int rangée = 0; rangée < NbRangées; ++rangée)
             {
                 for (int colonne = 0; colonne < NbColonnes; ++colonne)
                 {
                     if (calendrier[rangée, colonne] != 0)
                     {
-                        if (dateÀSurligner != null && calendrier[rangée, colonne] == dateÀSurligner.Jour)
+                        if (calendrier.Localiser(dateÀSurligner, out int rangéeDate, out int colonneDate) &&
+                            rangée == rangéeDate && colonne == colonneDate)
                         {
+                            Write(" ");
                             BackgroundColor = Green;
-                            ForegroundColor = Black;
-                            ColorWrite(Black, "{0, 3}", calendrier[rangée, colonne]);
+                            ColorWrite(Black, "{0, 2}", calendrier[rangée, colonne]);
                             ResetColor();
                         }
                         else
@@ -83,14 +93,14 @@ namespace Prog2
             => année % 4 == 0 && année % 100 != 0 || année % 400 == 0;
 
         /// <summary>
-        /// 
+        /// Pour lire une date sur la console.
         /// </summary>
-        /// <param name="propriété"></param>
-        /// <param name="min"></param>
-        /// <param name="max"></param>
-        /// <param name="date"></param>
-        /// <param name="défaut"></param>
-        /// <returns></returns>
+        /// <param name="propriété">la propriété de la question à demander</param>
+        /// <param name="min">la date minimale</param>
+        /// <param name="max">la date maximale</param>
+        /// <param name="date">la date lue</param>
+        /// <param name="défaut">la propriété par défaut</param>
+        /// <returns>vrai si la date est valide</returns>
         public static bool LireDate(string propriété, string min, string max, out Date date, string défaut = null)
         {
             if (!TryParse(Demander(propriété, défaut), out date))
