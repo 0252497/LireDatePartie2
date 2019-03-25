@@ -18,7 +18,8 @@ namespace Prog2
         }
 
         // --- Constructeurs paramétrés ---
-        public Date(int année, int mois, int jour)
+
+        public Date(int année, int mois, int jour, bool estMutable = true)
         {
             Année = année;
             Mois = mois;
@@ -26,8 +27,7 @@ namespace Prog2
         }
 
         public Date(int année, Mois moisTypé, int jour) : this(année, (int)moisTypé, jour) {}
-
-
+        
         /// <summary>
         /// Exemple : new Date("11 septembre 2011").
         /// </summary>
@@ -103,54 +103,6 @@ namespace Prog2
                 _jour = value;
             }
         }
-
-        // --- Propriétés calculables --- 
-        /// <summary>
-        /// Date d'aujourd'hui.
-        /// NB: Le même objet est retourné chaque fois.
-        /// </summary>
-        public static Date Aujourdhui => aujourdhui.MettreÀJour();
-
-        /// <summary>
-        /// Date de demain.
-        /// </summary>
-        public static Date Demain => demain.MettreÀJour().Incrémenter();
-
-        /// <summary>
-        /// Vrai si la date est le premier jour de l'an.
-        /// </summary>
-        public bool EstJourDeLAn
-            => Mois == 1 && Jour == 1;
-
-        /// <summary>
-        /// Vrai si la date est Noël.
-        /// </summary>
-        public bool EstNoël
-            => Mois == 12 && Jour == 25;
-
-        /// <summary>
-        /// Vrai si une date est spéciale. Une date est spéciale si le mois et le jour sont
-        /// identiques.
-        /// </summary>
-        public bool EstSpéciale => Jour == Mois;
-
-        /// <summary>
-        /// Vrai si la date est la St-Jean-Baptiste.
-        /// </summary>
-        public bool EstStJean
-            => Mois == 6 && Jour == 24;
-
-        /// <summary>
-        /// Vrai si une date est très spéciale. Une date est très spéciale si le jour, le mois et
-        /// les deux derniers chiffres de l'année sont identiques.
-        /// </summary>
-        public bool EstTrèsSpéciale 
-            => EstSpéciale && Mois == Année % 100;
-
-        /// <summary>
-        /// Date de hier.
-        /// </summary>
-        public static Date Hier => hier.MettreÀJour().Décrémenter();
 
         /// <summary>
         /// Le jour de l'année.
@@ -244,6 +196,55 @@ namespace Prog2
                 Mois = (int)value;
             }
         }
+
+
+        // --- Propriétés calculables --- 
+        /// <summary>
+        /// Date d'aujourd'hui.
+        /// NB: Le même objet est retourné chaque fois.
+        /// </summary>
+        public static Date Aujourdhui => aujourdhui.MettreÀJour();
+
+        /// <summary>
+        /// Date de demain.
+        /// </summary>
+        public static Date Demain => demain.MettreÀJour().Incrémenter();
+
+        /// <summary>
+        /// Vrai si la date est le premier jour de l'an.
+        /// </summary>
+        public bool EstJourDeLAn
+            => Mois == 1 && Jour == 1;
+
+        /// <summary>
+        /// Vrai si la date est Noël.
+        /// </summary>
+        public bool EstNoël
+            => Mois == 12 && Jour == 25;
+
+        /// <summary>
+        /// Vrai si une date est spéciale. Une date est spéciale si le mois et le jour sont
+        /// identiques.
+        /// </summary>
+        public bool EstSpéciale => Jour == Mois;
+
+        /// <summary>
+        /// Vrai si la date est la St-Jean-Baptiste.
+        /// </summary>
+        public bool EstStJean
+            => Mois == 6 && Jour == 24;
+
+        /// <summary>
+        /// Vrai si une date est très spéciale. Une date est très spéciale si le jour, le mois et
+        /// les deux derniers chiffres de l'année sont identiques.
+        /// </summary>
+        public bool EstTrèsSpéciale 
+            => EstSpéciale && Mois == Année % 100;
+
+        /// <summary>
+        /// Date de hier.
+        /// </summary>
+        public static Date Hier => hier.MettreÀJour().Décrémenter();
 
         // --- Méthodes ---
 
