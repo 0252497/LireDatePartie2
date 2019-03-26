@@ -196,8 +196,7 @@ namespace Prog2
                 Mois = (int)value;
             }
         }
-
-
+        
         // --- Propriétés calculables --- 
 
         /// <summary>
