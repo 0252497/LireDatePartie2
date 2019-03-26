@@ -1,4 +1,5 @@
-﻿using System;
+﻿/* Programme permettant l'affichage de différents objets. */
+using System;
 using static Prog2.ConsolePlus;
 using static System.Console;
 using static System.ConsoleColor;
@@ -27,9 +28,6 @@ namespace Prog2
             ColorWriteLine(DarkCyan, $"date: {date}");
 
             obj = date;
-            ColorWriteLine(Cyan, $"obj: {obj}");
-
-            obj = "C#";
             ColorWriteLine(Cyan, $"obj: {obj}");
 
             obj = 5;
@@ -119,8 +117,7 @@ namespace Prog2
                 ColorWriteLine(Blue, $"* {EnTexte(objet)}");
             }
 
-            ColorWriteLine(Magenta, $"\n{10} + {20} = {30}");
-            WriteLine();
+            ColorWriteLine(Magenta, $"\n{10} + {20} = {30}\n");
         }
 
         private static string InfoObjet(object obj)
@@ -129,6 +126,7 @@ namespace Prog2
                 return "\nobjet: null\n";
             else
             {
+                // Variables pour les parents de l'objet, s'ils existent, null sinon :
                 var parent = obj.GetType().BaseType;
                 var grandParent = parent?.BaseType;
                 var arrièreGrandParent = grandParent?.BaseType;

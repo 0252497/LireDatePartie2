@@ -109,8 +109,7 @@ namespace Prog2
                     return obj.ToString();
             }
         }
-
-
+        
         /// <summary>
         /// Renvoie si une année est bissextile.
         /// </summary>

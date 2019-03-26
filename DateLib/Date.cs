@@ -24,7 +24,6 @@ namespace Prog2
             Année = année;
             Mois = mois;
             Jour = jour;
-
         }
 
         public Date(int année, Mois moisTypé, int jour) : this(année, (int)moisTypé, jour) {}
@@ -117,24 +116,10 @@ namespace Prog2
 
                 _jourDeLAnnée = 0;
 
-                if (SontÉgales(date, dernier))
+                while (!SontÉgales(date, dernier))
                 {
-                    if (Année.EstBissextile())
-                    {
-                        _jourDeLAnnée = 366;
-                    }
-                    else
-                    {
-                        _jourDeLAnnée = 365;
-                    }
-                }
-                else
-                {
-                    while (!SontÉgales(date, dernier))
-                    {
-                        date.Décrémenter();
-                        ++_jourDeLAnnée;
-                    }
+                    date.Décrémenter();
+                    ++_jourDeLAnnée;
                 }
 
                 return _jourDeLAnnée;

@@ -14,7 +14,10 @@ namespace Prog2
         // Pour le nombre de rangées et de colonnes du calendrier :
         public const int NbRangées = 6; 
         public const int NbColonnes = 7;
-        
+
+        // Pour l'année minimale et maximale :
+        public const int AnnéeMin = 1582;
+        public const int AnnéeMax = 9999;
 
         /// <summary>
         /// Pour l'année.
@@ -38,7 +41,7 @@ namespace Prog2
         /// <param name="mois">le mois</param>
         public Calendrier(int année, Mois mois)
         {
-            if (1582 > année || année > 9999)
+            if (AnnéeMin > année || année > AnnéeMax)
             {
                 throw new ArgumentOutOfRangeException(nameof(Année), $"## Invalide : {année}");
 
@@ -46,12 +49,13 @@ namespace Prog2
 
             Année = année;
 
-            if (Mois.Décembre < mois || mois < Mois.Janvier)
+            if (Mois.Janvier > mois || mois > Mois.Décembre)
             {
                 throw new ArgumentOutOfRangeException(nameof(Mois), $"## Invalide : {mois}");
             }
 
             Mois = mois;
+
             Jours = new int[NbRangées, NbColonnes];
             RemplirTableau();
         }
