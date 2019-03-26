@@ -69,9 +69,9 @@ namespace Prog2
             ColorWrite(Blue, InfoObjet(new List<int>()));
             ColorWrite(Magenta, InfoObjet(new int[0]));
             ColorWrite(DarkRed, InfoObjet(new ArgumentException()));
-            ColorWrite(DarkYellow, InfoObjet(5));
-            ColorWrite(Yellow, InfoObjet(true));
-            ColorWrite(Green, InfoObjet(Mois.Mars));
+            ColorWrite(DarkYellow, InfoObjet(5));       // boxage
+            ColorWrite(Yellow, InfoObjet(true));        // boxage
+            ColorWrite(Green, InfoObjet(Mois.Mars));    // boxage
 
             var tableau1 = new int[0];
 
@@ -85,6 +85,42 @@ namespace Prog2
             Debug.Assert(!(obj is int));
             Debug.Assert(!(obj is Mois));
             Debug.Assert(!(obj is null));
+
+            // Boxage :
+            int i = 10;
+            obj = i;    // boxage ici
+
+            Debug.Assert(obj.GetType().IsValueType);
+            Debug.Assert(obj.GetType().IsPrimitive);
+            Debug.Assert(obj.GetType() == typeof(int));
+            Debug.Assert(obj.ToString() == "10"); ;
+            Debug.Assert(obj.Equals(10));   // boxage implicite
+            Debug.Assert(obj != (object)10);    // boxage implicite
+            Debug.Assert((int)obj == 10);   // déboxage explicite
+
+            int j = (int)obj;   // déboxage
+            ++j;
+
+            Debug.Assert(object.Equals((object)10, (object)10));    // double boxage implicite
+            Debug.Assert(Equals(10, 10));    // double boxage implicite
+            Debug.Assert(!object.ReferenceEquals(10, 10));    // double boxage implicite
+
+            // Tableau d'objets :
+            var objets = new object[]
+            {
+                null, 100, true, Mois.Janvier,   // triple boxage implicite
+                Date.Aléatoire(new Random(), 1900, 2000), new Calendrier(2019, Mois.Mars)
+            };
+
+            WriteLine("\nTableau d'objets :");
+
+            foreach (var objet in objets)
+            {
+                ColorWriteLine(Blue, $"* {EnTexte(objet)}");
+            }
+
+            ColorWriteLine(Magenta, $"\n{10} + {20} = {30}");
+            WriteLine();
         }
 
         private static string InfoObjet(object obj)
