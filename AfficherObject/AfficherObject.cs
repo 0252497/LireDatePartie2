@@ -68,6 +68,10 @@ namespace Prog2
             ColorWrite(Cyan, InfoObjet(new object()));
             ColorWrite(Blue, InfoObjet(new List<int>()));
             ColorWrite(Magenta, InfoObjet(new int[0]));
+            ColorWrite(DarkRed, InfoObjet(new ArgumentException()));
+            ColorWrite(DarkYellow, InfoObjet(5));
+            ColorWrite(Yellow, InfoObjet(true));
+            ColorWrite(Green, InfoObjet(Mois.Mars));
 
             var tableau1 = new int[0];
 
@@ -79,6 +83,13 @@ namespace Prog2
                 return "\nobjet: null\n";
             else
             {
+                object grandParent = obj.GetType().BaseType != null && 
+                    obj.GetType().BaseType.BaseType != null ? obj.GetType().BaseType.BaseType : null;
+
+                object arrièreGrandParent = grandParent != null &&
+                    obj.GetType().BaseType.BaseType.BaseType != null ?
+                    obj.GetType().BaseType.BaseType.BaseType : null;
+
                 return
                     $"\n 1. objet:              {obj}"
                   + $"\n 2. type d'objet:       {obj.GetType()}"
@@ -87,8 +98,8 @@ namespace Prog2
                   + $"\n 5. nom du type:        {obj.GetType().Name}"
                   + $"\n 6. parent:             {obj.GetType().BaseType}"
                   + $"\n 7. parent == object:   {obj.GetType().BaseType == typeof(object)}"
-                  + $"\n 7. grand-parents  {obj.GetType().BaseType.BaseType == typeof(object)}"
-                  + $"\n 7. parent == object:   {obj.GetType().BaseType == typeof(object)}"
+                  + $"\n 8. grand-parent:       {grandParent}"
+                  + $"\n 9. arr-grand-parent:   {arrièreGrandParent}"
                   + "\n";
             }
         }
