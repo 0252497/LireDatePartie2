@@ -75,6 +75,16 @@ namespace Prog2
 
             var tableau1 = new int[0];
 
+            // Opérateur is :
+            obj = true;
+            Debug.Assert(obj is object);
+            Debug.Assert(obj is Object);
+            Debug.Assert(obj is ValueType);
+            Debug.Assert(obj is Boolean);
+            Debug.Assert(obj is bool);
+            Debug.Assert(!(obj is int));
+            Debug.Assert(!(obj is Mois));
+            Debug.Assert(!(obj is null));
         }
 
         private static string InfoObjet(object obj)
@@ -83,23 +93,20 @@ namespace Prog2
                 return "\nobjet: null\n";
             else
             {
-                object grandParent = obj.GetType().BaseType != null && 
-                    obj.GetType().BaseType.BaseType != null ? obj.GetType().BaseType.BaseType : null;
-
-                object arrièreGrandParent = grandParent != null &&
-                    obj.GetType().BaseType.BaseType.BaseType != null ?
-                    obj.GetType().BaseType.BaseType.BaseType : null;
+                var parent = obj.GetType().BaseType;
+                var grandParent = parent?.BaseType;
+                var arrièreGrandParent = grandParent?.BaseType;
 
                 return
-                    $"\n 1. objet:              {obj}"
+                    $"\n 1. objet:              {EnTexte(obj)}"
                   + $"\n 2. type d'objet:       {obj.GetType()}"
                   + $"\n 3. type de Date:       {typeof(Date)}"
-                  + $"\n 4. type == Date:       {typeof(Date) == obj.GetType()}"
+                  + $"\n 4. type == Date:       {EnTexte(typeof(Date) == obj.GetType())}"
                   + $"\n 5. nom du type:        {obj.GetType().Name}"
-                  + $"\n 6. parent:             {obj.GetType().BaseType}"
-                  + $"\n 7. parent == object:   {obj.GetType().BaseType == typeof(object)}"
-                  + $"\n 8. grand-parent:       {grandParent}"
-                  + $"\n 9. arr-grand-parent:   {arrièreGrandParent}"
+                  + $"\n 6. parent:             {EnTexte(parent)}"
+                  + $"\n 7. parent == object:   {EnTexte(obj.GetType().BaseType == typeof(object))}"
+                  + $"\n 8. grand-parent:       {EnTexte(grandParent)}"
+                  + $"\n 9. arr-grand-parent:   {EnTexte(arrièreGrandParent)}"
                   + "\n";
             }
         }

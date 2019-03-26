@@ -85,6 +85,33 @@ namespace Prog2
         }
 
         /// <summary>
+        /// Représentation textuelle d'un objet.
+        /// </summary>
+        /// <param name="obj">l'objet</param>
+        /// <returns>sa version en texte</returns>
+        public static string EnTexte(object obj)
+        {
+            switch (obj)
+            {
+                case Date date:
+                    return date.EnTexteLong();
+
+                case bool b:
+                    return b.OuiNon();
+
+                case null:
+                    return "null";
+
+                case Calendrier calendrier:
+                    return $"Calendrier {calendrier.Mois} {calendrier.Année}";
+
+                default:
+                    return obj.ToString();
+            }
+        }
+
+
+        /// <summary>
         /// Renvoie si une année est bissextile.
         /// </summary>
         /// <param name="année">l'année</param>

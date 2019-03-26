@@ -88,6 +88,7 @@
     <Compile Include="TesterDate_102_ConstructeurCalendrier.cs" />
     <Compile Include="TesterDate_103_RemplirTableau.cs" />
     <Compile Include="TesterDate_104_Localiser.cs" />
+    <Compile Include="TesterDate_111_EnTexteObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -104,6 +105,10 @@
     <ProjectReference Include="..\AfficherMois\AfficherMois.csproj">
       <Project>{0e533868-422c-449a-a7cb-9a0d3e683a44}</Project>
       <Name>AfficherMois</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AfficherObject\AfficherObject.csproj">
+      <Project>{86fe1a9c-5ef3-42fb-b62d-62cf55041b3d}</Project>
+      <Name>AfficherObject</Name>
     </ProjectReference>
     <ProjectReference Include="..\AfficherRandom\AfficherRandom.csproj">
       <Project>{c39794a4-ca96-4339-89fb-58224848548b}</Project>
