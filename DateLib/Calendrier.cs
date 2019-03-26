@@ -14,37 +14,17 @@ namespace Prog2
         // Pour le nombre de rangées et de colonnes du calendrier :
         public const int NbRangées = 6; 
         public const int NbColonnes = 7;
-
-        private int _année;
-        private Mois _mois;
+        
 
         /// <summary>
         /// Pour l'année.
         /// </summary>
-        public int Année
-        {
-            get => _année;
-            set
-            {
-                if (1582 > value || value > 9999)
-                    throw new ArgumentOutOfRangeException(nameof(Année), $"## Invalide : {value}");
-                _année = value;
-            }
-        }
+        public int Année { get; }
 
         /// <summary>
         /// Pour le mois.
         /// </summary>
-        public Mois Mois
-        {
-            get => _mois;
-            set
-            {
-                if ((int)value > 12 || 1 > (int)value)
-                    throw new ArgumentOutOfRangeException(nameof(Mois), $"## Invalide : {value}");
-                _mois = value;
-            }
-        }
+        public Mois Mois { get; }
 
         /// <summary>
         /// Pour le jour, représenté par calendrier[rangée, colonne].
@@ -58,7 +38,19 @@ namespace Prog2
         /// <param name="mois">le mois</param>
         public Calendrier(int année, Mois mois)
         {
+            if (1582 > année || année > 9999)
+            {
+                throw new ArgumentOutOfRangeException(nameof(Année), $"## Invalide : {année}");
+
+            }
+
             Année = année;
+
+            if (Mois.Décembre < mois || mois < Mois.Janvier)
+            {
+                throw new ArgumentOutOfRangeException(nameof(Mois), $"## Invalide : {mois}");
+            }
+
             Mois = mois;
             Jours = new int[NbRangées, NbColonnes];
             RemplirTableau();

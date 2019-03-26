@@ -24,6 +24,7 @@ namespace Prog2
             Année = année;
             Mois = mois;
             Jour = jour;
+
         }
 
         public Date(int année, Mois moisTypé, int jour) : this(année, (int)moisTypé, jour) {}
@@ -60,8 +61,7 @@ namespace Prog2
             DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
 
         // --- Propriétés ---
-        
-        // --- Autopropriétés ---
+
         /// <summary>
         /// L'année.
         /// </summary>

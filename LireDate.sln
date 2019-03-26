@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AfficherRandom", "AfficherR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Devinette", "Devinette\Devinette.csproj", "{AD6DB0B6-DF8B-4883-A448-FF449969A05D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AfficherObject", "AfficherObject\AfficherObject.csproj", "{86FE1A9C-5EF3-42FB-B62D-62CF55041B3D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{AD6DB0B6-DF8B-4883-A448-FF449969A05D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD6DB0B6-DF8B-4883-A448-FF449969A05D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD6DB0B6-DF8B-4883-A448-FF449969A05D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86FE1A9C-5EF3-42FB-B62D-62CF55041B3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86FE1A9C-5EF3-42FB-B62D-62CF55041B3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86FE1A9C-5EF3-42FB-B62D-62CF55041B3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86FE1A9C-5EF3-42FB-B62D-62CF55041B3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
