@@ -199,6 +199,7 @@ namespace Prog2
 
 
         // --- Propriétés calculables --- 
+
         /// <summary>
         /// Date d'aujourd'hui.
         /// NB: Le même objet est retourné chaque fois.
@@ -460,7 +461,7 @@ namespace Prog2
         /// <returns>la différence</returns>
         public int Moins(/* Date this */ Date autre)
         {
-            int différence = 0;
+            int différence = 0; // Le nombre de jours de différence entre la date et l'autre
 
             if (ComparerAvec(autre) == 1)
             {

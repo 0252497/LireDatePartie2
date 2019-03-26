@@ -210,7 +210,8 @@ namespace Prog2
             {
                 ColorWrite(Magenta, "\nAppuyez sur une touche pour poursuivre...");
             }
-            
+
+
             ReadKey(true);
             WriteLine();
         }
