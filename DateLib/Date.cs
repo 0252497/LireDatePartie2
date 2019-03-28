@@ -600,5 +600,10 @@ namespace Prog2
             bool EstAnnée(string str) => str.EstNumérique() && str.Length >= 3;
             bool EstJour(string str) => str.EstNumérique() && str.Length <= 2;
         }
+
+        public override string ToString()
+        {
+            return $"{EnTexte(this)}";
+        }
     }
 }

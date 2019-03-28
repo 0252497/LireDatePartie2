@@ -91,6 +91,7 @@
     <Compile Include="TesterDate_111_EnTexteObject.cs" />
     <Compile Include="TesterDate_121_MoisNumérique.cs" />
     <Compile Include="TesterDate_122_Dupliquer.cs" />
+    <Compile Include="TesterDate_123_ToString.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

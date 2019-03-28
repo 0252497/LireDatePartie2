@@ -117,6 +117,28 @@ namespace Prog2
                 ColorWriteLine(Blue, $"* {EnTexte(objet)}");
             }
 
+            // ToString : 
+            WriteLine("\nTableau d'objets (ToString):");
+
+            foreach (var objet in objets)
+            {
+                ColorWriteLine(DarkYellow, " * " + objet?.ToString());
+            }
+
+            WriteLine("\nTableau d'objets (ToString implicite 1):");
+
+            foreach (var objet in objets)
+            {
+                ColorWriteLine(DarkRed, " * " + objet);
+            }
+
+            WriteLine("\nTableau d'objets (ToString implicite 2):");
+
+            foreach (var objet in objets)
+            {
+                ColorWriteLine(DarkMagenta, $" * {objet}");
+            }
+
             ColorWriteLine(Magenta, $"\n{10} + {20} = {30}\n");
         }
 

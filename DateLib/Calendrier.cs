@@ -139,5 +139,10 @@ namespace Prog2
                 }
             }
         }
+
+        public override string ToString()
+        {
+            return $"Calendrier {Mois} {Année}"; ;
+        }
     }
 }
