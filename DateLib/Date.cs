@@ -605,5 +605,23 @@ namespace Prog2
         {
             return $"{EnTexte(this)}";
         }
+
+        public override bool Equals(object obj)
+        {
+            var date = obj as Date;
+            return date != null &&
+                   Année == date.Année &&
+                   Mois == date.Mois &&
+                   Jour == date.Jour;
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = -1198555504;
+            hashCode = hashCode * -1521134295 + Année.GetHashCode();
+            hashCode = hashCode * -1521134295 + Mois.GetHashCode();
+            hashCode = hashCode * -1521134295 + Jour.GetHashCode();
+            return hashCode;
+        }
     }
 }

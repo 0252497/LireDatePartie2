@@ -92,6 +92,7 @@
     <Compile Include="TesterDate_121_MoisNumérique.cs" />
     <Compile Include="TesterDate_122_Dupliquer.cs" />
     <Compile Include="TesterDate_123_ToString.cs" />
+    <Compile Include="TesterDate_124_Equals.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

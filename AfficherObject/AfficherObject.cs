@@ -140,6 +140,18 @@ namespace Prog2
             }
 
             ColorWriteLine(Magenta, $"\n{10} + {20} = {30}\n");
+
+            // Equals 
+            Debug.Assert(objets.Contains(true));
+            Debug.Assert(!objets.Contains(false));
+            Debug.Assert(objets.Contains(100));
+            Debug.Assert(!objets.Contains(99));
+            Debug.Assert(objets.Contains(new Calendrier(2019, Mois.Mars)));
+            Debug.Assert(objets.Contains(new Calendrier(2018, Mois.Mars)));
+            Debug.Assert(Equals(new Calendrier(2019, Mois.Mars), new Calendrier(2019, Mois.Mars)));
+            Debug.Assert(!Equals(new Calendrier(2019, Mois.Mars), new Calendrier(2018, Mois.Mars)));
+            Debug.Assert(new Calendrier(2019, Mois.Mars) ==  new Calendrier(2019, Mois.Mars));
+            Debug.Assert(new Calendrier(2019, Mois.Mars) != new Calendrier(2018, Mois.Mars));
         }
 
         private static string InfoObjet(object obj)

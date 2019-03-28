@@ -144,5 +144,22 @@ namespace Prog2
         {
             return $"Calendrier {Mois} {Année}"; ;
         }
+
+        public override bool Equals(object obj)
+        {
+            var calendrier = obj as Calendrier;
+            return calendrier != null &&
+                   Année == calendrier.Année &&
+                   Mois == calendrier.Mois;
+        }
+
+        public override int GetHashCode() 
+            => Année * 100 + MoisNumérique;
+
+        public static bool operator ==(Calendrier calendrier1, Calendrier calendrier2) 
+            => Equals(calendrier1, calendrier2);
+
+        public static bool operator !=(Calendrier calendrier1, Calendrier calendrier2) 
+            => !(calendrier1 == calendrier2);
     }
 }
