@@ -73,7 +73,7 @@ namespace Prog2
             Calendrier calendrier = new Calendrier(date.Année, date.MoisTypé);
             calendrier.Afficher(date);
             WriteLine("");
-
+            
             Poursuivre();
         }
     }

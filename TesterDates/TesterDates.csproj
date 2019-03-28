@@ -89,6 +89,8 @@
     <Compile Include="TesterDate_103_RemplirTableau.cs" />
     <Compile Include="TesterDate_104_Localiser.cs" />
     <Compile Include="TesterDate_111_EnTexteObject.cs" />
+    <Compile Include="TesterDate_121_MoisNumérique.cs" />
+    <Compile Include="TesterDate_122_Dupliquer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

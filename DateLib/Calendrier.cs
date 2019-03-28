@@ -61,6 +61,12 @@ namespace Prog2
         }
 
         /// <summary>
+        /// Renvoie le mois en version numérique.
+        /// </summary>
+        public int MoisNumérique 
+            => (int)Mois;
+
+        /// <summary>
         /// Indexation de la classe Calendrier.
         /// </summary>
         /// <param name="rangée">la rangée</param>

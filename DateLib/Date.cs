@@ -1,5 +1,6 @@
 ﻿/* Fichier pour les attributs, les méthodes et les propriétés de la classe Date. */
 using System;
+using System.Diagnostics;
 using static System.Int32;
 
 namespace Prog2
@@ -37,9 +38,9 @@ namespace Prog2
         {
             if (TryParse(strDate, out Date date))
             {
-                _année = date.Année;
-                _mois = date.Mois;
-                _jour = date.Jour;
+                Année = date.Année;
+                Mois = date.Mois;
+                Jour = date.Jour;
             }
             else
             {
@@ -365,6 +366,13 @@ namespace Prog2
 
             return this;
         }
+
+        /// <summary>
+        /// Pour cloner une date.
+        /// </summary>
+        /// <returns>le clone du date</returns>
+        public Date Dupliquer() 
+            => this.MemberwiseClone() as Date;
 
         /// <summary>
         /// Fais afficher la date, soit le mois, le jour et l'année. Si aucune date n'est précisée, on fera 

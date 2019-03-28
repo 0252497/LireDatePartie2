@@ -55,9 +55,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Calendrier.cd" />
-    <None Include="DateUtil.cd" />
-    <None Include="Date.cd" />
+    <None Include="DateLib.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
