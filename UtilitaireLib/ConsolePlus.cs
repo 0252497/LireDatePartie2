@@ -16,7 +16,7 @@ namespace Prog2
         /// <param name="couleurValeur">la couleur de la valeur (0 pour la valeur par défaut)</param>
         /// <param name="couleurPropriété">la couleur de la propriété (0 pour la valeur par défaut)</param>
         public static void Afficher(
-            string propriété, string valeur, int offset = 0, ConsoleColor couleurValeur = 0,
+            string propriété, object valeur, int offset = 0, ConsoleColor couleurValeur = 0,
             ConsoleColor couleurPropriété = 0)
         {
             if (couleurValeur == 0)

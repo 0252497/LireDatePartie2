@@ -8,7 +8,7 @@ namespace Prog2
     /// <summary>
     /// Classe Date.
     /// </summary>
-    public class Date
+    public class Date : object
     {
         // --- Constructeur par défaut ---
         public Date()
@@ -79,7 +79,7 @@ namespace Prog2
         /// <summary>
         /// Le mois de l'année. (janvier = 1)
         /// </summary>
-        public int Mois
+        public virtual int Mois
         {
             get => _mois;
             set
@@ -93,7 +93,7 @@ namespace Prog2
         /// <summary>
         /// Le jour du mois.
         /// </summary>
-        public int Jour
+        public virtual int Jour
         {
             get => _jour;
             set
@@ -340,7 +340,7 @@ namespace Prog2
         /// Retranche des jours à la date.
         /// </summary>
         /// <param name="décrément">nombre de jours à enlever</param>
-        public Date Décrémenter(/* Date this */ int décrément = 1)
+        public virtual Date Décrémenter(/* Date this */ int décrément = 1)
         {
             for (int i = 0; i < décrément; ++i)
             {
@@ -372,7 +372,7 @@ namespace Prog2
         /// </summary>
         /// <returns>le clone du date</returns>
         public Date Dupliquer() 
-            => this.MemberwiseClone() as Date;
+            => MemberwiseClone() as Date;
 
         /// <summary>
         /// Fais afficher la date, soit le mois, le jour et l'année. Si aucune date n'est précisée, on fera 
@@ -407,7 +407,7 @@ namespace Prog2
         /// Ajoute des jours à la date
         /// </summary>
         /// <param name="incrément">nombre de jours à ajouter</param>
-        public Date Incrémenter(/* Date this*/ int incrément = 1)
+        public virtual Date Incrémenter(/* Date this*/ int incrément = 1)
         {
             for (int i = 0; i < incrément; ++i)
             {

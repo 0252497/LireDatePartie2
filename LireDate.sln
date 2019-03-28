@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Devinette", "Devinette\Devi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AfficherObject", "AfficherObject\AfficherObject.csproj", "{86FE1A9C-5EF3-42FB-B62D-62CF55041B3D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AfficherDateConstante", "AfficherDateConstante\AfficherDateConstante.csproj", "{7D75C0B7-1B5D-4203-9907-4861C66565B8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{86FE1A9C-5EF3-42FB-B62D-62CF55041B3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86FE1A9C-5EF3-42FB-B62D-62CF55041B3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86FE1A9C-5EF3-42FB-B62D-62CF55041B3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D75C0B7-1B5D-4203-9907-4861C66565B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D75C0B7-1B5D-4203-9907-4861C66565B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D75C0B7-1B5D-4203-9907-4861C66565B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D75C0B7-1B5D-4203-9907-4861C66565B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
