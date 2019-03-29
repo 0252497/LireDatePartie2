@@ -1,4 +1,5 @@
-﻿using static System.Enum;
+﻿/* Fichier pour les attributs, les méthodes et les propriétés de la classe DateConstante. */
+using static System.Enum;
 using static Prog2.ConsolePlus;
 using static System.ConsoleColor;
 using static Prog2.Date;
