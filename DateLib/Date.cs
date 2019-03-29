@@ -29,7 +29,7 @@ namespace Prog2
             _année = année;
             _mois = mois;
             _jour = jour;
-            _estMutable = estMutable;
+            EstMutable = estMutable;
         }
 
         public Date(int année, Mois moisTypé, int jour, bool estMutable = true)
@@ -44,7 +44,7 @@ namespace Prog2
         {
             if (TryParse(strDate, out Date date))
             {
-                _estMutable = estMutable;
+                EstMutable = estMutable;
                 _année = date.Année;
                 _mois = date.Mois;
                 _jour = date.Jour;
@@ -59,8 +59,6 @@ namespace Prog2
         private int _mois;
         private int _jour;
         private int _jourDeLAnnée;
-        private bool _estMutable;
-
         private static readonly Date aujourdhui = New(
             DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
         private static readonly Date demain = New(
@@ -241,17 +239,7 @@ namespace Prog2
         /// <summary>
         /// 
         /// </summary>
-        public bool EstMutable
-        {
-            get
-            {
-                return _estMutable;
-            }
-            set
-            {
-                _estMutable = value;
-            }
-        }
+        public bool EstMutable { get; set; }
 
         /// <summary>
         /// Vrai si la date est Noël.
