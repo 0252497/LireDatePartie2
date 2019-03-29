@@ -149,9 +149,7 @@ namespace Prog2
 
             // Pour vérifier nos affichages!
             Title = "AfficherDates";
-
-            DateAttentatWTC.Jour = 30;
-            DateAttentatWTC.MoisTypé = Mois.Janvier;
+            
 
             ColorWriteLine(Green, "Attentat du WTC:\t{0}", EnTexte(DateAttentatWTC));
             ColorWriteLine(Yellow, "\nMort de MJ:\t\t{0}", EnTexte(DateDécèsMJ, "/"));

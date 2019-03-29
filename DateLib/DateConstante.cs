@@ -17,58 +17,28 @@ namespace Prog2
         {
         }
 
-        public override Date Cloner(int année = 0, int mois = 0, int jour = 0)
-        {
-            Date clone = (Date)MemberwiseClone(); // On clone la date entrée
-
-            if (année > 0)
-            {
-                clone.Année = année;
-            }
-
-            if (mois > 0)
-            {
-                clone.Mois = mois;
-            }
-
-            if (jour > 0)
-            {
-                clone.Jour = jour;
-            }
-
-            return clone;
-        }
-
-        public override Date Décrémenter(int incrément = 1)
-        {
-            throw OpérationInvalide();
-        }
-
-        public override Date Incrémenter(int incrément = 1)
-        {
-            throw OpérationInvalide();
-        }
-
-        //public override int Mois
-        //{
-        //    get => base.Mois;
-        //    set => throw OpérationInvalide();
-        //}
-
-        //public override int Jour
-        //{
-        //    get => base.Jour;
-        //    set => throw OpérationInvalide();
-        //}
-
-        //public override int Année
-        //{
-        //    get => base.Année;
-        //    set => throw OpérationInvalide();
-        //}
-
         private int JourDeLAnnéeCaché = 0;
 
+        /// <summary>
+        /// L'année.
+        /// </summary>
+        public override int Année
+        {
+            get => base.Année;
+            set => throw OpérationInvalide();
+        }
+
+        /// <summary>
+        /// Le jour.
+        /// </summary>
+        public override int Jour
+        {
+            get => base.Jour;
+            set => throw OpérationInvalide();
+        }
+        /// <summary>
+        /// Le jour de l'année. 
+        /// </summary>
         public override int JourDeLAnnée
         {
             get
@@ -77,6 +47,56 @@ namespace Prog2
                     JourDeLAnnéeCaché = base.JourDeLAnnée;
                 return JourDeLAnnéeCaché;
             }
+        }
+
+        /// <summary>
+        /// Le mois.
+        /// </summary>
+        public override int Mois
+        {
+            get => base.Mois;
+            set => throw OpérationInvalide();
+        }
+
+        /// <summary>
+        /// Pour cloner une date constante.
+        /// </summary>
+        /// <param name="année"></param>
+        /// <param name="mois"></param>
+        /// <param name="jour"></param>
+        /// <returns></returns>
+        public override Date Cloner(int année = 0, int mois = 0, int jour = 0)
+        {
+            var annéeClone = Année;
+            var moisClone = Mois;
+            var jourClone = Jour;
+
+            if (année > 0)
+            {
+                annéeClone = année;
+            }
+
+            if (mois > 0)
+            {
+                moisClone = mois;
+            }
+
+            if (jour > 0)
+            {
+                jourClone = jour;
+            }
+
+            return new DateConstante(annéeClone, moisClone, jourClone);
+        }
+
+        public override Date Décrémenter(int décrément = 1)
+        {
+            throw OpérationInvalide();
+        }
+
+        public override Date Incrémenter(int incrément = 1)
+        {
+            throw OpérationInvalide();
         }
 
         public override Date MettreÀJour()

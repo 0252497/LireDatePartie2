@@ -13,6 +13,7 @@ namespace Prog2
         // --- Constructeur par défaut ---
         public Date()
         {
+            EstMutable = true;
             Mois = 1;
             Jour = 1;
             Année = 1;
@@ -20,27 +21,33 @@ namespace Prog2
 
         // --- Constructeurs paramétrés ---
 
-        public Date(int année, int mois, int jour)
+        public Date(int année, int mois, int jour, bool estMutable = true)
         {
-            Année = année;
-            Mois = mois;
-            Jour = jour;
+            if (!EstValide(année, mois, jour))
+                throw new ArgumentOutOfRangeException("##  ");
+
+            _année = année;
+            _mois = mois;
+            _jour = jour;
+            _estMutable = estMutable;
         }
 
-        public Date(int année, Mois moisTypé, int jour) : this(année, (int)moisTypé, jour) {}
+        public Date(int année, Mois moisTypé, int jour, bool estMutable = true)
+            : this(année, (int)moisTypé, jour, estMutable) {}
         
         /// <summary>
         /// Exemple : new Date("11 septembre 2011").
         /// </summary>
         /// <param name="strDate">la date en format texte</param>
         /// <exception cref="System.ArgumentException">date</exception>
-        public Date(string strDate)
+        public Date(string strDate, bool estMutable = true)
         {
             if (TryParse(strDate, out Date date))
             {
-                Année = date.Année;
-                Mois = date.Mois;
-                Jour = date.Jour;
+                _estMutable = estMutable;
+                _année = date.Année;
+                _mois = date.Mois;
+                _jour = date.Jour;
             }
             else
             {
@@ -52,6 +59,7 @@ namespace Prog2
         private int _mois;
         private int _jour;
         private int _jourDeLAnnée;
+        private bool _estMutable;
 
         private static readonly Date aujourdhui = New(
             DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
@@ -72,6 +80,12 @@ namespace Prog2
             {
                 if (value < 1 || _jour > value.NbJoursDsMois(_mois))
                     throw new ArgumentOutOfRangeException(nameof(Année), $"## Invalide : {value}");
+
+                if (!EstMutable)
+                {
+                    throw new InvalidOperationException();
+                }
+
                 _année = value;
             }
         }
@@ -86,6 +100,12 @@ namespace Prog2
             {
                 if (value < 1 || value > 12 || _jour > _année.NbJoursDsMois(value))
                     throw new ArgumentOutOfRangeException(nameof(Mois), $"## Invalide : {value}");
+
+                if (!EstMutable)
+                {
+                    throw new InvalidOperationException();
+                }
+
                 _mois = value;
             }
         }
@@ -100,6 +120,12 @@ namespace Prog2
             {
                 if (1 > value || value > _année.NbJoursDsMois(_mois))
                     throw new ArgumentOutOfRangeException(nameof(Jour), $"## Invalide : {value}");
+
+                if (!EstMutable)
+                {
+                    throw new InvalidOperationException();
+                }
+
                 _jour = value;
             }
         }
@@ -148,6 +174,11 @@ namespace Prog2
         {
             get
             {
+                if (!EstMutable)
+                {
+                    throw new InvalidOperationException();
+                }
+
                 int m = Mois;
                 int a = Année;
                 int q = Jour;
@@ -179,6 +210,11 @@ namespace Prog2
             }
             set
             {
+                if (!EstMutable)
+                {
+                    throw new InvalidOperationException();
+                }
+
                 Mois = (int)value;
             }
         }
@@ -201,6 +237,21 @@ namespace Prog2
         /// </summary>
         public bool EstJourDeLAn
             => Mois == 1 && Jour == 1;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool EstMutable
+        {
+            get
+            {
+                return _estMutable;
+            }
+            set
+            {
+                _estMutable = value;
+            }
+        }
 
         /// <summary>
         /// Vrai si la date est Noël.
@@ -291,7 +342,7 @@ namespace Prog2
         /// <returns>la date clonée</returns>
         public virtual Date Cloner(/* Date this*/ int année = 0, int mois = 0, int jour = 0)
         {
-            Date clone = New(Année, Mois, Jour); // On clone la date entrée
+            Date clone = new Date(Année, Mois, Jour); // On clone la date entrée
 
             if (année > 0)
             {
@@ -342,6 +393,11 @@ namespace Prog2
         /// <param name="décrément">nombre de jours à enlever</param>
         public virtual Date Décrémenter(/* Date this */ int décrément = 1)
         {
+            if (!EstMutable)
+            {
+                throw new InvalidOperationException();
+            }
+
             for (int i = 0; i < décrément; ++i)
             {
                 if (EstValide(Année, Mois, Jour - 1))
@@ -400,7 +456,7 @@ namespace Prog2
         /// <param name="mois">le mois</param>
         /// <param name="jour">le jour</param>
         /// <returns>vrai si la date est valide</returns>
-        public static bool EstValide(int année, int mois, int jour)
+        public static bool EstValide(int année, int mois, int jour, bool estMutable = true)
             => 1 <= jour && jour <= année.NbJoursDsMois(mois) && 1 <= mois && mois <= 12;
 
         /// <summary>
@@ -482,8 +538,9 @@ namespace Prog2
         /// <param name="mois">le mois, 1 = janvier</param>
         /// <param name="jour">le jour du mois</param>
         /// <returns>une nouvelle date ou null si la date n'est pas valide</returns>
-        public static Date New(int année, int mois, int jour)
-            => !EstValide(année, mois, jour) ? null : new Date { Année = année, Mois = mois, Jour = jour };
+        public static Date New(int année, int mois, int jour, bool estMutable = true)
+            => !EstValide(année, mois, jour, estMutable) ? null 
+            : new Date { Année = année, Mois = mois, Jour = jour, EstMutable = estMutable};
 
         /// <summary>
         /// Pour aider à construire une nouvelle date.
@@ -492,9 +549,9 @@ namespace Prog2
         /// <param name="mois">le mois en type Mois</param>
         /// <param name="jour">le jour du mois</param>
         /// <returns>une nouvelle date ou null si la date n'est pas valide</returns>
-        public static Date New(int année, Mois mois, int jour)
+        public static Date New(int année, Mois mois, int jour, bool estMutable = true)
             => EstValide(année, (int)mois, jour) ?
-                new Date { Année = année, Mois = (int)mois, Jour = jour } : null;
+                new Date { Année = année, Mois = (int)mois, Jour = jour, EstMutable = estMutable } : null;
 
 
         /// <summary>

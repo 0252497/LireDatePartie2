@@ -79,6 +79,7 @@
     <Compile Include="TesterDate65_TryParseDate.cs" />
     <Compile Include="TesterDate80_Propriétés.cs" />
     <Compile Include="TesterDate87_Constructeur.cs" />
+    <Compile Include="TesterDate89B2_DateImmutable.cs" />
     <Compile Include="TesterDate89B_FailleDeSécurité.cs" />
     <Compile Include="TesterDate91_ComparerAvec.cs" />
     <Compile Include="TesterDate92_AléatoireEntreDeuxAnnées.cs" />
