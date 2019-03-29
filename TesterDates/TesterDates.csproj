@@ -93,6 +93,9 @@
     <Compile Include="TesterDate_122_Dupliquer.cs" />
     <Compile Include="TesterDate_123_ToString.cs" />
     <Compile Include="TesterDate_124_Equals.cs" />
+    <Compile Include="TesterDate_125_DateConstante.cs" />
+    <Compile Include="TesterDate_126_ClonerDateConstante.cs" />
+    <Compile Include="TesterDate_127_CacherJourDeLAnnée.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

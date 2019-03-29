@@ -154,7 +154,7 @@ namespace Prog2
             DateAttentatWTC.MoisTypé = Mois.Janvier;
 
             ColorWriteLine(Green, "Attentat du WTC:\t{0}", EnTexte(DateAttentatWTC));
-            ColorWriteLine(Yellow, "\nMort de MJ:\t\t{0}", EnTexte(DateDecesMJ, "/"));
+            ColorWriteLine(Yellow, "\nMort de MJ:\t\t{0}", EnTexte(DateDécèsMJ, "/"));
             ColorWriteLine(Cyan, "\nExplosion de la NC:\t{0}", EnTexte(DateExplosionNC, "."));
 
             var aprèsDemain = New(

@@ -30,6 +30,8 @@ namespace Prog2
             //dateConst.Jour--;
             //Afficher(" 1 jour plus tôt", dateConst);
             WriteLine();
+            Afficher("       Cloner OK", dateConst.Cloner() is DateConstante);
+            Afficher("    Dupliquer OK", dateConst.Dupliquer() is DateConstante);
         }
     }
 }

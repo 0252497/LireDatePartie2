@@ -15,9 +15,9 @@ namespace Prog2
         // --- Attributs ---
 
         // public static readonly Date DateAttentatWTC = New(2001, 09, 11);
-        public static readonly Date DateAttentatWTC = new Date(2001, 09, 11);
-        public static readonly Date DateDecesMJ = new Date(2012, 01, 31);
-        public static readonly Date DateExplosionNC = new Date(2018, 07, 11);
+        public static DateConstante DateAttentatWTC = new DateConstante(2001, 09, 11);
+        public static DateConstante DateDécèsMJ = new DateConstante(2012, 01, 31);
+        public static DateConstante DateExplosionNC = new DateConstante(2018, 07, 11);
 
         // --- Méthodes ---
 

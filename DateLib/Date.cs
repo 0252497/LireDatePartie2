@@ -20,7 +20,7 @@ namespace Prog2
 
         // --- Constructeurs paramétrés ---
 
-        public Date(int année, int mois, int jour, bool estMutable = true)
+        public Date(int année, int mois, int jour)
         {
             Année = année;
             Mois = mois;
@@ -65,7 +65,7 @@ namespace Prog2
         /// <summary>
         /// L'année.
         /// </summary>
-        public int Année
+        public virtual int Année
         {
             get => _année;
             set
@@ -107,13 +107,13 @@ namespace Prog2
         /// <summary>
         /// Le jour de l'année.
         /// </summary>
-        public int JourDeLAnnée
+        public virtual int JourDeLAnnée
         {
             get
             {
                 // Pour la date entrée et le dernier jour de l'année précédente :
-                Date date = New(Année, Mois, Jour);
-                Date dernier = New(Année - 1, 12, 31);
+                Date date = new Date(Année, Mois, Jour);
+                Date dernier = new Date(Année - 1, 12, 31);
 
                 _jourDeLAnnée = 0;
 
@@ -289,7 +289,7 @@ namespace Prog2
         /// <param name="mois">mois modifié au besoin</param>
         /// <param name="jour">jour modifié au besoin</param>
         /// <returns>la date clonée</returns>
-        public Date Cloner(/* Date this*/ int année = 0, int mois = 0, int jour = 0)
+        public virtual Date Cloner(/* Date this*/ int année = 0, int mois = 0, int jour = 0)
         {
             Date clone = New(Année, Mois, Jour); // On clone la date entrée
 
@@ -438,7 +438,7 @@ namespace Prog2
         /// Modifie la date pour la mettre au jour d'aujourd'hui.
         /// </summary>
         /// <returns>la date</returns>
-        public Date MettreÀJour(/* Date this*/)
+        public virtual Date MettreÀJour(/* Date this*/)
         {
             Année = DateTime.Today.Year;
             Mois = DateTime.Today.Month;

@@ -11,13 +11,31 @@ namespace Prog2
 {
     public class DateConstante : Date
     {
-        public DateConstante(int année, int mois, int jour, bool estMutable = true) : base(année, mois, jour, estMutable)
+        public DateConstante(int année, int mois, int jour) 
+            : base(année, mois, jour)
         {
         }
 
-        public override Date Incrémenter(int incrément = 1)
+        public override Date Cloner(int année = 0, int mois = 0, int jour = 0)
         {
-            throw OpérationInvalide();
+            Date clone = (Date)MemberwiseClone(); // On clone la date entrée
+
+            if (année > 0)
+            {
+                clone.Année = année;
+            }
+
+            if (mois > 0)
+            {
+                clone.Mois = mois;
+            }
+
+            if (jour > 0)
+            {
+                clone.Jour = jour;
+            }
+
+            return clone;
         }
 
         public override Date Décrémenter(int incrément = 1)
@@ -25,14 +43,47 @@ namespace Prog2
             throw OpérationInvalide();
         }
 
-        public override int Mois
+        public override Date Incrémenter(int incrément = 1)
         {
-            get => base.Mois;
-            set => throw OpérationInvalide();
+            throw OpérationInvalide();
         }
-        
+
+        //public override int Mois
+        //{
+        //    get => base.Mois;
+        //    set => throw OpérationInvalide();
+        //}
+
+        //public override int Jour
+        //{
+        //    get => base.Jour;
+        //    set => throw OpérationInvalide();
+        //}
+
+        //public override int Année
+        //{
+        //    get => base.Année;
+        //    set => throw OpérationInvalide();
+        //}
+
+        private int JourDeLAnnéeCaché = 0;
+
+        public override int JourDeLAnnée
+        {
+            get
+            {
+                if (JourDeLAnnéeCaché == 0)
+                    JourDeLAnnéeCaché = base.JourDeLAnnée;
+                return JourDeLAnnéeCaché;
+            }
+        }
+
+        public override Date MettreÀJour()
+        {
+            throw OpérationInvalide();
+        }
 
         private Exception OpérationInvalide() 
-            => new InvalidOperationException("## Date constante nom modifiable");
+            => new DateConstanteException();
     }
 }

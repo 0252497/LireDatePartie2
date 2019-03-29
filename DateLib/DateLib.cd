@@ -12,7 +12,7 @@
     <TypeIdentifier />
   </Class>
   <Class Name="Prog2.DateUtil">
-    <Position X="5.75" Y="4" Width="1.5" />
+    <Position X="5.75" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>UAAAAIIAAAAAAAAIAAAAQAAAAAIACAAAAAAAgAIAAIA=</HashCode>
       <FileName>DateUtil.cs</FileName>
@@ -28,9 +28,25 @@
   <Class Name="Prog2.DateConstante" Collapsed="true">
     <Position X="3.5" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAACAQAAAAIAAAAAAAAAAAAAAAAAAAAACBAAAAAAA=</HashCode>
       <FileName>DateConstante.cs</FileName>
     </TypeIdentifier>
+  </Class>
+  <Class Name="Prog2.DateConstanteException">
+    <Position X="5.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DateConstanteException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="System.ApplicationException" Collapsed="true">
+    <Position X="5.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.Exception" Collapsed="true">
+    <Position X="5.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
   </Class>
   <Enum Name="Prog2.JourDeLaSemaine">
     <Position X="3" Y="6" Width="1.5" />
