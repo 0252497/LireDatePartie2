@@ -448,7 +448,7 @@ namespace Prog2
             => 1 <= jour && jour <= année.NbJoursDsMois(mois) && 1 <= mois && mois <= 12;
 
         /// <summary>
-        /// Ajoute des jours à la date
+        /// Ajoute des jours à la date.
         /// </summary>
         /// <param name="incrément">nombre de jours à ajouter</param>
         public virtual Date Incrémenter(/* Date this*/ int incrément = 1)
