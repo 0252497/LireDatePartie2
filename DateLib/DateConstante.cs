@@ -1,23 +1,24 @@
 ﻿/* Fichier pour les attributs, les méthodes et les propriétés de la classe DateConstante. */
-using static System.Enum;
-using static Prog2.ConsolePlus;
-using static System.ConsoleColor;
-using static Prog2.Date;
-using static Prog2.Mois;
-using static System.Console;
-using static Prog2.Calendrier;
 using System;
 
 namespace Prog2
 {
     public class DateConstante : Date
     {
+        /// <summary>
+        /// Constructeur de date constante.
+        /// </summary>
+        /// <param name="année">l'année</param>
+        /// <param name="mois">le mois</param>
+        /// <param name="jour">le jour</param>
         public DateConstante(int année, int mois, int jour) 
             : base(année, mois, jour)
         {
         }
 
         private int JourDeLAnnéeCaché = 0;
+
+        // --- Propriétés ---
 
         /// <summary>
         /// L'année.
@@ -58,13 +59,15 @@ namespace Prog2
             set => throw OpérationInvalide();
         }
 
+        // --- Méthodes ---
+
         /// <summary>
         /// Pour cloner une date constante.
         /// </summary>
-        /// <param name="année"></param>
-        /// <param name="mois"></param>
-        /// <param name="jour"></param>
-        /// <returns></returns>
+        /// <param name="année">l'année</param>
+        /// <param name="mois">le mois</param>
+        /// <param name="jour">le jour</param>
+        /// <returns>le clone de la date constante</returns>
         public override Date Cloner(int année = 0, int mois = 0, int jour = 0)
         {
             var annéeClone = Année;
@@ -88,6 +91,8 @@ namespace Prog2
 
             return new DateConstante(annéeClone, moisClone, jourClone);
         }
+        
+        // Opérations invalides :
 
         public override Date Décrémenter(int décrément = 1)
         {

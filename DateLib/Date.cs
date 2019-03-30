@@ -59,6 +59,7 @@ namespace Prog2
         private int _mois;
         private int _jour;
         private int _jourDeLAnnée;
+
         private static readonly Date aujourdhui = New(
             DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
         private static readonly Date demain = New(
@@ -237,7 +238,7 @@ namespace Prog2
             => Mois == 1 && Jour == 1;
 
         /// <summary>
-        /// 
+        /// Renvoie si la date est mutable.
         /// </summary>
         public bool EstMutable { get; set; }
 
