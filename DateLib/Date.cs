@@ -8,7 +8,7 @@ namespace Prog2
     /// <summary>
     /// Classe Date.
     /// </summary>
-    public class Date : object
+    public class Date : object, IEquatable<Date>
     {
         // --- Constructeur par défaut ---
         public Date()
@@ -668,6 +668,11 @@ namespace Prog2
             hashCode = hashCode * -1521134295 + Mois.GetHashCode();
             hashCode = hashCode * -1521134295 + Jour.GetHashCode();
             return hashCode;
+        }
+
+        public bool Equals(Date other)
+        {
+            throw new NotImplementedException();
         }
     }
 }
