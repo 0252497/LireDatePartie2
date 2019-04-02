@@ -9,7 +9,7 @@ using static System.Console;
 
 namespace Prog2
 {
-    public class Calendrier
+    public class Calendrier : ICalendrier
     {
         // Pour le nombre de rangées et de colonnes du calendrier :
         public const int NbRangées = 6; 
@@ -65,6 +65,20 @@ namespace Prog2
         /// </summary>
         public int MoisNumérique 
             => (int)Mois;
+
+        public int NbJours 
+            => Année.NbJoursDsMois(MoisNumérique);
+
+        public int NbSemaines
+        {
+            get
+            {
+                Localiser(new Date(Année, Mois, NbJours), out int rangée,
+                    out int colonne);
+
+                return rangée + 1;
+            }
+        }
 
         /// <summary>
         /// Indexation de la classe Calendrier.

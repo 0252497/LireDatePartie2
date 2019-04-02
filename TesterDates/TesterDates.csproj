@@ -97,6 +97,8 @@
     <Compile Include="TesterDate_125_DateConstante.cs" />
     <Compile Include="TesterDate_126_ClonerDateConstante.cs" />
     <Compile Include="TesterDate_127_CacherJourDeLAnnée.cs" />
+    <Compile Include="TesterDate_131_NbJours.cs" />
+    <Compile Include="TesterDate_132_NbSemaines.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -46,6 +46,8 @@
     <Compile Include="DateConstanteException.cs" />
     <Compile Include="DateUtil.cs" />
     <Compile Include="DateConstante.cs" />
+    <Compile Include="ICalendrier.cs" />
+    <Compile Include="ICalendrierUtil.cs" />
     <Compile Include="JourDeLaSemaine.cs" />
     <Compile Include="Mois.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

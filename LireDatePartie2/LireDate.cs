@@ -8,6 +8,7 @@ using static Prog2.DateUtil;
 using static Prog2.ConsolePlus;
 using static Prog2.Date;
 using static System.ConsoleColor;
+using System.Diagnostics;
 
 namespace Prog2
 {
@@ -73,7 +74,13 @@ namespace Prog2
             Calendrier calendrier = new Calendrier(date.Année, date.MoisTypé);
             calendrier.Afficher(date);
             WriteLine("");
-            
+
+            // Utiliser ICalendrier :
+            Debug.Assert(calendrier is object);
+            Debug.Assert(calendrier is Calendrier);
+            Debug.Assert(calendrier is ICalendrier);
+            ICalendrier ical = default(ICalendrier);
+            Debug.Assert(ical == null);
             Poursuivre();
         }
     }
