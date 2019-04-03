@@ -100,6 +100,7 @@
     <Compile Include="TesterDate_131_NbJours.cs" />
     <Compile Include="TesterDate_132_NbSemaines.cs" />
     <Compile Include="TesterDate_133_IEquatable.cs" />
+    <Compile Include="TesterDate_134_IComparable.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

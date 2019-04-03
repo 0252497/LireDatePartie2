@@ -8,7 +8,7 @@ namespace Prog2
     /// <summary>
     /// Classe Date.
     /// </summary>
-    public class Date : object, IEquatable<Date>, IDate
+    public class Date : object, IEquatable<Date>, IDate, IComparable<Date>
     {
         // --- Constructeur par défaut ---
         public Date()
@@ -668,5 +668,9 @@ namespace Prog2
             => Année == date.Année &&
                 Mois == date.Mois &&
                 Jour == date.Jour;
+
+        // IComparable :
+        public int CompareTo(Date date) 
+            => ComparerAvec(date);
     }
 }

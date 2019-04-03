@@ -2,7 +2,7 @@
 
 namespace Prog2
 {
-    public interface ICalendrier : IEquatable<ICalendrier>
+    public interface ICalendrier : IEquatable<ICalendrier>, IComparable<ICalendrier>
     {
         int this[int rangée, int colonne] { get; }
 

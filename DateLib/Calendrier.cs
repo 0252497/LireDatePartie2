@@ -172,10 +172,27 @@ namespace Prog2
             => Année == calendrier.Année &&
                Mois == calendrier.Mois;
 
+        // Implémentation de IComparable :
+        public int CompareTo(ICalendrier calendrier) 
+            => new Date(Année, Mois, 1).ComparerAvec(new Date(calendrier.Année, calendrier.Mois, 1));
+
         public static bool operator ==(Calendrier calendrier1, Calendrier calendrier2) 
             => Equals(calendrier1, calendrier2);
 
         public static bool operator !=(Calendrier calendrier1, Calendrier calendrier2) 
             => !(calendrier1 == calendrier2);
+
+        public static bool operator <(Calendrier calendrier1, Calendrier calendrier2)
+            => calendrier1.CompareTo(calendrier2) == -1;
+
+        public static bool operator >(Calendrier calendrier1, Calendrier calendrier2)
+            => calendrier1.CompareTo(calendrier2) == 1;
+
+        public static bool operator <=(Calendrier calendrier1, Calendrier calendrier2)
+            => calendrier1.CompareTo(calendrier2) == -1 || Equals(calendrier1, calendrier2);
+
+        public static bool operator >=(Calendrier calendrier1, Calendrier calendrier2)
+            => calendrier1.CompareTo(calendrier2) == 1 || Equals(calendrier1, calendrier2);
+
     }
 }

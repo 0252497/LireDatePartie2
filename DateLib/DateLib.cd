@@ -3,7 +3,7 @@
   <Class Name="Prog2.Calendrier">
     <Position X="0.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAEAAAAAAIAgEiAAACUAEAABAAIaAAAAAEAAAAiA=</HashCode>
+      <HashCode>AAAAAEAAAAAAIAwEiACAC0AEAABAAIaAAAAAEAAAByA=</HashCode>
       <FileName>Calendrier.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -22,7 +22,7 @@
   <Class Name="Prog2.Date" Collapsed="true">
     <Position X="3.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AYIAACAwBICEICoUgIgACIkAAAgAAIAgQEAJGOAACNA=</HashCode>
+      <HashCode>AYIAACAwBICEIC4UgIgACIkAAAgAAIAgQEAJGOAACNA=</HashCode>
       <FileName>Date.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -51,28 +51,32 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Prog2.ICalendrierUtil">
-    <Position X="9.5" Y="4.75" Width="1.5" />
+    <Position X="3.25" Y="8.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAQAAAAAAAAASAAAAAAAAAAAA=</HashCode>
       <FileName>ICalendrierUtil.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Interface Name="Prog2.ICalendrier">
-    <Position X="10" Y="2" Width="1.5" />
+    <Position X="9.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAIAgACAAAAQAEAABAAAIAAAAAAAAAAAA=</HashCode>
       <FileName>ICalendrier.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Prog2.IDate">
-    <Position X="8.75" Y="6.75" Width="1.5" />
+    <Position X="6" Y="9" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAIAgAAIAAAIgAAAAAAAAAAEAAAAAAAEA=</HashCode>
       <FileName>IDate.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="System.IEquatable&lt;T&gt;">
-    <Position X="9" Y="0.5" Width="1.5" />
+    <Position X="9.25" Y="4" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="System.IComparable&lt;T&gt;" Collapsed="true">
+    <Position X="11" Y="4" Width="1.5" />
     <TypeIdentifier />
   </Interface>
   <Enum Name="Prog2.JourDeLaSemaine">
