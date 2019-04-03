@@ -66,9 +66,15 @@ namespace Prog2
         public int MoisNumérique 
             => (int)Mois;
 
+        /// <summary>
+        /// Renvoie le nombre de jours dans un mois.
+        /// </summary>
         public int NbJours 
             => Année.NbJoursDsMois(MoisNumérique);
 
+        /// <summary>
+        /// Renvoie le nombre de semaines dans un mois.
+        /// </summary>
         public int NbSemaines
         {
             get
@@ -90,6 +96,9 @@ namespace Prog2
             => Jours[rangée, colonne];
 
         // --- Méthodes ---
+
+        public override int GetHashCode()
+            => Année * 100 + MoisNumérique;
 
         /// <summary>
         /// Localise la position (rangée et colonne) d'une date dans le calendrier.
@@ -138,7 +147,7 @@ namespace Prog2
             int colonne = datePremier.JourDeLaSemaine != Dimanche ? (int)datePremier.JourDeLaSemaine : 0;
 
             // Pour trouver toutes les positions de chaque jour du mois :
-            for (int i = 1; i <= Année.NbJoursDsMois((int)Mois); ++i)
+            for (int i = 1; i <= Année.NbJoursDsMois(MoisNumérique); ++i)
             {
                 Jours[rangée, colonne] = i;
 
@@ -154,18 +163,19 @@ namespace Prog2
             }
         }
 
+        /// <summary>
+        /// Renvoie le calendrier en chaîne de caractères.
+        /// </summary>
+        /// <returns>le calendrier en string</returns>
         public override string ToString()
-        {
-            return $"Calendrier {Mois} {Année}"; ;
-        }
+            => $"Calendrier {Mois} {Année}"; 
+        
+        // --- Interfaces ---
 
         // Hérité de Object :
         public override bool Equals(object obj)
             => obj is Calendrier calendrier &&
                Equals(calendrier);
-
-        public override int GetHashCode() 
-            => Année * 100 + MoisNumérique;
 
         // Implémentation de IEquatable :
         public bool Equals(ICalendrier calendrier)
@@ -174,8 +184,10 @@ namespace Prog2
 
         // Implémentation de IComparable :
         public int CompareTo(ICalendrier calendrier) 
-            => new Date(Année, Mois, 1).ComparerAvec(new Date(calendrier.Année, calendrier.Mois, 1));
+            => new Date(Année, Mois, 1).ComparerAvec(
+                new Date(calendrier.Année, calendrier.Mois, 1));
 
+        // Surcharge des opérateurs :
         public static bool operator ==(Calendrier calendrier1, Calendrier calendrier2) 
             => Equals(calendrier1, calendrier2);
 
@@ -193,6 +205,5 @@ namespace Prog2
 
         public static bool operator >=(Calendrier calendrier1, Calendrier calendrier2)
             => calendrier1.CompareTo(calendrier2) == 1 || Equals(calendrier1, calendrier2);
-
     }
 }

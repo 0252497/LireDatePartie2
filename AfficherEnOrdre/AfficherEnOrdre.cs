@@ -1,4 +1,6 @@
-﻿/* Programme qui fait afficher des dates aléatoires dans un certain ordre. */
+﻿/* Programme qui fait afficher des dates et des calendriers aléatoires dans un certain ordre et dans
+ * un certain format grâce aux interfaces.  
+ */
 using System;
 using static Prog2.ConsolePlus;
 using static System.Console;
@@ -11,14 +13,17 @@ using System.Diagnostics;
 
 namespace Prog2
 {
-    public class AfficherEnOrdre
+    static class AfficherEnOrdre
     {
         static void Main(string[] args)
         {
-            WriteLine("Dix dates aléatoires:");
-
+            // Tableau de dates aléatoires :
             Date[] datesAléatoires = new Date[10];
+
+            // Random pour nos dates et calendriers aléatoires :
             Random random = new Random();
+
+            WriteLine("Dix dates aléatoires:");
 
             for (int i = 0; i < datesAléatoires.Length; ++i)
             {
@@ -30,7 +35,7 @@ namespace Prog2
 
             WriteLine("\nDix dates aléatoires (après sort lambda):");
 
-            foreach (var date in datesAléatoires)
+            foreach (Date date in datesAléatoires)
             {
                 ColorWriteLine(DarkCyan, $"  * {date}");
             }
@@ -44,14 +49,15 @@ namespace Prog2
                 ColorWriteLine(Green, $"  * {date}");
             }
 
-            WriteLine("\nDix calendriers aléatoires (après sort):");
-
+            // Liste de calendriers aléatoires :
             List<Calendrier> calendriersAléatoires = new List<Calendrier>();
+
+            WriteLine("\nDix calendriers aléatoires (après sort):");
 
             for (int i = 0; i < 10; ++i)
             {
-                calendriersAléatoires.Add(new Calendrier(
-                    random.Next(1700, Aujourdhui.Année + 1), 
+                calendriersAléatoires.Add(
+                    new Calendrier(random.Next(1700, Aujourdhui.Année + 1), 
                     (Mois)random.Next((int)Janvier, (int)Décembre) + 1));
             }
 
@@ -59,11 +65,12 @@ namespace Prog2
 
             foreach (Calendrier calendrier in calendriersAléatoires)
             {
-                ColorWriteLine(Magenta, $"  * {EnTexte(calendrier)}");
+                ColorWriteLine(Magenta, $"  * {calendrier}");
             }
 
             WriteLine();
 
+            // Validations :
             var cal199903 = new Calendrier(1999, Mars);
             var cal199905 = new Calendrier(1999, Mai);
             var cal200005 = new Calendrier(2000, Mai);

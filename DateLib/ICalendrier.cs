@@ -8,9 +8,13 @@ namespace Prog2
         int this[int rangée, int colonne] { get; }
 
         int Année { get; }
+
         Mois Mois { get; }
+
         int MoisNumérique { get; }
+
         int NbJours { get; }
+
 
         int NbSemaines { get; }
 

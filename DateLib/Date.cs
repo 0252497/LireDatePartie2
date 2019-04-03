@@ -448,6 +448,15 @@ namespace Prog2
         public static bool EstValide(int année, int mois, int jour, bool estMutable = true)
             => 1 <= jour && jour <= année.NbJoursDsMois(mois) && 1 <= mois && mois <= 12;
 
+        public override int GetHashCode()
+        {
+            var hashCode = -1198555504;
+            hashCode = hashCode * -1521134295 + Année.GetHashCode();
+            hashCode = hashCode * -1521134295 + Mois.GetHashCode();
+            hashCode = hashCode * -1521134295 + Jour.GetHashCode();
+            return hashCode;
+        }
+
         /// <summary>
         /// Ajoute des jours à la date.
         /// </summary>
@@ -529,7 +538,7 @@ namespace Prog2
         /// <returns>une nouvelle date ou null si la date n'est pas valide</returns>
         public static Date New(int année, int mois, int jour, bool estMutable = true)
             => !EstValide(année, mois, jour, estMutable) ? null 
-            : new Date { Année = année, Mois = mois, Jour = jour, EstMutable = estMutable};
+                : new Date { Année = année, Mois = mois, Jour = jour, EstMutable = estMutable};
 
         /// <summary>
         /// Pour aider à construire une nouvelle date.
@@ -542,7 +551,6 @@ namespace Prog2
             => EstValide(année, (int)mois, jour) ?
                 new Date { Année = année, Mois = (int)mois, Jour = jour, EstMutable = estMutable } : null;
 
-
         /// <summary>
         /// Pour vérifier que deux dates sont pareilles.
         /// </summary>
@@ -551,6 +559,13 @@ namespace Prog2
         /// <returns>vrai si égales</returns>
         public static bool SontÉgales(Date date1, Date date2)
             => date1.Année == date2.Année && date1.Mois == date2.Mois && date1.Jour == date2.Jour;
+
+        /// <summary>
+        /// Renvoie la date en chaîne de caractères.
+        /// </summary>
+        /// <returns>la date en string</returns>
+        public override string ToString()
+            => $"{EnTexte(this)}";
 
         /// <summary>
         /// Tente de décoder une date donnée en format texte.
@@ -647,30 +662,20 @@ namespace Prog2
             bool EstJour(string str) => str.EstNumérique() && str.Length <= 2;
         }
 
-        public override string ToString() 
-            => $"{EnTexte(this)}";
+        // --- Interfaces ---
 
-        // Implémentation de IEquatable :
-        public override bool Equals(object obj) 
+        // IComparable :
+        public int CompareTo(Date date)
+            => ComparerAvec(date);
+
+        // IEquatable :
+        public override bool Equals(object obj)
             => obj is Date date && Equals(date);
 
-        public override int GetHashCode()
-        {
-            var hashCode = -1198555504;
-            hashCode = hashCode * -1521134295 + Année.GetHashCode();
-            hashCode = hashCode * -1521134295 + Mois.GetHashCode();
-            hashCode = hashCode * -1521134295 + Jour.GetHashCode();
-            return hashCode;
-        }
-
-        public bool Equals(Date date) 
+        public bool Equals(Date date)
             => Année == date.Année &&
                 Mois == date.Mois &&
                 Jour == date.Jour;
-
-        // IComparable :
-        public int CompareTo(Date date) 
-            => ComparerAvec(date);
 
         // IFormattable :
         public string ToString(string format, IFormatProvider formatProvider)
@@ -688,7 +693,7 @@ namespace Prog2
                     return EnTexteLong();
 
                 case "S":
-                    return EnTexte(this, " "); 
+                    return EnTexte(this, " ");
 
                 case ".":
                     return EnTexte(this, ".");
