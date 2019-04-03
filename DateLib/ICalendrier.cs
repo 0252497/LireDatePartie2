@@ -1,4 +1,5 @@
-﻿using System;
+﻿/* Classe pour l'interface ICalendrier. */
+using System;
 
 namespace Prog2
 {

@@ -8,7 +8,7 @@ namespace Prog2
     /// <summary>
     /// Classe Date.
     /// </summary>
-    public class Date : object, IEquatable<Date>, IDate, IComparable<Date>
+    public class Date : object, IEquatable<Date>, IComparable<Date>, IFormattable
     {
         // --- Constructeur par défaut ---
         public Date()
@@ -647,11 +647,10 @@ namespace Prog2
             bool EstJour(string str) => str.EstNumérique() && str.Length <= 2;
         }
 
-        public override string ToString()
-        {
-            return $"{EnTexte(this)}";
-        }
+        public override string ToString() 
+            => $"{EnTexte(this)}";
 
+        // Implémentation de IEquatable :
         public override bool Equals(object obj) 
             => obj is Date date && Equals(date);
 
@@ -672,5 +671,35 @@ namespace Prog2
         // IComparable :
         public int CompareTo(Date date) 
             => ComparerAvec(date);
+
+        // IFormattable :
+        public string ToString(string format, IFormatProvider formatProvider)
+        {
+            format = format ?? "G";
+
+            switch (format.ToUpperInvariant())
+            {
+                case "G":   // Général = par défaut
+                case "":
+                case "-":
+                    return ToString();
+
+                case "L": // long
+                    return EnTexteLong();
+
+                case "S":
+                    return EnTexte(this, " "); 
+
+                case ".":
+                    return EnTexte(this, ".");
+
+                case "/":
+                    return EnTexte(this, "/");
+
+                default:
+                    throw new FormatException(
+                        $"Le format '{format}' n'est pas supporté pour une Date.");
+            }
+        }
     }
 }

@@ -20,7 +20,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Prog2.Date" Collapsed="true">
-    <Position X="3.5" Y="3.75" Width="1.5" />
+    <Position X="3" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AYIAACAwBICEIC4UgIgACIkAAAgAAIAgQEAJGOAACNA=</HashCode>
       <FileName>Date.cs</FileName>
@@ -28,7 +28,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Prog2.DateConstante" Collapsed="true">
-    <Position X="3.5" Y="5" Width="1.5" />
+    <Position X="3" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAACAQAABAIAgAAIAAAAgAAAAAAAAAAACBAAAAABA=</HashCode>
       <FileName>DateConstante.cs</FileName>
@@ -46,26 +46,26 @@
     <TypeIdentifier />
   </Class>
   <Class Name="System.Exception" Collapsed="true">
-    <Position X="5.5" Y="0.75" Width="1.5" />
+    <Position X="5.5" Y="1" Width="1.5" />
     <TypeIdentifier />
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Prog2.ICalendrierUtil">
-    <Position X="3.25" Y="8.25" Width="1.5" />
+    <Position X="10.5" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAQAAAAAAAAASAAAAAAAAAAAA=</HashCode>
       <FileName>ICalendrierUtil.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Interface Name="Prog2.ICalendrier">
-    <Position X="9.5" Y="0.5" Width="1.5" />
+    <Position X="10.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAIAgACAAAAQAEAABAAAIAAAAAAAAAAAA=</HashCode>
       <FileName>ICalendrier.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Prog2.IDate">
-    <Position X="6" Y="9" Width="1.5" />
+    <Position X="3" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAIAgAAIAAAIgAAAAAAAAAAEAAAAAAAEA=</HashCode>
       <FileName>IDate.cs</FileName>
@@ -75,12 +75,12 @@
     <Position X="9.25" Y="4" Width="1.5" />
     <TypeIdentifier />
   </Interface>
-  <Interface Name="System.IComparable&lt;T&gt;" Collapsed="true">
-    <Position X="11" Y="4" Width="1.5" />
+  <Interface Name="System.IComparable&lt;T&gt;">
+    <Position X="11.25" Y="4" Width="1.5" />
     <TypeIdentifier />
   </Interface>
   <Enum Name="Prog2.JourDeLaSemaine">
-    <Position X="3" Y="6" Width="1.5" />
+    <Position X="8.5" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAABAAAQAQIAAAAAAAAAQgAAAgAAAAAAAA=</HashCode>
       <FileName>JourDeLaSemaine.cs</FileName>

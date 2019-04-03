@@ -1,7 +1,5 @@
 ﻿/* Ce programme permet de lire une date, soit l'année, le mois et le jour, et la fait ensuite afficher en texte.
- * 
- * Auteure : Véronique Giguère
- * Création : 8 février 2019 - ...
+ * Il permet aussi l'affichage de différents formats, validations, et le calendrier associé à cette date.
  */
 using static System.Console;
 using static Prog2.DateUtil;
@@ -37,6 +35,16 @@ namespace Prog2
                     return;
                 }
             }
+
+            WriteLine();
+
+            // Affichage IFormattable :
+            Afficher("   Format G", $"{date:G}");
+            Afficher("   Format -", $"{date:-}");
+            Afficher("   Format L", $"{date:L}");
+            Afficher("   Format S", $"{date:S}", couleurValeur: Magenta);
+            Afficher("   Format .", $"{date:.}", couleurValeur: Magenta);
+            Afficher("   Format /", $"{date:/}", couleurValeur: Magenta);
 
             var message = $"\nDate = {EnTexte(date)}";
 
