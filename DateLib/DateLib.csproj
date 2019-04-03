@@ -48,6 +48,7 @@
     <Compile Include="DateConstante.cs" />
     <Compile Include="ICalendrier.cs" />
     <Compile Include="ICalendrierUtil.cs" />
+    <Compile Include="IDate.cs" />
     <Compile Include="JourDeLaSemaine.cs" />
     <Compile Include="Mois.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,6 +1,8 @@
-﻿namespace Prog2
+﻿using System;
+
+namespace Prog2
 {
-    public interface ICalendrier
+    public interface ICalendrier : IEquatable<ICalendrier>
     {
         int this[int rangée, int colonne] { get; }
 

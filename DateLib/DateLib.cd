@@ -50,12 +50,30 @@
     <TypeIdentifier />
     <Lollipop Position="0.2" />
   </Class>
+  <Class Name="Prog2.ICalendrierUtil">
+    <Position X="9.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAQAAAAAAAAASAAAAAAAAAAAA=</HashCode>
+      <FileName>ICalendrierUtil.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Interface Name="Prog2.ICalendrier">
-    <Position X="10" Y="0.5" Width="1.5" />
+    <Position X="10" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAIAgACAAAAQAEAABAAAIAAAAAAAAAAAA=</HashCode>
       <FileName>ICalendrier.cs</FileName>
     </TypeIdentifier>
+  </Interface>
+  <Interface Name="Prog2.IDate">
+    <Position X="8.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAgAAIAAAIgAAAAAAAAAAEAAAAAAAEA=</HashCode>
+      <FileName>IDate.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="System.IEquatable&lt;T&gt;">
+    <Position X="9" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
   </Interface>
   <Enum Name="Prog2.JourDeLaSemaine">
     <Position X="3" Y="6" Width="1.5" />
@@ -65,7 +83,7 @@
     </TypeIdentifier>
   </Enum>
   <Enum Name="Prog2.Mois">
-    <Position X="8" Y="2.25" Width="1.5" />
+    <Position X="7.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>QAAAAAAAABAAgAAAAAAAAQAQEAAIAEAABAAAAACgAAA=</HashCode>
       <FileName>Mois.cs</FileName>

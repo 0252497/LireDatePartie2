@@ -9,7 +9,7 @@ using static System.Console;
 
 namespace Prog2
 {
-    public class Calendrier : ICalendrier, IEquatable<Calendrier>
+    public class Calendrier : ICalendrier
     {
         // Pour le nombre de rangées et de colonnes du calendrier :
         public const int NbRangées = 6; 
@@ -162,13 +162,13 @@ namespace Prog2
         // Hérité de Object :
         public override bool Equals(object obj)
             => obj is Calendrier calendrier &&
-                  Equals(calendrier);
+               Equals(calendrier);
 
         public override int GetHashCode() 
             => Année * 100 + MoisNumérique;
 
         // Implémentation de IEquatable :
-        public bool Equals(Calendrier calendrier)
+        public bool Equals(ICalendrier calendrier)
             => Année == calendrier.Année &&
                Mois == calendrier.Mois;
 

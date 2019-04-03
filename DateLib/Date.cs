@@ -8,7 +8,7 @@ namespace Prog2
     /// <summary>
     /// Classe Date.
     /// </summary>
-    public class Date : object, IEquatable<Date>
+    public class Date : object, IEquatable<Date>, IDate
     {
         // --- Constructeur par défaut ---
         public Date()
@@ -652,14 +652,8 @@ namespace Prog2
             return $"{EnTexte(this)}";
         }
 
-        public override bool Equals(object obj)
-        {
-            var date = obj as Date;
-            return date != null &&
-                   Année == date.Année &&
-                   Mois == date.Mois &&
-                   Jour == date.Jour;
-        }
+        public override bool Equals(object obj) 
+            => obj is Date date && Equals(date);
 
         public override int GetHashCode()
         {
@@ -670,9 +664,9 @@ namespace Prog2
             return hashCode;
         }
 
-        public bool Equals(Date other)
-        {
-            throw new NotImplementedException();
-        }
+        public bool Equals(Date date) 
+            => Année == date.Année &&
+                Mois == date.Mois &&
+                Jour == date.Jour;
     }
 }

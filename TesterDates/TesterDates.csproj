@@ -99,6 +99,7 @@
     <Compile Include="TesterDate_127_CacherJourDeLAnnée.cs" />
     <Compile Include="TesterDate_131_NbJours.cs" />
     <Compile Include="TesterDate_132_NbSemaines.cs" />
+    <Compile Include="TesterDate_133_IEquatable.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
