@@ -4,6 +4,8 @@ using static System.Console;
 using static Prog2.Mois;
 using System.Collections.Generic;
 using static Prog2.Date;
+using static Prog2.IEnumerableUtil;
+using static System.ConsoleColor;
 
 namespace Prog2
 {
@@ -70,11 +72,20 @@ namespace Prog2
             WriteLine();
 
             Write("\nAny: ");
-            WriteAny<int>(new[] { 1, 2, 3 });    // T = int
+            WriteAny(new[] { 1, 2, 3 });    // T = int
             WriteAny(new List<bool> { true, true, false });    // T = bool
             WriteAny("C#");    // T = char
             WriteAny(new[] { Hier, Demain });    // T = Date
-            WriteLine();
+
+            WriteLine("\n");
+
+            // Utiliser EnTexte générique :
+            Afficher("Voyelles", "aeiouy".EnTexte());
+            Afficher("Nombres", new[] { 10, 20, 30, 40 }.EnTexte(", "), 
+                couleurValeur: Green);
+            Afficher("Dates", 
+                "\n" + new[] { Hier, Aujourdhui, Demain }.EnTexte("", " * ", "\n"), 
+                couleurValeur: DarkYellow);
         }
 
         static string EnTexte(IEnumerable<int> p_entiers, string séparateur = " ")

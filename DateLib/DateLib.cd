@@ -22,7 +22,7 @@
   <Class Name="Prog2.Date" Collapsed="true">
     <Position X="2.75" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AYIAACAwBICEIC4UgIgACIkAAAgAAIAgQEAJGOAACNA=</HashCode>
+      <HashCode>A4IAACAwBICEIC4UgIgACIkAAAgAAIAgQEAJGOAACNA=</HashCode>
       <FileName>Date.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -65,7 +65,7 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="Prog2.IDate">
-    <Position X="3" Y="6.5" Width="1.5" />
+    <Position X="2.75" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAIAgAAIAAAIgAAAAAAAAAAEAAAAAAAEA=</HashCode>
       <FileName>IDate.cs</FileName>

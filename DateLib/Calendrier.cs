@@ -144,7 +144,8 @@ namespace Prog2
             // On commence à la rangée zéro, et la colonne de début correspond au jour du premier 
             // du mois :
             int rangée = 0; 
-            int colonne = datePremier.JourDeLaSemaine != Dimanche ? (int)datePremier.JourDeLaSemaine : 0;
+            int colonne = datePremier.JourDeLaSemaine != Dimanche ? 
+                (int)datePremier.JourDeLaSemaine : 0;
 
             // Pour trouver toutes les positions de chaque jour du mois :
             for (int i = 1; i <= Année.NbJoursDsMois(MoisNumérique); ++i)

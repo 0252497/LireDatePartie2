@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Prog2
 {
-    static class IEnumerableUtil
+    public static class IEnumerableUtil
     {
         /// <summary>
         /// Convertit un énumérable en texte.
@@ -24,6 +25,25 @@ namespace Prog2
         public static string EnTexte<T>(this IEnumerable<T> elems, string séparateur = " ",
             string texteAvant = "", string texteAprès = "")
         {
+            string enTexte = "";
+            
+            int i = 0;
+
+            foreach (T elem in elems)
+            {
+                enTexte += texteAvant != null ? texteAvant : "";
+                enTexte += elem;
+                enTexte += texteAprès != null ? texteAprès : "";
+
+                if (i != elems.Count() - 1)
+                {
+                    enTexte += séparateur != null ? séparateur : " ";
+                }
+
+                ++i;
+            }
+
+            return enTexte;
         }
     }
 }

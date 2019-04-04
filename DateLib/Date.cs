@@ -1,7 +1,7 @@
 ﻿/* Fichier pour les attributs, les méthodes et les propriétés de la classe Date. */
 using System;
-using System.Diagnostics;
 using static System.Int32;
+using static Prog2.Mois;
 
 namespace Prog2
 {
@@ -10,13 +10,32 @@ namespace Prog2
     /// </summary>
     public class Date : object, IEquatable<Date>, IComparable<Date>, IFormattable
     {
+        // --- Attributs ---
+
+        private int _année;
+        private int _mois;
+        private int _jour;
+        private int _annéeMoisJour;
+        private int _jourDeLAnnée;
+
+        private static readonly Date aujourdhui = New(
+            DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
+        private static readonly Date demain = New(
+            DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
+        private static readonly Date hier = New(
+            DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
+
         // --- Constructeur par défaut ---
+
         public Date()
         {
             EstMutable = true;
             Mois = 1;
             Jour = 1;
             Année = 1;
+
+            _annéeMoisJour = Année * 10000 + Mois * 1000 + Jour * 10 + 
+                (EstMutable ? 1 : 0);
         }
 
         // --- Constructeurs paramétrés ---
@@ -30,6 +49,9 @@ namespace Prog2
             _mois = mois;
             _jour = jour;
             EstMutable = estMutable;
+
+            _annéeMoisJour = Année * 10000 + Mois * 1000 + Jour * 10 + 
+                (EstMutable ? 1 : 0);
         }
 
         public Date(int année, Mois moisTypé, int jour, bool estMutable = true)
@@ -48,6 +70,9 @@ namespace Prog2
                 _année = date.Année;
                 _mois = date.Mois;
                 _jour = date.Jour;
+
+                _annéeMoisJour = Année * 10000 + Mois * 1000 + Jour * 10 +
+                    (EstMutable ? 1 : 0);
             }
             else
             {
@@ -55,18 +80,7 @@ namespace Prog2
             }
         }
 
-        private int _année;
-        private int _mois;
-        private int _jour;
-        private int _jourDeLAnnée;
-
-        private static readonly Date aujourdhui = New(
-            DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
-        private static readonly Date demain = New(
-            DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
-        private static readonly Date hier = New(
-            DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
-
+       
         // --- Propriétés ---
 
         /// <summary>
@@ -74,7 +88,7 @@ namespace Prog2
         /// </summary>
         public virtual int Année
         {
-            get => _année;
+            get => _année;  // _annéeMoisJour / 100000;
             set
             {
                 if (value < 1 || _jour > value.NbJoursDsMois(_mois))
@@ -94,7 +108,7 @@ namespace Prog2
         /// </summary>
         public virtual int Mois
         {
-            get => _mois;
+            get => _mois;   // _annéeMoisJour / 1000 % 100;
             set
             {
                 if (value < 1 || value > 12 || _jour > _année.NbJoursDsMois(value))
@@ -114,7 +128,7 @@ namespace Prog2
         /// </summary>
         public virtual int Jour
         {
-            get => _jour;
+            get => _jour; // _annéeMoisJour / 10 % 100;
             set
             {
                 if (1 > value || value > _année.NbJoursDsMois(_mois))
@@ -291,8 +305,9 @@ namespace Prog2
 
             // On génère une année, un mois et un jour aléatoires :
             int annéeAléatoire = random.Next(annéeMin, annéeMax + 1);
-            int moisAléatoire = random.Next(1, 13);
-            int jourAléatoire = random.Next(1, annéeAléatoire.NbJoursDsMois(moisAléatoire) + 1);
+            int moisAléatoire = random.Next((int)Janvier, (int)Décembre + 1);
+            int jourAléatoire = random.Next(
+                1, annéeAléatoire.NbJoursDsMois(moisAléatoire) + 1);
 
             return new Date(annéeAléatoire, moisAléatoire, jourAléatoire);
         }
@@ -446,7 +461,8 @@ namespace Prog2
         /// <param name="jour">le jour</param>
         /// <returns>vrai si la date est valide</returns>
         public static bool EstValide(int année, int mois, int jour, bool estMutable = true)
-            => 1 <= jour && jour <= année.NbJoursDsMois(mois) && 1 <= mois && mois <= 12;
+            => 1 <= jour && jour <= année.NbJoursDsMois(mois) && 
+                (int)Janvier <= mois && mois <= (int)Décembre;
 
         public override int GetHashCode()
         {
@@ -558,7 +574,9 @@ namespace Prog2
         /// <param name="date2">deuxième date</param>
         /// <returns>vrai si égales</returns>
         public static bool SontÉgales(Date date1, Date date2)
-            => date1.Année == date2.Année && date1.Mois == date2.Mois && date1.Jour == date2.Jour;
+            => date1.Année == date2.Année && 
+                date1.Mois == date2.Mois && 
+                date1.Jour == date2.Jour;
 
         /// <summary>
         /// Renvoie la date en chaîne de caractères.
