@@ -102,6 +102,7 @@
     <Compile Include="TesterDate_133_IEquatable.cs" />
     <Compile Include="TesterDate_134_IComparable.cs" />
     <Compile Include="TesterDate_135_IFormattable.cs" />
+    <Compile Include="TesterDate_141_ModifierMois.cs" />
     <Compile Include="TesterIEnumerableUtil_01_EnTexte.cs" />
   </ItemGroup>
   <ItemGroup>

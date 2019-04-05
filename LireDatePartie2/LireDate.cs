@@ -72,12 +72,20 @@ namespace Prog2
             MessageOk(message);
 
             // Afficher si Noël, jour de l'an, St-Jean-Baptiste ou pas, et le jour de l'année :
-            ColorWriteLine(DarkYellow, $"\n\n Jour de l'an : {date.EstJourDeLAn.OuiNon()}");
-            ColorWriteLine(DarkYellow, $"      St-Jean : {date.EstStJean.OuiNon()}");
-            ColorWriteLine(DarkYellow, $"         Noël : {date.EstNoël.OuiNon()}");
-            ColorWriteLine(Magenta, $"  Jour numéro : {date.JourDeLAnnée}");
-            ColorWriteLine(Blue, $" Jour semaine : {date.JourDeLaSemaine}");
-            ColorWriteLine(Cyan, $"Dans 3 mois", date.ModifierMois(n => n - 3));
+            ColorWriteLine(DarkYellow,   $" \n\n Jour de l'an : {date.EstJourDeLAn.OuiNon()}");
+            ColorWriteLine(DarkYellow,   $"      St-Jean : {date.EstStJean.OuiNon()}");
+            ColorWriteLine(DarkYellow,   $"         Noël : {date.EstNoël.OuiNon()}");
+            ColorWriteLine(Magenta,      $"  Jour numéro : {date.JourDeLAnnée}");
+            ColorWriteLine(Blue,         $" Jour semaine : {date.JourDeLaSemaine}");
+
+            try
+            {
+                ColorWriteLine(Cyan,     $"  Dans 3 mois : {date.ModifierMois(n => n + 3)}");
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                ColorWriteLine(Red,     $"   Dans 3 mois : date impossible");
+            }
 
             WriteLine("");
 

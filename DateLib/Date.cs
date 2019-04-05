@@ -519,14 +519,14 @@ namespace Prog2
 
         public virtual Date ModifierMois(Func<int, int> f)
         {
-            f = n => Mois - n;
-
             if (!EstValide(Année, f(Mois), Jour))
             {
                 throw new ArgumentOutOfRangeException();
             }
 
-            return new Date(Année, f(Mois), Jour);
+            Mois = f(Mois);
+
+            return this;
         }
 
         /// <summary>
