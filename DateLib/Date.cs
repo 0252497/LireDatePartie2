@@ -2,6 +2,7 @@
 using System;
 using static System.Int32;
 using static Prog2.Mois;
+using static Prog2.ConsolePlus;
 
 namespace Prog2
 {
@@ -34,7 +35,7 @@ namespace Prog2
             Jour = 1;
             Année = 1;
 
-            _annéeMoisJour = Année * 10000 + Mois * 1000 + Jour * 10 + 
+            _annéeMoisJour = Année * 10000 + Mois * 1000 + Jour * 10 +
                 (EstMutable ? 1 : 0);
         }
 
@@ -50,13 +51,13 @@ namespace Prog2
             _jour = jour;
             EstMutable = estMutable;
 
-            _annéeMoisJour = Année * 10000 + Mois * 1000 + Jour * 10 + 
+            _annéeMoisJour = Année * 10000 + Mois * 1000 + Jour * 10 +
                 (EstMutable ? 1 : 0);
         }
 
         public Date(int année, Mois moisTypé, int jour, bool estMutable = true)
-            : this(année, (int)moisTypé, jour, estMutable) {}
-        
+            : this(année, (int)moisTypé, jour, estMutable) { }
+
         /// <summary>
         /// Exemple : new Date("11 septembre 2011").
         /// </summary>
@@ -80,7 +81,7 @@ namespace Prog2
             }
         }
 
-       
+
         // --- Propriétés ---
 
         /// <summary>
@@ -231,7 +232,7 @@ namespace Prog2
                 Mois = (int)value;
             }
         }
-        
+
         // --- Propriétés calculables --- 
 
         /// <summary>
@@ -278,7 +279,7 @@ namespace Prog2
         /// Vrai si une date est très spéciale. Une date est très spéciale si le jour, le mois et
         /// les deux derniers chiffres de l'année sont identiques.
         /// </summary>
-        public bool EstTrèsSpéciale 
+        public bool EstTrèsSpéciale
             => EstSpéciale && Mois == Année % 100;
 
         /// <summary>
@@ -331,7 +332,7 @@ namespace Prog2
             int nbJours = dateMax.Moins(dateMin) + 1;
 
             // Pour le jour aléatoire qu'on ajoutera à un clone de la date minimum :
-            int jourAléatoire = random.Next(0, nbJours);    
+            int jourAléatoire = random.Next(0, nbJours);
 
             return dateMin.Cloner().Incrémenter(jourAléatoire);
         }
@@ -379,7 +380,7 @@ namespace Prog2
                 return 0;
             }
             else if (Année.ComparerAvec(autre.Année) == 1 ||
-                (Année.ComparerAvec(autre.Année) == 0 && (Mois.ComparerAvec(autre.Mois) == 1))||
+                (Année.ComparerAvec(autre.Année) == 0 && (Mois.ComparerAvec(autre.Mois) == 1)) ||
                 (Année.ComparerAvec(autre.Année) == 0 && Mois.ComparerAvec(autre.Mois) == 0
                 && Jour.ComparerAvec(autre.Jour) == 1))
             {
@@ -431,7 +432,7 @@ namespace Prog2
         /// Pour cloner une date.
         /// </summary>
         /// <returns>le clone du date</returns>
-        public Date Dupliquer() 
+        public Date Dupliquer()
             => MemberwiseClone() as Date;
 
         /// <summary>
@@ -445,7 +446,7 @@ namespace Prog2
             => (date != null) ? string.Format(
                     $"{date.Année:D4}{séparateur}{date.Mois:D2}{séparateur}{date.Jour:D2}") : string.Format(
                     $"{aujourdhui.Année:D4}{séparateur}{aujourdhui.Mois:D2}{séparateur}{aujourdhui.Jour:D2}");
-  
+
         /// <summary>
         /// Pour obtenir la représentation textuelle d'une date en format long.
         /// </summary>
@@ -461,7 +462,7 @@ namespace Prog2
         /// <param name="jour">le jour</param>
         /// <returns>vrai si la date est valide</returns>
         public static bool EstValide(int année, int mois, int jour, bool estMutable = true)
-            => 1 <= jour && jour <= année.NbJoursDsMois(mois) && 
+            => 1 <= jour && jour <= année.NbJoursDsMois(mois) &&
                 (int)Janvier <= mois && mois <= (int)Décembre;
 
         public override int GetHashCode()
@@ -514,6 +515,18 @@ namespace Prog2
             Mois = DateTime.Today.Month;
             Jour = DateTime.Today.Day;
             return this;
+        }
+
+        public virtual Date ModifierMois(Func<int, int> f)
+        {
+            f = n => Mois - n;
+
+            if (!EstValide(Année, f(Mois), Jour))
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+            return new Date(Année, f(Mois), Jour);
         }
 
         /// <summary>

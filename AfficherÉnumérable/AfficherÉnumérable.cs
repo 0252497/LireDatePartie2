@@ -77,7 +77,7 @@ namespace Prog2
             WriteAny("C#");    // T = char
             WriteAny(new[] { Hier, Demain });    // T = Date
 
-            WriteLine("\n");
+            WriteLine();
 
             // Utiliser EnTexte générique :
             Afficher("Voyelles", "aeiouy".EnTexte());
@@ -86,6 +86,61 @@ namespace Prog2
             Afficher("Dates", 
                 "\n" + new[] { Hier, Aujourdhui, Demain }.EnTexte("", " * ", "\n"), 
                 couleurValeur: DarkYellow);
+
+            // Utiliser les prédicats :
+            Afficher("12 est pair", 12.EstPair());
+            Afficher("80 est impair", 12.EstImpair());
+            Afficher("80 est divisible par 5", 80.EstDivisiblePar5());
+            Afficher("80 est divisible par 8", 80.EstDivisiblePar(8));
+            Afficher("C# contient #", "C#".Contient('#'));
+
+            // Utiliser les types fonctionnels :
+            WriteLine();
+            Func<int, bool> estQuoi;
+            estQuoi = EstPair;
+            Afficher("12 est pair", estQuoi(12));
+            estQuoi = EstImpair;
+            Afficher("80 est impair", estQuoi(80));
+            estQuoi = EstDivisiblePar5;
+            Afficher("80 est divisible par 5", estQuoi(80));
+
+            // Type fonctionnel en argument :
+            WriteLine();
+
+            void opérerSur50et10(Func<int, int, int> opérerSur)
+            {
+                Afficher("Résultat", opérerSur(50, 10));
+            }
+
+            opérerSur50et10(Somme);
+            opérerSur50et10(Soustraction);
+            opérerSur50et10(Multiplication);
+            opérerSur50et10(Division);
+
+            WriteLine();
+
+            // Lambdas en argument :
+            opérerSur50et10((a, b) => a + b);
+            opérerSur50et10((a, b) => a - b);
+            opérerSur50et10((a, b) => a * b);
+            opérerSur50et10((a, b) => a / b);
+
+            // Lambda dans une variable :
+            WriteLine();
+            estQuoi = n => n % 7 == 0;
+            Afficher("91 est divisible par 7", estQuoi(91));
+            Func<int, int> carréDe = n => n * n;
+            Afficher("Le carré de 12 est", carréDe(12));
+
+            WriteLine();
+
+            // Périmètre d'un rectangle :
+            opérerSur50et10((a, b) => 2 * a + 2 * b);
+
+            // Calcul des pièces d'or :
+            opérerSur50et10((a, b) => 13 * a + 27 * b);
+
+            WriteLine();
         }
 
         static string EnTexte(IEnumerable<int> p_entiers, string séparateur = " ")
@@ -117,5 +172,18 @@ namespace Prog2
                 Write(entier + séparateur);
             }
         }
+
+        // Prédicats :
+        static bool EstPair(this int i)                         => i % 2 == 0;
+        static bool EstImpair(this int i)                       => !EstPair(i);
+        static bool EstDivisiblePar5(this int i)                => i % 5 == 0;
+        static bool EstDivisiblePar(this int i, int diviseur)   => i % diviseur == 0;
+        static bool Contient(this string S, char c)             => S.IndexOf(c) >= 0;
+
+        // Opérations arithmétiques  :
+        static int Somme(int i, int j)          => i + j;
+        static int Soustraction(int i, int j)   => i - j;
+        static int Multiplication(int i, int j) => i * j;
+        static int Division(int i, int j)       => i / j;
     }
 }

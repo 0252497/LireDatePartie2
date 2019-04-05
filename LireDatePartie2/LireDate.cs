@@ -7,6 +7,8 @@ using static Prog2.ConsolePlus;
 using static Prog2.Date;
 using static System.ConsoleColor;
 using System.Diagnostics;
+using System.Collections.Generic;
+using System;
 
 namespace Prog2
 {
@@ -75,6 +77,7 @@ namespace Prog2
             ColorWriteLine(DarkYellow, $"         Noël : {date.EstNoël.OuiNon()}");
             ColorWriteLine(Magenta, $"  Jour numéro : {date.JourDeLAnnée}");
             ColorWriteLine(Blue, $" Jour semaine : {date.JourDeLaSemaine}");
+            ColorWriteLine(Cyan, $"Dans 3 mois", date.ModifierMois(n => n - 3));
 
             WriteLine("");
 
