@@ -213,7 +213,23 @@ namespace Prog2
             Afficher("la totale (chaînage)", chaînage.EnTexte());
             Afficher("la totale  (requête)", requête.EnTexte());
 
+            // Utiliser des fonctions génératrices :
             WriteLine();
+            Afficher("  Générer 123", Générer123().EnTexte());
+            var énumérateur = Générer123().GetEnumerator();
+            while (énumérateur.MoveNext())
+                Afficher("        Appel", énumérateur.Current);
+            foreach (var courant in Générer123())
+                Afficher("      Courant", courant);
+            Afficher("Générer 5 à 10", GénérerEntiers(5, 10).EnTexte());
+        }
+
+        // Fonction génératrice simple :
+        static IEnumerable<int> Générer123()
+        {
+            yield return 1;
+            yield return 2;
+            yield return 3;
         }
 
         static string EnTexte(IEnumerable<int> p_entiers, string séparateur = " ")
@@ -225,6 +241,14 @@ namespace Prog2
             foreach (T elem in elems)
             {
                 Write(elem + séparateur);
+            }
+        }
+
+        static IEnumerable<int> GénérerEntiers(int début, int fin)
+        {
+            for (int i = début; i <= fin; ++i)
+            {
+                yield return i;
             }
         }
 
