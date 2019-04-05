@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using static Prog2.Date;
 using static Prog2.IEnumerableUtil;
 using static System.ConsoleColor;
+using System.Linq;
 
 namespace Prog2
 {
@@ -139,6 +140,78 @@ namespace Prog2
 
             // Calcul des pièces d'or :
             opérerSur50et10((a, b) => 13 * a + 27 * b);
+
+            WriteLine();
+
+            // LINQ: All et Any
+            WriteLine();
+            Afficher("         Nombres", impairs.EnTexte());
+            Afficher("    Tous impairs", impairs.All(EstImpair));
+            Afficher("       Tous < 10", impairs.All(n => n < 10));
+            Afficher("        Tous < 5", impairs.All(n => n < 5));
+            Afficher(" Au moins un < 5", impairs.Any(n => n < 5));
+            Afficher("Au moins un pair", impairs.Any(EstPair));
+            Afficher("        Pas vide", impairs.Any());
+
+            // LINQ: Max, Min, Average, First, Last
+            WriteLine();
+            var nombres = new int[] { 3, 2, 7, 4, 1, 5 };
+            Afficher("     Nombres", nombres.EnTexte());
+            Afficher("         Max", nombres.Max());
+            Afficher("         Min", nombres.Min());
+            Afficher("     Moyenne", nombres.Average());
+            Afficher("       First", nombres.First());
+            Afficher("        Last", nombres.Last());
+            Afficher("  First pair", nombres.First(EstPair));
+            Afficher("   Last pair", nombres.Last(EstPair));
+            Afficher("   Last > 10", nombres.LastOrDefault(n => n > 10));
+
+            // LINQ: Reverse, Skip, Take
+            WriteLine();
+            var lettres = "ABCDEFG";
+            Afficher("Lettres", lettres.EnTexte(), couleurValeur: ConsoleColor.DarkYellow);
+            Afficher("Reverse", lettres.Reverse().EnTexte());
+            Afficher("Skip 2", lettres.Skip(2));
+            Afficher("Take 3", lettres.Take(3).EnTexte());
+            Afficher("Skip 2 Take3", lettres.Skip(2).Take(3).EnTexte());
+
+            // LINQ: Count, Distinct
+            WriteLine();
+            lettres = "abracadabra";
+            Afficher("    Lettres", lettres.EnTexte(), couleurValeur: ConsoleColor.DarkYellow);
+            Afficher("      Count", lettres.Count());
+            Afficher("    Nb de a", lettres.Count(c => c == 'a'));
+            Afficher("   Distinct", lettres.Distinct().EnTexte());
+            Afficher("Dist. Count", lettres.Distinct().Count());
+
+            // LINQ: ElementAt, ToString, ToList
+            WriteLine();
+            nombres = new int[] { 1, 2, 3, 4, 5, 6, 7 }.Skip(2).ToArray();
+            Afficher("    Nombres", nombres.EnTexte(), couleurValeur: ConsoleColor.DarkYellow);
+            Afficher("Element  #1", nombres.ElementAt(1));
+            Afficher("Element #10", nombres.ElementAtOrDefault(10));
+
+            // LINQ: Where, Select, OrderBy
+            WriteLine();
+            nombres = new int[] { 3, 2, 7, 4, 1, 5 };
+            Afficher("  Nombres", nombres.EnTexte(), couleurValeur: ConsoleColor.DarkYellow);
+            Afficher("    pairs", nombres.Where(EstPair).EnTexte());
+            Afficher("  impairs", nombres.Where(EstImpair).EnTexte());
+            Afficher("   plus 1", nombres.Select(n => n + 1).EnTexte());
+            Afficher("  doubler", nombres.Select(n => 2 * n).EnTexte());
+            Afficher("croissant", nombres.OrderBy(n => n).EnTexte());
+            Afficher("décrois 1", nombres.OrderBy(n => -n).EnTexte());
+            Afficher("décrois 2", nombres.OrderByDescending(n => n).EnTexte());
+            // Doubler seulement les impairs et les placer en ordre croissants
+            Afficher(" la total", nombres.Where(EstImpair).Select(n => n * 2).OrderBy(n => n).EnTexte());
+            // LINQ: Chaînage de méthodes d'extension
+            var chaînage = nombres.Where(EstImpair).OrderBy(n => n).Select(n => n * 2);
+
+            // LINQ: langage de requête
+            var requête = from n in nombres where n % 2 == 1 orderby n select n * 2;
+
+            Afficher("la totale (chaînage)", chaînage.EnTexte());
+            Afficher("la totale  (requête)", requête.EnTexte());
 
             WriteLine();
         }
