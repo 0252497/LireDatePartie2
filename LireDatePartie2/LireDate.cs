@@ -100,6 +100,7 @@ namespace Prog2
             Debug.Assert(calendrier is ICalendrier);
             ICalendrier ical = default(ICalendrier);
             Debug.Assert(ical == null);
+
             Poursuivre();
         }
     }

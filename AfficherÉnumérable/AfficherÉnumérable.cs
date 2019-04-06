@@ -136,7 +136,7 @@ namespace Prog2
             WriteLine();
 
             // Périmètre d'un rectangle :
-            opérerSur50et10((a, b) => 2 * a + 2 * b);
+            opérerSur50et10((a, b) => 2 * (a + b));
 
             // Calcul des pièces d'or :
             opérerSur50et10((a, b) => 13 * a + 27 * b);
@@ -169,7 +169,7 @@ namespace Prog2
             // LINQ: Reverse, Skip, Take
             WriteLine();
             var lettres = "ABCDEFG";
-            Afficher("Lettres", lettres.EnTexte(), couleurValeur: ConsoleColor.DarkYellow);
+            Afficher("Lettres", lettres.EnTexte(), couleurValeur: DarkYellow);
             Afficher("Reverse", lettres.Reverse().EnTexte());
             Afficher("Skip 2", lettres.Skip(2));
             Afficher("Take 3", lettres.Take(3).EnTexte());
@@ -178,7 +178,7 @@ namespace Prog2
             // LINQ: Count, Distinct
             WriteLine();
             lettres = "abracadabra";
-            Afficher("    Lettres", lettres.EnTexte(), couleurValeur: ConsoleColor.DarkYellow);
+            Afficher("    Lettres", lettres.EnTexte(), couleurValeur: DarkYellow);
             Afficher("      Count", lettres.Count());
             Afficher("    Nb de a", lettres.Count(c => c == 'a'));
             Afficher("   Distinct", lettres.Distinct().EnTexte());
@@ -187,14 +187,14 @@ namespace Prog2
             // LINQ: ElementAt, ToString, ToList
             WriteLine();
             nombres = new int[] { 1, 2, 3, 4, 5, 6, 7 }.Skip(2).ToArray();
-            Afficher("    Nombres", nombres.EnTexte(), couleurValeur: ConsoleColor.DarkYellow);
+            Afficher("    Nombres", nombres.EnTexte(), couleurValeur: DarkYellow);
             Afficher("Element  #1", nombres.ElementAt(1));
             Afficher("Element #10", nombres.ElementAtOrDefault(10));
 
             // LINQ: Where, Select, OrderBy
             WriteLine();
             nombres = new int[] { 3, 2, 7, 4, 1, 5 };
-            Afficher("  Nombres", nombres.EnTexte(), couleurValeur: ConsoleColor.DarkYellow);
+            Afficher("  Nombres", nombres.EnTexte(), couleurValeur: DarkYellow);
             Afficher("    pairs", nombres.Where(EstPair).EnTexte());
             Afficher("  impairs", nombres.Where(EstImpair).EnTexte());
             Afficher("   plus 1", nombres.Select(n => n + 1).EnTexte());
@@ -202,13 +202,18 @@ namespace Prog2
             Afficher("croissant", nombres.OrderBy(n => n).EnTexte());
             Afficher("décrois 1", nombres.OrderBy(n => -n).EnTexte());
             Afficher("décrois 2", nombres.OrderByDescending(n => n).EnTexte());
+
             // Doubler seulement les impairs et les placer en ordre croissants
-            Afficher(" la total", nombres.Where(EstImpair).Select(n => n * 2).OrderBy(n => n).EnTexte());
+            Afficher(" la totale", nombres.Where(EstImpair).Select(n => n * 2).OrderBy(n => n).EnTexte());
+            
             // LINQ: Chaînage de méthodes d'extension
             var chaînage = nombres.Where(EstImpair).OrderBy(n => n).Select(n => n * 2);
 
             // LINQ: langage de requête
-            var requête = from n in nombres where n % 2 == 1 orderby n select n * 2;
+            var requête = from n in nombres
+                          where n % 2 == 1
+                          orderby n
+                          select n * 2;
 
             Afficher("la totale (chaînage)", chaînage.EnTexte());
             Afficher("la totale  (requête)", requête.EnTexte());
@@ -216,12 +221,62 @@ namespace Prog2
             // Utiliser des fonctions génératrices :
             WriteLine();
             Afficher("  Générer 123", Générer123().EnTexte());
+
             var énumérateur = Générer123().GetEnumerator();
+
             while (énumérateur.MoveNext())
+            {
                 Afficher("        Appel", énumérateur.Current);
+            }
+
             foreach (var courant in Générer123())
+            {
                 Afficher("      Courant", courant);
+            }
+
             Afficher("Générer 5 à 10", GénérerEntiers(5, 10).EnTexte());
+
+            Afficher("Pairs 0 à 20", GénérerEntiers(0, 20).Where(EstPair).EnTexte());
+
+            Afficher("mul de 7 <= 40",
+                GénérerEntiers(0, 40).Where(n => n % 7 == 0).Select(n => n).EnTexte());
+
+            WriteLine();
+            
+            Random random = new Random();
+            Date dateMin = new Date(1700, 01, 01); // La date minimale
+
+            Afficher("10 dates aléa.", "\n" +
+                GénérerEntiers(0, 10).Select(n =>
+                Aléatoire(random, dateMin, Aujourdhui)).OrderBy(n => n).EnTexte("", " * ", "\n"),
+                couleurValeur: DarkMagenta);
+
+            Afficher("10 dates suiv.", "\n" +
+                GénérerEntiers(0, 10).Select(n =>
+                Aujourdhui.Incrémenter(n + 1)).EnTexte("", " * ", "\n"),
+                couleurValeur: DarkYellow);
+
+            Afficher("12 fins de mois", "\n" +
+                GénérerEntiers(1, 12).Select(n => new Date(
+                    Aujourdhui.Année, n, Aujourdhui.Année.NbJoursDsMois(n))).EnTexte("", " * ", "\n"),
+                    couleurValeur: Green);
+
+            WriteLine();
+
+            Afficher("   Range(5,6)", Enumerable.Range(5, 6).EnTexte());
+            Afficher("  Repeat(5,6)", Enumerable.Repeat(5, 6).EnTexte());
+
+            Afficher("Pairs 10 à 30", GénérerInfiniement().Skip(9).Where(EstPair).Take(11).EnTexte());
+
+            WriteLine();
+
+            Afficher("Pairs 40 à 50", 40.Jusqua(50, 2).EnTexte());
+            Afficher("  Décompte -5", 50.Jusqua(0, -5).EnTexte());
+            
+            var alphabet = 65.Jusqua(76).Select(n => (char)n);
+            Afficher("        A à Z", alphabet.EnTexte());
+
+            WriteLine();
         }
 
         // Fonction génératrice simple :
@@ -249,6 +304,18 @@ namespace Prog2
             for (int i = début; i <= fin; ++i)
             {
                 yield return i;
+            }
+        }
+
+        // Générateur infini :
+        static IEnumerable<int> GénérerInfiniement()
+        {
+            int entier = 0;
+
+            for (; ; )
+            {
+                yield return entier;
+                ++entier;
             }
         }
 

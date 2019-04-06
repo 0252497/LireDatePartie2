@@ -517,6 +517,11 @@ namespace Prog2
             return this;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="f"></param>
+        /// <returns></returns>
         public virtual Date ModifierMois(Func<int, int> f)
         {
             if (!EstValide(Année, f(Mois), Jour))

@@ -104,6 +104,7 @@
     <Compile Include="TesterDate_135_IFormattable.cs" />
     <Compile Include="TesterDate_141_ModifierMois.cs" />
     <Compile Include="TesterIEnumerableUtil_01_EnTexte.cs" />
+    <Compile Include="TesterIEnumerableUtil_02_Jusqua.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
