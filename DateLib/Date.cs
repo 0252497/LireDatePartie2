@@ -518,10 +518,11 @@ namespace Prog2
         }
 
         /// <summary>
-        /// 
+        /// Modifie le mois selon la fonction.
         /// </summary>
-        /// <param name="f"></param>
-        /// <returns></returns>
+        /// <param name="f">la fonction à appliquer pour modifier le mois</param>
+        /// <returns>la date modifiée (pour plus de fluidité)</returns>
+        /// <exception cref="ArgumentOutOfRangeException">si la date modifiée est invalide</exception>
         public virtual Date ModifierMois(Func<int, int> f)
         {
             if (!EstValide(Année, f(Mois), Jour))

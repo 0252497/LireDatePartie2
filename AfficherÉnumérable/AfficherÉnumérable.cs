@@ -78,30 +78,30 @@ namespace Prog2
             WriteAny("C#");    // T = char
             WriteAny(new[] { Hier, Demain });    // T = Date
 
-            WriteLine();
+            WriteLine("\n");
 
             // Utiliser EnTexte générique :
             Afficher("Voyelles", "aeiouy".EnTexte());
-            Afficher("Nombres", new[] { 10, 20, 30, 40 }.EnTexte(", "), 
+            Afficher(" Nombres", new[] { 10, 20, 30, 40 }.EnTexte(", "), 
                 couleurValeur: Green);
-            Afficher("Dates", 
-                "\n" + new[] { Hier, Aujourdhui, Demain }.EnTexte("", " * ", "\n"), 
+            Afficher("   Dates", 
+                "\n" + new[] { Hier, Aujourdhui, Demain }.EnTexte("", "     * ", "\n"), 
                 couleurValeur: DarkYellow);
 
             // Utiliser les prédicats :
-            Afficher("12 est pair", 12.EstPair());
-            Afficher("80 est impair", 12.EstImpair());
+            Afficher("           12 est pair", 12.EstPair());
+            Afficher("         80 est impair", 12.EstImpair());
             Afficher("80 est divisible par 5", 80.EstDivisiblePar5());
             Afficher("80 est divisible par 8", 80.EstDivisiblePar(8));
-            Afficher("C# contient #", "C#".Contient('#'));
+            Afficher("         C# contient #", "C#".Contient('#'));
 
             // Utiliser les types fonctionnels :
             WriteLine();
             Func<int, bool> estQuoi;
             estQuoi = EstPair;
-            Afficher("12 est pair", estQuoi(12));
+            Afficher("           12 est pair", estQuoi(12));
             estQuoi = EstImpair;
-            Afficher("80 est impair", estQuoi(80));
+            Afficher("         80 est impair", estQuoi(80));
             estQuoi = EstDivisiblePar5;
             Afficher("80 est divisible par 5", estQuoi(80));
 
@@ -131,7 +131,7 @@ namespace Prog2
             estQuoi = n => n % 7 == 0;
             Afficher("91 est divisible par 7", estQuoi(91));
             Func<int, int> carréDe = n => n * n;
-            Afficher("Le carré de 12 est", carréDe(12));
+            Afficher("    Le carré de 12 est", carréDe(12));
 
             WriteLine();
 
@@ -140,8 +140,6 @@ namespace Prog2
 
             // Calcul des pièces d'or :
             opérerSur50et10((a, b) => 13 * a + 27 * b);
-
-            WriteLine();
 
             // LINQ: All et Any
             WriteLine();
@@ -156,55 +154,57 @@ namespace Prog2
             // LINQ: Max, Min, Average, First, Last
             WriteLine();
             var nombres = new int[] { 3, 2, 7, 4, 1, 5 };
-            Afficher("     Nombres", nombres.EnTexte());
-            Afficher("         Max", nombres.Max());
-            Afficher("         Min", nombres.Min());
-            Afficher("     Moyenne", nombres.Average());
-            Afficher("       First", nombres.First());
-            Afficher("        Last", nombres.Last());
-            Afficher("  First pair", nombres.First(EstPair));
-            Afficher("   Last pair", nombres.Last(EstPair));
-            Afficher("   Last > 10", nombres.LastOrDefault(n => n > 10));
+            Afficher("         Nombres", nombres.EnTexte());
+            Afficher("             Max", nombres.Max());
+            Afficher("             Min", nombres.Min());
+            Afficher("         Moyenne", nombres.Average());
+            Afficher("           First", nombres.First());
+            Afficher("            Last", nombres.Last());
+            Afficher("      First pair", nombres.First(EstPair));
+            Afficher("       Last pair", nombres.Last(EstPair));
+            Afficher("       Last > 10", nombres.LastOrDefault(n => n > 10));
 
             // LINQ: Reverse, Skip, Take
             WriteLine();
             var lettres = "ABCDEFG";
-            Afficher("Lettres", lettres.EnTexte(), couleurValeur: DarkYellow);
-            Afficher("Reverse", lettres.Reverse().EnTexte());
-            Afficher("Skip 2", lettres.Skip(2));
-            Afficher("Take 3", lettres.Take(3).EnTexte());
-            Afficher("Skip 2 Take3", lettres.Skip(2).Take(3).EnTexte());
+            Afficher("         Lettres", lettres.EnTexte(), couleurValeur: DarkYellow);
+            Afficher("         Reverse", lettres.Reverse().EnTexte());
+            Afficher("          Skip 2", lettres.Skip(2).EnTexte());
+            Afficher("          Take 3", lettres.Take(3).EnTexte());
+            Afficher("    Skip 2 Take3", lettres.Skip(2).Take(3).EnTexte());
 
             // LINQ: Count, Distinct
             WriteLine();
             lettres = "abracadabra";
-            Afficher("    Lettres", lettres.EnTexte(), couleurValeur: DarkYellow);
-            Afficher("      Count", lettres.Count());
-            Afficher("    Nb de a", lettres.Count(c => c == 'a'));
-            Afficher("   Distinct", lettres.Distinct().EnTexte());
-            Afficher("Dist. Count", lettres.Distinct().Count());
+            Afficher("         Lettres", lettres.EnTexte(), couleurValeur: DarkYellow);
+            Afficher("           Count", lettres.Count());
+            Afficher("         Nb de a", lettres.Count(c => c == 'a'));
+            Afficher("        Distinct", lettres.Distinct().EnTexte());
+            Afficher("     Dist. Count", lettres.Distinct().Count());
 
             // LINQ: ElementAt, ToString, ToList
             WriteLine();
             nombres = new int[] { 1, 2, 3, 4, 5, 6, 7 }.Skip(2).ToArray();
-            Afficher("    Nombres", nombres.EnTexte(), couleurValeur: DarkYellow);
-            Afficher("Element  #1", nombres.ElementAt(1));
-            Afficher("Element #10", nombres.ElementAtOrDefault(10));
+            Afficher("         Nombres", nombres.EnTexte(), couleurValeur: DarkYellow);
+            Afficher("     Element  #1", nombres.ElementAt(1));
+            Afficher("     Element #10", nombres.ElementAtOrDefault(10));
 
             // LINQ: Where, Select, OrderBy
             WriteLine();
             nombres = new int[] { 3, 2, 7, 4, 1, 5 };
-            Afficher("  Nombres", nombres.EnTexte(), couleurValeur: DarkYellow);
-            Afficher("    pairs", nombres.Where(EstPair).EnTexte());
-            Afficher("  impairs", nombres.Where(EstImpair).EnTexte());
-            Afficher("   plus 1", nombres.Select(n => n + 1).EnTexte());
-            Afficher("  doubler", nombres.Select(n => 2 * n).EnTexte());
-            Afficher("croissant", nombres.OrderBy(n => n).EnTexte());
-            Afficher("décrois 1", nombres.OrderBy(n => -n).EnTexte());
-            Afficher("décrois 2", nombres.OrderByDescending(n => n).EnTexte());
+            Afficher("         Nombres", nombres.EnTexte(), couleurValeur: DarkYellow);
+            Afficher("           pairs", nombres.Where(EstPair).EnTexte());
+            Afficher("         impairs", nombres.Where(EstImpair).EnTexte());
+            Afficher("          plus 1", nombres.Select(n => n + 1).EnTexte());
+            Afficher("         doubler", nombres.Select(n => 2 * n).EnTexte());
+            Afficher("       croissant", nombres.OrderBy(n => n).EnTexte());
+            Afficher("       décrois 1", nombres.OrderBy(n => -n).EnTexte());
+            Afficher("       décrois 2", nombres.OrderByDescending(n => n).EnTexte());
+
+            WriteLine();
 
             // Doubler seulement les impairs et les placer en ordre croissants
-            Afficher(" la totale", nombres.Where(EstImpair).Select(n => n * 2).OrderBy(n => n).EnTexte());
+            Afficher("       la totale", nombres.Where(EstImpair).Select(n => n * 2).OrderBy(n => n).EnTexte());
             
             // LINQ: Chaînage de méthodes d'extension
             var chaînage = nombres.Where(EstImpair).OrderBy(n => n).Select(n => n * 2);
@@ -220,25 +220,25 @@ namespace Prog2
 
             // Utiliser des fonctions génératrices :
             WriteLine();
-            Afficher("  Générer 123", Générer123().EnTexte());
+            Afficher("     Générer 123", Générer123().EnTexte());
 
             var énumérateur = Générer123().GetEnumerator();
 
             while (énumérateur.MoveNext())
             {
-                Afficher("        Appel", énumérateur.Current);
+                Afficher("           Appel", énumérateur.Current);
             }
 
             foreach (var courant in Générer123())
             {
-                Afficher("      Courant", courant);
+                Afficher("         Courant", courant);
             }
 
-            Afficher("Générer 5 à 10", GénérerEntiers(5, 10).EnTexte());
+            Afficher("  Générer 5 à 10", GénérerEntiers(5, 10).EnTexte());
 
-            Afficher("Pairs 0 à 20", GénérerEntiers(0, 20).Where(EstPair).EnTexte());
+            Afficher("    Pairs 0 à 20", GénérerEntiers(0, 20).Where(EstPair).EnTexte());
 
-            Afficher("mul de 7 <= 40",
+            Afficher("  mul de 7 <= 40",
                 GénérerEntiers(0, 40).Where(n => n % 7 == 0).Select(n => n).EnTexte());
 
             WriteLine();
@@ -247,12 +247,12 @@ namespace Prog2
             Date dateMin = new Date(1700, 01, 01); // La date minimale
 
             Afficher("10 dates aléa.", "\n" +
-                GénérerEntiers(0, 10).Select(n =>
+                GénérerEntiers(1, 10).Select(n =>
                 Aléatoire(random, dateMin, Aujourdhui)).OrderBy(n => n).EnTexte("", " * ", "\n"),
                 couleurValeur: DarkMagenta);
 
             Afficher("10 dates suiv.", "\n" +
-                GénérerEntiers(0, 10).Select(n =>
+                GénérerEntiers(1, 10).Select(n =>
                 Aujourdhui.Incrémenter(n + 1)).EnTexte("", " * ", "\n"),
                 couleurValeur: DarkYellow);
 
@@ -272,9 +272,7 @@ namespace Prog2
 
             Afficher("Pairs 40 à 50", 40.Jusqua(50, 2).EnTexte());
             Afficher("  Décompte -5", 50.Jusqua(0, -5).EnTexte());
-            
-            var alphabet = 65.Jusqua(76).Select(n => (char)n);
-            Afficher("        A à Z", alphabet.EnTexte());
+            Afficher("        A à Z", 65.Jusqua(76).Select(n => (char)n).EnTexte());
 
             WriteLine();
         }
