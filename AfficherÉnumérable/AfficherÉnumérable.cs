@@ -204,7 +204,8 @@ namespace Prog2
             WriteLine();
 
             // Doubler seulement les impairs et les placer en ordre croissants
-            Afficher("       la totale", nombres.Where(EstImpair).Select(n => n * 2).OrderBy(n => n).EnTexte());
+            Afficher("       la totale", 
+                nombres.Where(EstImpair).Select(n => n * 2).OrderBy(n => n).EnTexte());
             
             // LINQ: Chaînage de méthodes d'extension
             var chaînage = nombres.Where(EstImpair).OrderBy(n => n).Select(n => n * 2);
