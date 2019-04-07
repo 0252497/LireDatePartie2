@@ -55,14 +55,14 @@ namespace Prog2
         /// <returns>énumération</returns>
         public static IEnumerable<int> Jusqua(this int début, int fin, int step = 0)
         {
-            if (début <= fin)
+            if (début <= fin && step >= 0)
             {
                 for (int i = début; i <= fin; i += step != 0 ? step : 1)
                 {
                     yield return i;
                 }
             }
-            else
+            else if (début > fin && step <= 0)
             {
                 for (int i = début; i >= fin; i += step != 0 ? step : -1)
                 {

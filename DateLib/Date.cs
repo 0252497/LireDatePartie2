@@ -49,9 +49,10 @@ namespace Prog2
             _année = année;
             _mois = mois;
             _jour = jour;
+
             EstMutable = estMutable;
 
-            _annéeMoisJour = Année * 10000 + Mois * 1000 + Jour * 10 +
+            _annéeMoisJour = année * 100000 + mois * 1000 + jour * 10 +
                 (EstMutable ? 1 : 0);
         }
 
@@ -72,7 +73,7 @@ namespace Prog2
                 _mois = date.Mois;
                 _jour = date.Jour;
 
-                _annéeMoisJour = Année * 10000 + Mois * 1000 + Jour * 10 +
+                _annéeMoisJour = date.Année * 100000 + date.Mois * 1000 + date.Jour * 10 +
                     (EstMutable ? 1 : 0);
             }
             else
@@ -89,9 +90,16 @@ namespace Prog2
         /// </summary>
         public virtual int Année
         {
-            get => _année;  // _annéeMoisJour / 100000;
+            get => _année; // _annéeMoisJour;
             set
             {
+                // int année = value / 100000;
+                // int mois = value / 1000 % 100;
+                // int jour = value / 10 % 100;
+
+                // if (année < 1 || jour > année.NbJoursDsMois(mois))
+                //    throw new ArgumentOutOfRangeException(nameof(Année), $"## Invalide : {année}");
+
                 if (value < 1 || _jour > value.NbJoursDsMois(_mois))
                     throw new ArgumentOutOfRangeException(nameof(Année), $"## Invalide : {value}");
 
@@ -99,6 +107,8 @@ namespace Prog2
                 {
                     throw new InvalidOperationException();
                 }
+
+                // _annéeMoisJour = value;
 
                 _année = value;
             }
