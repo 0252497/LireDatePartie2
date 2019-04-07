@@ -273,7 +273,7 @@ namespace Prog2
 
             Afficher("Pairs 40 à 50", 40.Jusqua(50, 2).EnTexte());
             Afficher("  Décompte -5", 50.Jusqua(0, -5).EnTexte());
-            Afficher("        A à Z", 65.Jusqua(76).Select(n => (char)n).EnTexte());
+            Afficher("        A à Z", 65.Jusqua(90).Select(n => (char)n).EnTexte());
 
             WriteLine();
         }
