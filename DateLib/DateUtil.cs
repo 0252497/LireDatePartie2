@@ -217,7 +217,7 @@ namespace Prog2
                 {
                     int.TryParse(strMois, out mois);
 
-                    if (mois < 1 || 12 < mois)
+                    if (mois < (int)Janvier || (int)Décembre < mois)
                         mois = 0;
                 }
                 else

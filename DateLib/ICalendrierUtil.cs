@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Prog2.JourDeLaSemaine;
+﻿/* Fichier d'utilitaires ICalendrierUtil. */
 using static System.Console;
 using static Prog2.ConsolePlus;
 using static System.ConsoleColor;
@@ -18,6 +13,8 @@ namespace Prog2
         public const int NbRangées = 6;
         public const int NbColonnes = 7;
 
+        // --- Méthodes ---
+
         /// <summary>
         /// Affiche un calendrier couleur sur la console.
         /// </summary>
@@ -25,8 +22,8 @@ namespace Prog2
         /// <param name="dateÀSurligner">la date à surligner, null si non fournie</param>
         public static void Afficher(this ICalendrier calendrier, Date dateÀSurligner = null)
         {
-            // J'ai créé une string avec le mois et l'année pour en connaître sa longueur qui variera 
-            // selon la longueur du mois. Ensuite, vu qu'on connaît la longueur de l'arrière-plan de
+            // String avec le mois et l'année pour en connaître sa longueur qui variera 
+            // selon la longueur du mois. Comme on connaît la longueur de l'arrière-plan de
             // l'entête, on peut s'assurer qu'elle aura toujours un centrage uniforme :
             string moisAnnée = $"{calendrier.Mois} {calendrier.Année}";
             int longueurBackground = 20;
@@ -58,7 +55,8 @@ namespace Prog2
                 {
                     if (calendrier[rangée, colonne] != 0)
                     {
-                        if (calendrier.Localiser(dateÀSurligner, out int rangéeDate, out int colonneDate) &&
+                        if (calendrier.Localiser(
+                            dateÀSurligner, out int rangéeDate, out int colonneDate) &&
                             rangée == rangéeDate && colonne == colonneDate)
                         {
                             Write(" ");

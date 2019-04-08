@@ -5,11 +5,11 @@ using System;
 using static Prog2.ConsolePlus;
 using static System.Console;
 using static System.ConsoleColor;
-using static Prog2.DateUtil;
 using static Prog2.Date;
 using System.Collections.Generic;
 using static Prog2.Mois;
 using System.Diagnostics;
+using static System.Array;
 
 namespace Prog2
 {
@@ -31,7 +31,7 @@ namespace Prog2
                 ColorWriteLine(DarkYellow, $"  * {datesAléatoires[i]}");
             }
            
-            Array.Sort(datesAléatoires, (a,b) => b.ComparerAvec(a));
+            Sort(datesAléatoires, (a,b) => b.ComparerAvec(a));
 
             WriteLine("\nDix dates aléatoires (après sort lambda):");
 
@@ -40,7 +40,7 @@ namespace Prog2
                 ColorWriteLine(DarkCyan, $"  * {date}");
             }
 
-            Array.Sort(datesAléatoires);
+            Sort(datesAléatoires);
 
             WriteLine("\nDix dates aléatoires (après sort sans lambda):");
 

@@ -47,7 +47,7 @@ namespace Prog2
             Afficher("   Format .", $"{date:.}", couleurValeur: Magenta);
             Afficher("   Format /", $"{date:/}", couleurValeur: Magenta);
 
-            var message = $"\nDate = {date}";
+            var message = $"\nDate = {date}"; // Message à afficher
 
             message += $"\n\nNB : Cette date est ";
 

@@ -9,6 +9,7 @@ using static System.ConsoleColor;
 using static Prog2.DateUtil;
 using static Prog2.Date;
 using System.IO;
+using static System.DateTime;
 
 namespace Prog2
 {
@@ -16,6 +17,7 @@ namespace Prog2
     {
         static void Main(string[] args)
         {
+            // Fichier txt contenant les dates :
             string nomFichier = "Dates.txt";
 
             try
@@ -49,8 +51,10 @@ namespace Prog2
                     // --- On affiche le contenu du fichier spécifié en argument ---
                     nomFichier = args[0];
 
+                    // Chaque ligne de texte :
                     string[] lignes = File.ReadAllLines(nomFichier);
 
+                    // Pour notre écriture en HTML :
                     StreamWriter html = new StreamWriter(nomFichier + ".html");
 
                     html.Write(@"<html>");
@@ -75,20 +79,21 @@ namespace Prog2
                     {
                         if (lignes[i] != null && lignes[i] != "")
                         {
-                            string[] parties = lignes[i].Split(new[] { ':' }, 
+                            // Pour chaque section de chaque ligne :
+                            string[] sections = lignes[i].Split(new[] { ':' }, 
                                 StringSplitOptions.RemoveEmptyEntries);
 
-                            if (!(1 > parties.Length || parties.Length >= 3))
+                            if (!(1 > sections.Length || sections.Length >= 3))
                             {
-                                if (TryParse(parties[0], out Date date))
+                                if (TryParse(sections[0], out Date date))
                                 {
                                     html.Write(@"<tr>");
 
-                                    if (parties.Length != 1)
+                                    if (sections.Length != 1)
                                     {
-                                        Afficher(EnTexte(date), parties[1], 1, DarkYellow, Cyan);
+                                        Afficher(EnTexte(date), sections[1], 1, DarkYellow, Cyan);
 
-                                        html.Write(@"<td>" + $"{parties[1]}" + "</td>");
+                                        html.Write(@"<td>" + $"{sections[1]}" + "</td>");
                                     }
                                     else
                                     {
@@ -151,18 +156,18 @@ namespace Prog2
             ColorWriteLine(Yellow, $"\nMort de MJ:\t\t{DateDécèsMJ:/}");
             ColorWriteLine(Cyan, $"\nExplosion de la NC:\t{DateExplosionNC:.}");
 
-            var aprèsDemain = New(
-                DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
-            var avantHier = New(
-                DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
-
-            ColorWriteLine(Magenta, $"\nAvant-hier:\t\t{avantHier.Décrémenter(2):L}");
+            // Pour avant-hier et après-demain :
+            Date avantHier = Hier.Cloner().Décrémenter();
+            Date aprèsDemain = Demain.Cloner().Incrémenter();
+            
+            ColorWriteLine(Magenta, $"\nAvant-hier:\t\t{avantHier:L}");
             ColorWriteLine(Yellow, $"Hier:\t\t\t{Hier:L}");
             ColorWriteLine(Green, $"Aujourd'hui:\t\t{Aujourdhui:L}");
             ColorWriteLine(Cyan, $"Demain:\t\t\t{Demain:L}");
-            ColorWriteLine(Magenta, $"Après-demain:\t\t{aprèsDemain.Incrémenter(2):L}");
+            ColorWriteLine(Magenta, $"Après-demain:\t\t{aprèsDemain:L}");
             ColorWriteLine(DarkYellow, 
-                $"\nDate par défaut:        {new Date {Année = 2019, JourDeLAnnée = 100}:L}");
+                $"\nDate par défaut:\t" +
+                $"{new Date {Année = 2019, JourDeLAnnée = 100}:L}");
 
             Poursuivre();
         }

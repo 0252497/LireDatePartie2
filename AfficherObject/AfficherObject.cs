@@ -5,10 +5,8 @@ using static System.Console;
 using static System.ConsoleColor;
 using static Prog2.DateUtil;
 using static Prog2.Date;
-using static System.Int32;
 using System.Collections.Generic;
 using System.Linq;
-using static System.String;
 using System.Diagnostics;
 
 namespace Prog2

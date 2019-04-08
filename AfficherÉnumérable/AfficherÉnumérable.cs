@@ -244,13 +244,12 @@ namespace Prog2
                 GénérerEntiers(0, 40).Where(n => n % 7 == 0).Select(n => n).EnTexte());
 
             WriteLine();
-            
-            Random random = new Random();
-            Date dateMin = new Date(1700, 01, 01); // La date minimale
+
+            Random random = new Random();   // Random pour les dates aléatoires 
 
             Afficher("10 dates aléa.", "\n" +
-                GénérerEntiers(1, 10).Select(n =>
-                Aléatoire(random, dateMin, Aujourdhui)).OrderBy(n => n).EnTexte("", " * ", "\n"),
+                GénérerEntiers(1, 10).Select(n => Aléatoire(random, new Date(
+                1700, 01, 01), Aujourdhui)).OrderBy(n => n).EnTexte("", " * ", "\n"),
                 couleurValeur: DarkMagenta);
 
             Afficher("10 dates suiv.", "\n" +
@@ -260,16 +259,19 @@ namespace Prog2
 
             Afficher("12 fins de mois", "\n" +
                 GénérerEntiers(1, 12).Select(n => new Date(
-                    Aujourdhui.Année, n, Aujourdhui.Année.NbJoursDsMois(n))).EnTexte("", " * ", "\n"),
+                    Aujourdhui.Année, n, 
+                    Aujourdhui.Année.NbJoursDsMois(n))).EnTexte("", " * ", "\n"),
                     couleurValeur: Green);
 
             Afficher("   Range(5,6)", Range(5, 6).EnTexte());
             Afficher("  Repeat(5,6)", Repeat(5, 6).EnTexte());
 
-            Afficher("Pairs 10 à 30", GénérerInfiniement().Skip(9).Where(EstPair).Take(11).EnTexte());
+            Afficher("Pairs 10 à 30",
+                GénérerInfiniement().Skip(9).Where(EstPair).Take(11).EnTexte());
 
             WriteLine();
 
+            // Utilisation de la méthode Jusqu'à :
             Afficher("Pairs 40 à 50", 40.Jusqua(50, 2).EnTexte());
             Afficher("  Décompte -5", 50.Jusqua(0, -5).EnTexte());
             Afficher("        A à Z", 65.Jusqua(90).Select(n => (char)n).EnTexte());
@@ -279,8 +281,36 @@ namespace Prog2
 
         // --- Fonctions locales ---
 
+        // Paramètre IEnumerable 1 :
+        static void WriteAll(IEnumerable<int> p_entiers, string séparateur = " ")
+        {
+            foreach (int entier in p_entiers)
+            {
+                Write(entier + séparateur);
+            }
+        }
+
+        // Paramètre IEnumerable 2 :
         static string EnTexte(IEnumerable<int> p_entiers, string séparateur = " ")
             => string.Join(séparateur, p_entiers);
+
+        // Paramètres IEnumerable 3 :
+        static void WriteAllChar(IEnumerable<char> p_chars, string séparateur = " ")
+        {
+            foreach (char c in p_chars)
+            {
+                Write(c + séparateur);
+            }
+        }
+
+        // Méthode générique :
+        static void WriteAny<T>(IEnumerable<T> elems, string séparateur = " ")
+        {
+            foreach (T elem in elems)
+            {
+                Write(elem + séparateur);
+            }
+        }
 
         // Fonction génératrice simple :
         static IEnumerable<int> Générer123()
@@ -290,12 +320,7 @@ namespace Prog2
             yield return 3;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="début"></param>
-        /// <param name="fin"></param>
-        /// <returns></returns>
+        // Générateur d'entiers :
         static IEnumerable<int> GénérerEntiers(int début, int fin)
         {
             for (int i = début; i <= fin; ++i)
@@ -313,49 +338,6 @@ namespace Prog2
             {
                 yield return entier;
                 ++entier;
-            }
-        }
-
-        // Paramètre IEnumerable 1
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="p_entiers"></param>
-        /// <param name="séparateur"></param>
-        static void WriteAll(IEnumerable<int> p_entiers, string séparateur = " ")
-        {
-            foreach (int entier in p_entiers)
-            {
-                Write(entier + séparateur);
-            }
-        }
-
-        // Paramètres IEnumerable 3
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="p_chars"></param>
-        /// <param name="séparateur"></param>
-        static void WriteAllChar(IEnumerable<char> p_chars, string séparateur = " ")
-        {
-            foreach (char c in p_chars)
-            {
-                Write(c + séparateur);
-            }
-        }
-
-        // Méthode générique :
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="elems"></param>
-        /// <param name="séparateur"></param>
-        static void WriteAny<T>(IEnumerable<T> elems, string séparateur = " ")
-        {
-            foreach (T elem in elems)
-            {
-                Write(elem + séparateur);
             }
         }
 

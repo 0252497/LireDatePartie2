@@ -1,9 +1,4 @@
-﻿/* Programme faisant afficher divers booléens.
- * 
- * Auteure : Véronique Giguère
- * Création : 5 février 2019
- */
-
+﻿/* Programme faisant afficher divers booléens. */
 using static System.Console;
 using static Prog2.ConsolePlus;
 using static System.ConsoleColor;

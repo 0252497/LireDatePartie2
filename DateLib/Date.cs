@@ -2,7 +2,7 @@
 using System;
 using static System.Int32;
 using static Prog2.Mois;
-using static Prog2.ConsolePlus;
+using static System.DateTime;
 
 namespace Prog2
 {
@@ -19,12 +19,10 @@ namespace Prog2
         private int _annéeMoisJour;
         private int _jourDeLAnnée;
 
-        private static readonly Date aujourdhui = New(
-            DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
-        private static readonly Date demain = New(
-            DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
-        private static readonly Date hier = New(
-            DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
+        // Copie d'aujourd'hui pour demain et hier :
+        private static readonly Date aujourdhui = New(Today.Year, Today.Month, Today.Day);
+        private static readonly Date demain = New(Today.Year, Today.Month, Today.Day);
+        private static readonly Date hier = New(Today.Year, Today.Month, Today.Day);
 
         // --- Constructeur par défaut ---
 
@@ -537,9 +535,9 @@ namespace Prog2
         /// <returns>la date</returns>
         public virtual Date MettreÀJour(/* Date this*/)
         {
-            Année = DateTime.Today.Year;
-            Mois = DateTime.Today.Month;
-            Jour = DateTime.Today.Day;
+            Année = Today.Year;
+            Mois = Today.Month;
+            Jour = Today.Day;
             return this;
         }
 
@@ -679,8 +677,8 @@ namespace Prog2
                 strMois.TryParseMois(out int mois))
             {
                 // Pour l'année et le jour numériques :
-                int année = Parse(strAnnée);   
-                int jour = Parse(strJour);
+                int année = int.Parse(strAnnée);   
+                int jour = int.Parse(strJour);
 
                 // On crée une nouvelle date qui sera null si non valide :
                 date = New(année, mois, jour);

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/* Exception pour les dates non-modifiables. */
+using System;
 
 namespace Prog2
 {

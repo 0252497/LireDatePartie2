@@ -1,6 +1,7 @@
 ﻿/* Fichier pour les attributs, les méthodes et les propriétés de la classe Calendrier. */
 using System;
 using static Prog2.JourDeLaSemaine;
+using static Prog2.Mois;
 
 namespace Prog2
 {
@@ -85,7 +86,7 @@ namespace Prog2
 
             Année = année;
 
-            if (Mois.Janvier > mois || mois > Mois.Décembre)
+            if (Janvier > mois || mois > Décembre)
             {
                 throw new ArgumentOutOfRangeException(nameof(Mois), $"## Invalide : {mois}");
             }
@@ -113,6 +114,7 @@ namespace Prog2
             => Année == calendrier.Année &&
                Mois == calendrier.Mois;
 
+        // HashCode :
         public override int GetHashCode()
             => Année * 100 + MoisNumérique;
 
