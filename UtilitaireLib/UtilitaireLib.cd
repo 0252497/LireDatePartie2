@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Prog2.BoolUtil">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAABAAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>BoolUtil.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Prog2.ConsolePlus">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAEAEAAAAgAAAAAQAABAAAQBAAAAAAAIAEAAAA=</HashCode>
+      <FileName>ConsolePlus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Prog2.IEnumerableUtil">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAIA=</HashCode>
+      <FileName>IEnumerableUtil.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Prog2.IntUtil">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IntUtil.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Prog2.StringUtil">
+    <Position X="8.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAABAIAAAABAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>StringUtil.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

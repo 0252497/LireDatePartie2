@@ -1,10 +1,8 @@
-﻿using System;
+﻿/* Programme simulant des lancers de dés. */
+using System;
 using static Prog2.ConsolePlus;
 using static System.Console;
 using static System.ConsoleColor;
-using static Prog2.DateUtil;
-using static Prog2.Date;
-using static System.Int32;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -27,7 +25,7 @@ namespace Prog2
 
             ColorWriteLine(Cyan, $"Nombres aléatoires de 1 à {nbFacesDuDé}");
 
-            List<int> nombres = new List<int>();
+            List<int> nombres = new List<int>();    // Liste pour les chiffres des lancers de dé
             
             for (int i = 0; i < quantitéNb; ++i)
             {

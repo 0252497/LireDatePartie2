@@ -7,6 +7,16 @@ namespace Prog2
 {
     public static class ConsolePlus
     {
+        // --- Attributs ---
+
+        /// <summary>
+        /// Précise si les messages d'erreurs ou ok sont bloquants ou pas. Un message bloquant demande
+        /// à l'utilisateur d'appuyer sur une touche avant de poursuivre.
+        /// </summary>
+        public static bool Bloquant = false;
+
+        // --- Méthodes ---
+
         /// <summary>
         /// Affiche une propriété et sa valeur à l'écran.
         /// </summary>
@@ -19,24 +29,12 @@ namespace Prog2
             string propriété, object valeur, int offset = 0, ConsoleColor couleurValeur = 0,
             ConsoleColor couleurPropriété = 0)
         {
-            if (couleurValeur == 0)
-            {
-                couleurValeur = White;
-            }
-
-            if (couleurPropriété == 0)
-            {
-                couleurPropriété = Cyan;
-            }
+            couleurValeur = couleurValeur == 0 ? White : couleurValeur;
+            couleurPropriété = couleurPropriété == 0 ? Cyan : couleurPropriété;
 
             ColorWrite(couleurPropriété, $"{propriété.PadLeft(offset)}:");
             ColorWriteLine(couleurValeur, $" {valeur}");
         }
-        /// <summary>
-        /// Précise si les messages d'erreurs ou ok sont bloquants ou pas. Un message bloquant demande
-        /// à l'utilisateur d'appuyer sur une touche avant de poursuivre.
-        /// </summary>
-        public static bool Bloquant = false;
 
         /// <summary>
         /// Permet d'afficher un message en couleur.
@@ -89,10 +87,7 @@ namespace Prog2
         /// <returns>la réponse de l'utilisateur</returns>
         public static string Demander(string propriété, string défaut, string caractère = ": ")
         {
-            if (défaut == null)
-            {
-                défaut = "";
-            }
+            défaut = défaut == null ? "" : défaut;
 
             if (défaut != "")
             {
@@ -102,14 +97,7 @@ namespace Prog2
             ColorWrite(Cyan, $"{propriété}{caractère} ");
             var réponse = ReadLine().Trim();
 
-            if (réponse == "")
-            {
-                return défaut;
-            }
-            else
-            {
-                return réponse;
-            }
+            return réponse == "" ? défaut : réponse;
         }
 
         /// <summary>
@@ -210,7 +198,6 @@ namespace Prog2
             {
                 ColorWrite(Magenta, "\nAppuyez sur une touche pour poursuivre...");
             }
-
 
             ReadKey(true);
             WriteLine();

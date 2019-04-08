@@ -8,7 +8,7 @@ using static System.Int32;
 
 namespace Prog2
 {
-    public static class Devinette
+    static class Devinette
     {
         static void Main(string[] args)
         {

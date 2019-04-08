@@ -1,4 +1,4 @@
-﻿/**/
+﻿/* Programme permettant l'affichage de différents énumérables. */
 using System;
 using static Prog2.ConsolePlus;
 using static System.Console;

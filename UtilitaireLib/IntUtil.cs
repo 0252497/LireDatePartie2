@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿/* Fichier d'utilitaires IntUtil. */
 namespace Prog2
 {
     public static class IntUtil

@@ -1,8 +1,4 @@
-﻿/* Programme affichant divers mois grâce à l'enum Mois. 
- * 
- * Auteure : Véronique Giguère
- * Création : Février 2019
- */
+﻿/* Programme affichant divers mois grâce à l'enum Mois. */
 using System;
 using System.Diagnostics;
 using static System.Console;

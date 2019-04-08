@@ -1,9 +1,6 @@
 ﻿/* Programme qui fait afficher diverses dates. Si un fichier texte est passé en argument, le programme
  * analyse les dates contenues dans ce fichier et produit un fichier html descrivant les dates traitées.
  * Il permet aussi d'intercepter les exceptions qui pourraient survenir durant son exécution.
- * 
- * Auteure : Véronique Giguère
- * Création : 5 mars 2019
  */
 using System;
 using static Prog2.ConsolePlus;
@@ -149,23 +146,23 @@ namespace Prog2
 
             // Pour vérifier nos affichages!
             Title = "AfficherDates";
-            
 
-            ColorWriteLine(Green, "Attentat du WTC:\t{0}", EnTexte(DateAttentatWTC));
-            ColorWriteLine(Yellow, "\nMort de MJ:\t\t{0}", EnTexte(DateDécèsMJ, "/"));
-            ColorWriteLine(Cyan, "\nExplosion de la NC:\t{0}", EnTexte(DateExplosionNC, "."));
+            ColorWriteLine(Green, $"Attentat du WTC:\t{DateAttentatWTC}");
+            ColorWriteLine(Yellow, $"\nMort de MJ:\t\t{DateDécèsMJ:/}");
+            ColorWriteLine(Cyan, $"\nExplosion de la NC:\t{DateExplosionNC:.}");
 
             var aprèsDemain = New(
                 DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
             var avantHier = New(
                 DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
 
-            ColorWriteLine(Magenta, $"\nAvant-hier:\t\t{avantHier.Décrémenter(2).EnTexteLong()}");
-            ColorWriteLine(Yellow, $"Hier:\t\t\t{Hier.EnTexteLong()}");
-            ColorWriteLine(Green, $"Aujourd'hui:\t\t{Aujourdhui.EnTexteLong()}");
-            ColorWriteLine(Cyan, $"Demain:\t\t\t{Demain.EnTexteLong()}");
-            ColorWriteLine(Magenta, $"Après-demain:\t\t{aprèsDemain.Incrémenter(2).EnTexteLong()}");
-            ColorWriteLine(DarkYellow, $"\nDate par défaut:        {new Date {Année = 2019, JourDeLAnnée = 100}.EnTexteLong()}");
+            ColorWriteLine(Magenta, $"\nAvant-hier:\t\t{avantHier.Décrémenter(2):L}");
+            ColorWriteLine(Yellow, $"Hier:\t\t\t{Hier:L}");
+            ColorWriteLine(Green, $"Aujourd'hui:\t\t{Aujourdhui:L}");
+            ColorWriteLine(Cyan, $"Demain:\t\t\t{Demain:L}");
+            ColorWriteLine(Magenta, $"Après-demain:\t\t{aprèsDemain.Incrémenter(2):L}");
+            ColorWriteLine(DarkYellow, 
+                $"\nDate par défaut:        {new Date {Année = 2019, JourDeLAnnée = 100}:L}");
 
             Poursuivre();
         }

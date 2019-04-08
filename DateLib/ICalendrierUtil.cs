@@ -12,6 +12,8 @@ namespace Prog2
 {
     public static class ICalendrierUtil
     {
+        // --- Attributs ---
+
         // Pour le nombre de rangées et de colonnes du calendrier :
         public const int NbRangées = 6;
         public const int NbColonnes = 7;
@@ -71,7 +73,7 @@ namespace Prog2
                     }
                     else
                     {
-                        Write("  .");
+                        Write("{0, 3}", ".");
                     }
                 }
 

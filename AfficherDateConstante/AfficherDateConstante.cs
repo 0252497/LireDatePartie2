@@ -1,11 +1,6 @@
-﻿using System;
+﻿/* Programme d'affichage de dates constantes. */
 using static Prog2.ConsolePlus;
 using static System.Console;
-using static System.ConsoleColor;
-using static Prog2.DateUtil;
-using static System.Int32;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Prog2
 {
@@ -18,7 +13,7 @@ namespace Prog2
             var dateConst = new DateConstante(2001, 9, 11);
 
             Afficher("        ToString", dateConst);
-            Afficher("     EnTexteLong", dateConst.EnTexteLong());
+            Afficher("     EnTexteLong", $"{dateConst:L}");
             Afficher("    JourDeLAnnée", dateConst.JourDeLAnnée);
             Afficher(" JourDeLaSemaine", dateConst.JourDeLaSemaine);
             //dateConst.Incrémenter(365);

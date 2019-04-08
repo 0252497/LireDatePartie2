@@ -1,16 +1,13 @@
 ﻿/* Fichier pour les attributs, les méthodes et les propriétés de la classe Calendrier. */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static Prog2.JourDeLaSemaine;
-using static System.Console;
 
 namespace Prog2
 {
     public class Calendrier : ICalendrier
     {
+        // --- Attributs ---
+
         // Pour le nombre de rangées et de colonnes du calendrier :
         public const int NbRangées = 6; 
         public const int NbColonnes = 7;
@@ -19,10 +16,17 @@ namespace Prog2
         public const int AnnéeMin = 1582;
         public const int AnnéeMax = 9999;
 
+        // --- Propriétés ---
+
         /// <summary>
         /// Pour l'année.
         /// </summary>
         public int Année { get; }
+
+        /// <summary>
+        /// Pour le jour, représenté par calendrier[rangée, colonne].
+        /// </summary>
+        private int[,] Jours { get; }
 
         /// <summary>
         /// Pour le mois.
@@ -30,9 +34,41 @@ namespace Prog2
         public Mois Mois { get; }
 
         /// <summary>
-        /// Pour le jour, représenté par calendrier[rangée, colonne].
+        /// Renvoie le mois en version numérique.
         /// </summary>
-        private int[,] Jours { get; }
+        public int MoisNumérique
+            => (int)Mois;
+
+        /// <summary>
+        /// Renvoie le nombre de jours dans un mois.
+        /// </summary>
+        public int NbJours
+            => Année.NbJoursDsMois(MoisNumérique);
+
+        /// <summary>
+        /// Renvoie le nombre de semaines dans un mois.
+        /// </summary>
+        public int NbSemaines
+        {
+            get
+            {
+                Localiser(new Date(Année, Mois, NbJours), out int rangée,
+                    out int colonne);
+
+                return rangée + 1;
+            }
+        }
+
+        /// <summary>
+        /// Indexation de la classe Calendrier.
+        /// </summary>
+        /// <param name="rangée">la rangée</param>
+        /// <param name="colonne">la colonne</param>
+        /// <returns>le jour et sa position</returns>
+        public int this[int rangée, int colonne]
+            => Jours[rangée, colonne];
+
+        // --- Constructeur ---
 
         /// <summary>
         /// Constructeur pour la classe Calendrier.
@@ -60,42 +96,22 @@ namespace Prog2
             RemplirTableau();
         }
 
-        /// <summary>
-        /// Renvoie le mois en version numérique.
-        /// </summary>
-        public int MoisNumérique 
-            => (int)Mois;
-
-        /// <summary>
-        /// Renvoie le nombre de jours dans un mois.
-        /// </summary>
-        public int NbJours 
-            => Année.NbJoursDsMois(MoisNumérique);
-
-        /// <summary>
-        /// Renvoie le nombre de semaines dans un mois.
-        /// </summary>
-        public int NbSemaines
-        {
-            get
-            {
-                Localiser(new Date(Année, Mois, NbJours), out int rangée,
-                    out int colonne);
-
-                return rangée + 1;
-            }
-        }
-
-        /// <summary>
-        /// Indexation de la classe Calendrier.
-        /// </summary>
-        /// <param name="rangée">la rangée</param>
-        /// <param name="colonne">la colonne</param>
-        /// <returns>le jour et sa position</returns>
-        public int this[int rangée, int colonne]
-            => Jours[rangée, colonne];
-
         // --- Méthodes ---
+
+        // Implémentation de IComparable :
+        public int CompareTo(ICalendrier calendrier)
+            => new Date(Année, Mois, 1).ComparerAvec(
+                new Date(calendrier.Année, calendrier.Mois, 1));
+
+        // Hérité de Object :
+        public override bool Equals(object obj)
+            => obj is Calendrier calendrier &&
+               Equals(calendrier);
+
+        // Implémentation de IEquatable :
+        public bool Equals(ICalendrier calendrier)
+            => Année == calendrier.Année &&
+               Mois == calendrier.Mois;
 
         public override int GetHashCode()
             => Année * 100 + MoisNumérique;
@@ -136,6 +152,25 @@ namespace Prog2
             }
         }
 
+        // Surcharge des opérateurs :
+        public static bool operator ==(Calendrier calendrier1, Calendrier calendrier2)
+            => Equals(calendrier1, calendrier2);
+
+        public static bool operator !=(Calendrier calendrier1, Calendrier calendrier2)
+            => !(calendrier1 == calendrier2);
+
+        public static bool operator <(Calendrier calendrier1, Calendrier calendrier2)
+            => calendrier1.CompareTo(calendrier2) == -1;
+
+        public static bool operator >(Calendrier calendrier1, Calendrier calendrier2)
+            => calendrier1.CompareTo(calendrier2) == 1;
+
+        public static bool operator <=(Calendrier calendrier1, Calendrier calendrier2)
+            => calendrier1.CompareTo(calendrier2) == -1 || Equals(calendrier1, calendrier2);
+
+        public static bool operator >=(Calendrier calendrier1, Calendrier calendrier2)
+            => calendrier1.CompareTo(calendrier2) == 1 || Equals(calendrier1, calendrier2);
+
         private void RemplirTableau()
         {
             // La date du premier du mois de la date entrée :
@@ -170,41 +205,5 @@ namespace Prog2
         /// <returns>le calendrier en string</returns>
         public override string ToString()
             => $"Calendrier {Mois} {Année}"; 
-        
-        // --- Interfaces ---
-
-        // Hérité de Object :
-        public override bool Equals(object obj)
-            => obj is Calendrier calendrier &&
-               Equals(calendrier);
-
-        // Implémentation de IEquatable :
-        public bool Equals(ICalendrier calendrier)
-            => Année == calendrier.Année &&
-               Mois == calendrier.Mois;
-
-        // Implémentation de IComparable :
-        public int CompareTo(ICalendrier calendrier) 
-            => new Date(Année, Mois, 1).ComparerAvec(
-                new Date(calendrier.Année, calendrier.Mois, 1));
-
-        // Surcharge des opérateurs :
-        public static bool operator ==(Calendrier calendrier1, Calendrier calendrier2) 
-            => Equals(calendrier1, calendrier2);
-
-        public static bool operator !=(Calendrier calendrier1, Calendrier calendrier2) 
-            => !(calendrier1 == calendrier2);
-
-        public static bool operator <(Calendrier calendrier1, Calendrier calendrier2)
-            => calendrier1.CompareTo(calendrier2) == -1;
-
-        public static bool operator >(Calendrier calendrier1, Calendrier calendrier2)
-            => calendrier1.CompareTo(calendrier2) == 1;
-
-        public static bool operator <=(Calendrier calendrier1, Calendrier calendrier2)
-            => calendrier1.CompareTo(calendrier2) == -1 || Equals(calendrier1, calendrier2);
-
-        public static bool operator >=(Calendrier calendrier1, Calendrier calendrier2)
-            => calendrier1.CompareTo(calendrier2) == 1 || Equals(calendrier1, calendrier2);
     }
 }

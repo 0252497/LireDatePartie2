@@ -5,6 +5,12 @@ namespace Prog2
 {
     public class DateConstante : Date
     {
+        // --- Attributs ---
+
+        private int JourDeLAnnéeCaché = 0;
+
+        // --- Constructeur ---
+
         /// <summary>
         /// Constructeur de date constante.
         /// </summary>
@@ -15,9 +21,7 @@ namespace Prog2
             : base(année, mois, jour)
         {
         }
-
-        private int JourDeLAnnéeCaché = 0;
-
+        
         // --- Propriétés ---
 
         /// <summary>
