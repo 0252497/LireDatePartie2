@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections;
+﻿/* Fichier d'utilitaires IEnumerableUtil. */
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Prog2
 {
@@ -25,9 +22,11 @@ namespace Prog2
         public static string EnTexte<T>(this IEnumerable<T> elems, string séparateur = " ",
             string texteAvant = "", string texteAprès = "")
         {
-            string enTexte = "";
-            
-            int i = 0;
+            string enTexte = "";    // La string à renvoyer
+
+            // Pour connaître notre position dans l'énumération, on ne veut pas de séparateur 
+            // à la fin de celle-ci :
+            int i = 1;  
 
             foreach (T elem in elems)
             {
@@ -35,7 +34,7 @@ namespace Prog2
                 enTexte += elem;
                 enTexte += texteAprès != null ? texteAprès : "";
 
-                if (i != elems.Count() - 1)
+                if (i != elems.Count())
                 {
                     enTexte += séparateur != null ? séparateur : " ";
                 }

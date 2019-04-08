@@ -1,12 +1,9 @@
-﻿/* Utilitaire de méthodes DateUtil. */
+﻿/* Utilitaire d'utilitaires DateUtil. */
 using static System.Enum;
 using static Prog2.ConsolePlus;
 using static System.ConsoleColor;
 using static Prog2.Date;
 using static Prog2.Mois;
-using static System.Console;
-using static Prog2.Calendrier;
-using System;
 
 namespace Prog2
 {
@@ -64,7 +61,8 @@ namespace Prog2
         /// <param name="date">la date lue</param>
         /// <param name="défaut">la propriété par défaut</param>
         /// <returns>vrai si la date est valide</returns>
-        public static bool LireDate(string propriété, string min, string max, out Date date, string défaut = null)
+        public static bool LireDate(string propriété, string min, string max, 
+            out Date date, string défaut = null)
         {
             if (!TryParse(Demander(propriété, défaut), out date))
             {
@@ -145,15 +143,18 @@ namespace Prog2
                 case 10:
                 case 12:
                     return 31;
+
                 // Pour le mois de février :
                 case 2:
                     return année.EstBissextile() ? 29 : 28;
+
                 // Pour les mois d'avril, juin, septembre et novembre :
                 case 4:
                 case 6:
                 case 9:
                 case 11:
                     return 30;
+
                 default:
                     return 0;
             }
@@ -225,7 +226,7 @@ namespace Prog2
                 }
             }
 
-            return mois != 0 ? true : false;
+            return mois != 0;
         }
     }
 }

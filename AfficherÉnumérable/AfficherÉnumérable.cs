@@ -1,12 +1,13 @@
-﻿using System;
+﻿/**/
+using System;
 using static Prog2.ConsolePlus;
 using static System.Console;
 using static Prog2.Mois;
 using System.Collections.Generic;
 using static Prog2.Date;
-using static Prog2.IEnumerableUtil;
 using static System.ConsoleColor;
 using System.Linq;
+using static System.Linq.Enumerable;
 
 namespace Prog2
 {
@@ -141,7 +142,7 @@ namespace Prog2
             // Calcul des pièces d'or :
             opérerSur50et10((a, b) => 13 * a + 27 * b);
 
-            // LINQ: All et Any
+            // LINQ: All et Any :
             WriteLine();
             Afficher("         Nombres", impairs.EnTexte());
             Afficher("    Tous impairs", impairs.All(EstImpair));
@@ -151,7 +152,7 @@ namespace Prog2
             Afficher("Au moins un pair", impairs.Any(EstPair));
             Afficher("        Pas vide", impairs.Any());
 
-            // LINQ: Max, Min, Average, First, Last
+            // LINQ: Max, Min, Average, First, Last :
             WriteLine();
             var nombres = new int[] { 3, 2, 7, 4, 1, 5 };
             Afficher("         Nombres", nombres.EnTexte());
@@ -164,7 +165,7 @@ namespace Prog2
             Afficher("       Last pair", nombres.Last(EstPair));
             Afficher("       Last > 10", nombres.LastOrDefault(n => n > 10));
 
-            // LINQ: Reverse, Skip, Take
+            // LINQ: Reverse, Skip, Take :
             WriteLine();
             var lettres = "ABCDEFG";
             Afficher("         Lettres", lettres.EnTexte(), couleurValeur: DarkYellow);
@@ -173,7 +174,7 @@ namespace Prog2
             Afficher("          Take 3", lettres.Take(3).EnTexte());
             Afficher("    Skip 2 Take3", lettres.Skip(2).Take(3).EnTexte());
 
-            // LINQ: Count, Distinct
+            // LINQ: Count, Distinct :
             WriteLine();
             lettres = "abracadabra";
             Afficher("         Lettres", lettres.EnTexte(), couleurValeur: DarkYellow);
@@ -182,14 +183,14 @@ namespace Prog2
             Afficher("        Distinct", lettres.Distinct().EnTexte());
             Afficher("     Dist. Count", lettres.Distinct().Count());
 
-            // LINQ: ElementAt, ToString, ToList
+            // LINQ: ElementAt, ToString, ToList :
             WriteLine();
             nombres = new int[] { 1, 2, 3, 4, 5, 6, 7 }.Skip(2).ToArray();
             Afficher("         Nombres", nombres.EnTexte(), couleurValeur: DarkYellow);
             Afficher("     Element  #1", nombres.ElementAt(1));
             Afficher("     Element #10", nombres.ElementAtOrDefault(10));
 
-            // LINQ: Where, Select, OrderBy
+            // LINQ: Where, Select, OrderBy :
             WriteLine();
             nombres = new int[] { 3, 2, 7, 4, 1, 5 };
             Afficher("         Nombres", nombres.EnTexte(), couleurValeur: DarkYellow);
@@ -203,7 +204,7 @@ namespace Prog2
 
             WriteLine();
 
-            // Doubler seulement les impairs et les placer en ordre croissants
+            // Doubler seulement les impairs et les placer en ordre croissants :
             Afficher("       la totale", 
                 nombres.Where(EstImpair).Select(n => n * 2).OrderBy(n => n).EnTexte());
             
@@ -262,10 +263,8 @@ namespace Prog2
                     Aujourdhui.Année, n, Aujourdhui.Année.NbJoursDsMois(n))).EnTexte("", " * ", "\n"),
                     couleurValeur: Green);
 
-            WriteLine();
-
-            Afficher("   Range(5,6)", Enumerable.Range(5, 6).EnTexte());
-            Afficher("  Repeat(5,6)", Enumerable.Repeat(5, 6).EnTexte());
+            Afficher("   Range(5,6)", Range(5, 6).EnTexte());
+            Afficher("  Repeat(5,6)", Repeat(5, 6).EnTexte());
 
             Afficher("Pairs 10 à 30", GénérerInfiniement().Skip(9).Where(EstPair).Take(11).EnTexte());
 
@@ -278,6 +277,11 @@ namespace Prog2
             WriteLine();
         }
 
+        // --- Fonctions locales ---
+
+        static string EnTexte(IEnumerable<int> p_entiers, string séparateur = " ")
+            => string.Join(séparateur, p_entiers);
+
         // Fonction génératrice simple :
         static IEnumerable<int> Générer123()
         {
@@ -286,18 +290,12 @@ namespace Prog2
             yield return 3;
         }
 
-        static string EnTexte(IEnumerable<int> p_entiers, string séparateur = " ")
-            => string.Join(séparateur, p_entiers);
-
-        // Méthode générique :
-        static void WriteAny<T>(IEnumerable<T> elems, string séparateur = " ")
-        {
-            foreach (T elem in elems)
-            {
-                Write(elem + séparateur);
-            }
-        }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="début"></param>
+        /// <param name="fin"></param>
+        /// <returns></returns>
         static IEnumerable<int> GénérerEntiers(int début, int fin)
         {
             for (int i = début; i <= fin; ++i)
@@ -318,7 +316,26 @@ namespace Prog2
             }
         }
 
+        // Paramètre IEnumerable 1
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="p_entiers"></param>
+        /// <param name="séparateur"></param>
+        static void WriteAll(IEnumerable<int> p_entiers, string séparateur = " ")
+        {
+            foreach (int entier in p_entiers)
+            {
+                Write(entier + séparateur);
+            }
+        }
+
         // Paramètres IEnumerable 3
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="p_chars"></param>
+        /// <param name="séparateur"></param>
         static void WriteAllChar(IEnumerable<char> p_chars, string séparateur = " ")
         {
             foreach (char c in p_chars)
@@ -327,12 +344,18 @@ namespace Prog2
             }
         }
 
-        // Paramètre IEnumerable 1
-        static void WriteAll(IEnumerable<int> p_entiers, string séparateur = " ")
+        // Méthode générique :
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="elems"></param>
+        /// <param name="séparateur"></param>
+        static void WriteAny<T>(IEnumerable<T> elems, string séparateur = " ")
         {
-            foreach (int entier in p_entiers)
+            foreach (T elem in elems)
             {
-                Write(entier + séparateur);
+                Write(elem + séparateur);
             }
         }
 

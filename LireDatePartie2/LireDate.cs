@@ -7,7 +7,6 @@ using static Prog2.ConsolePlus;
 using static Prog2.Date;
 using static System.ConsoleColor;
 using System.Diagnostics;
-using System.Collections.Generic;
 using System;
 
 namespace Prog2
@@ -48,7 +47,7 @@ namespace Prog2
             Afficher("   Format .", $"{date:.}", couleurValeur: Magenta);
             Afficher("   Format /", $"{date:/}", couleurValeur: Magenta);
 
-            var message = $"\nDate = {EnTexte(date)}";
+            var message = $"\nDate = {date}";
 
             message += $"\n\nNB : Cette date est ";
 
@@ -80,11 +79,12 @@ namespace Prog2
 
             try
             {
-                ColorWriteLine(Cyan,     $"  Dans 3 mois : {date.ModifierMois(n => n + 3)}");
+                ColorWriteLine(Cyan,     
+                    $"  Dans 3 mois : {date.Cloner().ModifierMois(n => n + 3)}");
             }
             catch (ArgumentOutOfRangeException)
             {
-                ColorWriteLine(Red,     $"   Dans 3 mois : date impossible");
+                MessageErreur($"  Dans 3 mois : date impossible");
             }
 
             WriteLine("");

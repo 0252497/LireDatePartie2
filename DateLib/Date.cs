@@ -81,8 +81,7 @@ namespace Prog2
                 throw new ArgumentException(strDate, $"## Invalide : {strDate}");
             }
         }
-
-
+        
         // --- Propriétés ---
 
         /// <summary>
@@ -90,7 +89,7 @@ namespace Prog2
         /// </summary>
         public virtual int Année
         {
-            get => _année; // _annéeMoisJour;
+            get => _année; // _annéeMoisJour / 100000;
             set
             {
                 // int année = value / 100000;
@@ -101,7 +100,9 @@ namespace Prog2
                 //    throw new ArgumentOutOfRangeException(nameof(Année), $"## Invalide : {année}");
 
                 if (value < 1 || _jour > value.NbJoursDsMois(_mois))
+                {
                     throw new ArgumentOutOfRangeException(nameof(Année), $"## Invalide : {value}");
+                }
 
                 if (!EstMutable)
                 {
@@ -109,30 +110,65 @@ namespace Prog2
                 }
 
                 // _annéeMoisJour = value;
+                // Année = année;
+                // _annéeMoisJour = Année * 10000 + Mois * 1000 + Jour * 10 +
+                //    (EstMutable ? 1 : 0);
 
                 _année = value;
             }
         }
 
         /// <summary>
-        /// Le mois de l'année. (janvier = 1)
+        /// Date d'aujourd'hui.
+        /// NB: Le même objet est retourné chaque fois.
         /// </summary>
-        public virtual int Mois
-        {
-            get => _mois;   // _annéeMoisJour / 1000 % 100;
-            set
-            {
-                if (value < 1 || value > 12 || _jour > _année.NbJoursDsMois(value))
-                    throw new ArgumentOutOfRangeException(nameof(Mois), $"## Invalide : {value}");
+        public static Date Aujourdhui => aujourdhui.MettreÀJour();
 
-                if (!EstMutable)
-                {
-                    throw new InvalidOperationException();
-                }
+        /// <summary>
+        /// Date de demain.
+        /// </summary>
+        public static Date Demain => demain.MettreÀJour().Incrémenter();
 
-                _mois = value;
-            }
-        }
+        /// <summary>
+        /// Vrai si la date est le premier jour de l'an.
+        /// </summary>
+        public bool EstJourDeLAn
+            => Mois == 1 && Jour == 1;
+
+        /// <summary>
+        /// Renvoie si la date est mutable.
+        /// </summary>
+        public bool EstMutable { get; set; }
+
+        /// <summary>
+        /// Vrai si la date est Noël.
+        /// </summary>
+        public bool EstNoël
+            => Mois == 12 && Jour == 25;
+
+        /// <summary>
+        /// Vrai si une date est spéciale. Une date est spéciale si le mois et le jour sont
+        /// identiques.
+        /// </summary>
+        public bool EstSpéciale => Jour == Mois;
+
+        /// <summary>
+        /// Vrai si la date est la St-Jean-Baptiste.
+        /// </summary>
+        public bool EstStJean
+            => Mois == 6 && Jour == 24;
+
+        /// <summary>
+        /// Vrai si une date est très spéciale. Une date est très spéciale si le jour, le mois et
+        /// les deux derniers chiffres de l'année sont identiques.
+        /// </summary>
+        public bool EstTrèsSpéciale
+            => EstSpéciale && Mois == Année % 100;
+
+        /// <summary>
+        /// Date de hier.
+        /// </summary>
+        public static Date Hier => hier.MettreÀJour().Décrémenter();
 
         /// <summary>
         /// Le jour du mois.
@@ -224,14 +260,34 @@ namespace Prog2
         }
 
         /// <summary>
+        /// Le mois de l'année. (janvier = 1)
+        /// </summary>
+        public virtual int Mois
+        {
+            get => _mois;   // _annéeMoisJour / 1000 % 100;
+            set
+            {
+                if ((int)Janvier > value || value > (int)Décembre ||
+                    _jour > _année.NbJoursDsMois(value))
+                {
+                    throw new ArgumentOutOfRangeException(nameof(Mois), $"## Invalide : {value}");
+                }
+
+                if (!EstMutable)
+                {
+                    throw new InvalidOperationException();
+                }
+
+                _mois = value;
+            }
+        }
+
+        /// <summary>
         /// Le mois sous forme de type Mois.
         /// </summary>
         public Mois MoisTypé
         {
-            get
-            {
-                return (Mois)Mois;
-            }
+            get => (Mois)Mois;
             set
             {
                 if (!EstMutable)
@@ -242,60 +298,6 @@ namespace Prog2
                 Mois = (int)value;
             }
         }
-
-        // --- Propriétés calculables --- 
-
-        /// <summary>
-        /// Date d'aujourd'hui.
-        /// NB: Le même objet est retourné chaque fois.
-        /// </summary>
-        public static Date Aujourdhui => aujourdhui.MettreÀJour();
-
-        /// <summary>
-        /// Date de demain.
-        /// </summary>
-        public static Date Demain => demain.MettreÀJour().Incrémenter();
-
-        /// <summary>
-        /// Vrai si la date est le premier jour de l'an.
-        /// </summary>
-        public bool EstJourDeLAn
-            => Mois == 1 && Jour == 1;
-
-        /// <summary>
-        /// Renvoie si la date est mutable.
-        /// </summary>
-        public bool EstMutable { get; set; }
-
-        /// <summary>
-        /// Vrai si la date est Noël.
-        /// </summary>
-        public bool EstNoël
-            => Mois == 12 && Jour == 25;
-
-        /// <summary>
-        /// Vrai si une date est spéciale. Une date est spéciale si le mois et le jour sont
-        /// identiques.
-        /// </summary>
-        public bool EstSpéciale => Jour == Mois;
-
-        /// <summary>
-        /// Vrai si la date est la St-Jean-Baptiste.
-        /// </summary>
-        public bool EstStJean
-            => Mois == 6 && Jour == 24;
-
-        /// <summary>
-        /// Vrai si une date est très spéciale. Une date est très spéciale si le jour, le mois et
-        /// les deux derniers chiffres de l'année sont identiques.
-        /// </summary>
-        public bool EstTrèsSpéciale
-            => EstSpéciale && Mois == Année % 100;
-
-        /// <summary>
-        /// Date de hier.
-        /// </summary>
-        public static Date Hier => hier.MettreÀJour().Décrémenter();
 
         // --- Méthodes ---
 
@@ -402,6 +404,10 @@ namespace Prog2
             }
         }
 
+        // IComparable :
+        public int CompareTo(Date date)
+            => ComparerAvec(date);
+
         /// <summary>
         /// Retranche des jours à la date.
         /// </summary>
@@ -464,6 +470,15 @@ namespace Prog2
         public string EnTexteLong(/* Date this */)
             => $"{Jour} {MoisTypé.ToString().ToLower()} {Année}";
 
+        // IEquatable :
+        public override bool Equals(object obj)
+            => obj is Date date && Equals(date);
+
+        public bool Equals(Date date)
+            => Année == date.Année &&
+                Mois == date.Mois &&
+                Jour == date.Jour;
+
         /// <summary>
         /// Détermine si une date est valide.
         /// </summary>
@@ -475,6 +490,7 @@ namespace Prog2
             => 1 <= jour && jour <= année.NbJoursDsMois(mois) &&
                 (int)Janvier <= mois && mois <= (int)Décembre;
 
+        // HashCode :
         public override int GetHashCode()
         {
             var hashCode = -1198555504;
@@ -594,7 +610,12 @@ namespace Prog2
         /// <returns>une nouvelle date ou null si la date n'est pas valide</returns>
         public static Date New(int année, Mois mois, int jour, bool estMutable = true)
             => EstValide(année, (int)mois, jour) ?
-                new Date { Année = année, Mois = (int)mois, Jour = jour, EstMutable = estMutable } : null;
+                new Date {
+                    Année = année,
+                    Mois = (int)mois,
+                    Jour = jour,
+                    EstMutable = estMutable
+                } : null;
 
         /// <summary>
         /// Pour vérifier que deux dates sont pareilles.
@@ -613,6 +634,36 @@ namespace Prog2
         /// <returns>la date en string</returns>
         public override string ToString()
             => $"{EnTexte(this)}";
+
+        // IFormattable :
+        public string ToString(string format, IFormatProvider formatProvider)
+        {
+            format = format ?? "G";
+
+            switch (format.ToUpperInvariant())
+            {
+                case "G":   // Général = par défaut
+                case "":
+                case "-":
+                    return ToString();
+
+                case "L": // long
+                    return EnTexteLong();
+
+                case "S":
+                    return EnTexte(this, " ");
+
+                case ".":
+                    return EnTexte(this, ".");
+
+                case "/":
+                    return EnTexte(this, "/");
+
+                default:
+                    throw new FormatException(
+                        $"Le format '{format}' n'est pas supporté pour une Date.");
+            }
+        }
 
         /// <summary>
         /// Tente de décoder une date donnée en format texte.
@@ -707,51 +758,6 @@ namespace Prog2
             // --- Fonctions locales ---
             bool EstAnnée(string str) => str.EstNumérique() && str.Length >= 3;
             bool EstJour(string str) => str.EstNumérique() && str.Length <= 2;
-        }
-
-        // --- Interfaces ---
-
-        // IComparable :
-        public int CompareTo(Date date)
-            => ComparerAvec(date);
-
-        // IEquatable :
-        public override bool Equals(object obj)
-            => obj is Date date && Equals(date);
-
-        public bool Equals(Date date)
-            => Année == date.Année &&
-                Mois == date.Mois &&
-                Jour == date.Jour;
-
-        // IFormattable :
-        public string ToString(string format, IFormatProvider formatProvider)
-        {
-            format = format ?? "G";
-
-            switch (format.ToUpperInvariant())
-            {
-                case "G":   // Général = par défaut
-                case "":
-                case "-":
-                    return ToString();
-
-                case "L": // long
-                    return EnTexteLong();
-
-                case "S":
-                    return EnTexte(this, " ");
-
-                case ".":
-                    return EnTexte(this, ".");
-
-                case "/":
-                    return EnTexte(this, "/");
-
-                default:
-                    throw new FormatException(
-                        $"Le format '{format}' n'est pas supporté pour une Date.");
-            }
         }
     }
 }
