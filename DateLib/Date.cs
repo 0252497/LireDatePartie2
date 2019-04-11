@@ -12,10 +12,6 @@ namespace Prog2
     public class Date : object, IEquatable<Date>, IComparable<Date>, IFormattable
     {
         // --- Attributs ---
-
-        private int _année;
-        private int _mois;
-        private int _jour;
         private int _annéeMoisJour;
         private int _jourDeLAnnée;
 
@@ -28,30 +24,20 @@ namespace Prog2
 
         public Date()
         {
-            EstMutable = true;
-            Mois = 1;
-            Jour = 1;
-            Année = 1;
-
-            _annéeMoisJour = Année * 10000 + Mois * 1000 + Jour * 10 +
-                (EstMutable ? 1 : 0);
+            _annéeMoisJour = Compacter(1, 1, 1, true);
         }
 
+        private int Compacter(int année, int mois, int jour, bool estMutable = true)
+            => année * 100000 + mois * 1000 + jour * 10 +
+                (estMutable ? 1 : 0);
+        
         // --- Constructeurs paramétrés ---
 
         public Date(int année, int mois, int jour, bool estMutable = true)
         {
             if (!EstValide(année, mois, jour))
                 throw new ArgumentOutOfRangeException("##  ");
-
-            _année = année;
-            _mois = mois;
-            _jour = jour;
-
-            EstMutable = estMutable;
-
-            _annéeMoisJour = année * 100000 + mois * 1000 + jour * 10 +
-                (EstMutable ? 1 : 0);
+            _annéeMoisJour = Compacter(année, mois, jour, estMutable);
         }
 
         public Date(int année, Mois moisTypé, int jour, bool estMutable = true)
@@ -66,13 +52,12 @@ namespace Prog2
         {
             if (TryParse(strDate, out Date date))
             {
-                EstMutable = estMutable;
-                _année = date.Année;
-                _mois = date.Mois;
-                _jour = date.Jour;
+                //EstMutable = estMutable;
+                //_année = date.Année;
+                //_mois = date.Mois;
+                //_jour = date.Jour;
 
-                _annéeMoisJour = date.Année * 100000 + date.Mois * 1000 + date.Jour * 10 +
-                    (EstMutable ? 1 : 0);
+                _annéeMoisJour = Compacter(date.Année, date.Mois, date.Jour, estMutable);
             }
             else
             {
@@ -80,6 +65,36 @@ namespace Prog2
             }
         }
         
+        // --- Sous-propriétés
+
+        private int _année
+        {
+            get => _annéeMoisJour / 100000;
+            set 
+            {
+                _annéeMoisJour = Compacter(value, _mois, _jour, EstMutable);
+            }
+        }
+
+        private int _mois
+        {
+            get => _annéeMoisJour / 1000 % 100;
+            set
+            {
+                _annéeMoisJour = Compacter(_année, value, _jour, EstMutable);
+            }
+        }
+
+        private int _jour
+        {
+            get => _annéeMoisJour / 10 % 100;
+            set
+            {
+                _annéeMoisJour = Compacter(_année, _mois, value, EstMutable);
+            }
+        }
+
+
         // --- Propriétés ---
 
         /// <summary>
@@ -87,16 +102,9 @@ namespace Prog2
         /// </summary>
         public virtual int Année
         {
-            get => _année; // _annéeMoisJour / 100000;
+            get => _année; // _annéeMoisJour / 100000 % 10;
             set
             {
-                // int année = value / 100000;
-                // int mois = value / 1000 % 100;
-                // int jour = value / 10 % 100;
-
-                // if (année < 1 || jour > année.NbJoursDsMois(mois))
-                //    throw new ArgumentOutOfRangeException(nameof(Année), $"## Invalide : {année}");
-
                 if (value < 1 || _jour > value.NbJoursDsMois(_mois))
                 {
                     throw new ArgumentOutOfRangeException(nameof(Année), $"## Invalide : {value}");
@@ -136,7 +144,14 @@ namespace Prog2
         /// <summary>
         /// Renvoie si la date est mutable.
         /// </summary>
-        public bool EstMutable { get; set; }
+        public bool EstMutable
+        {
+            get => _annéeMoisJour % 10 == 1;
+            set
+            {
+                _annéeMoisJour = Compacter(_année, _mois, _jour, value);
+            }
+        }
 
         /// <summary>
         /// Vrai si la date est Noël.
@@ -173,7 +188,7 @@ namespace Prog2
         /// </summary>
         public virtual int Jour
         {
-            get => _jour; // _annéeMoisJour / 10 % 100;
+            get => _jour;
             set
             {
                 if (1 > value || value > _année.NbJoursDsMois(_mois))
@@ -262,7 +277,7 @@ namespace Prog2
         /// </summary>
         public virtual int Mois
         {
-            get => _mois;   // _annéeMoisJour / 1000 % 100;
+            get => _mois;
             set
             {
                 if ((int)Janvier > value || value > (int)Décembre ||
