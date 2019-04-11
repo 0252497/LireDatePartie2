@@ -106,6 +106,7 @@
     <Compile Include="TesterDate_141_ModifierMois.cs" />
     <Compile Include="TesterIEnumerableUtil_01_EnTexte.cs" />
     <Compile Include="TesterIEnumerableUtil_02_Jusqua.cs" />
+    <Compile Include="TesterIntUtil_01.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
