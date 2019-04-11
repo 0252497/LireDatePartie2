@@ -52,11 +52,6 @@ namespace Prog2
         {
             if (TryParse(strDate, out Date date))
             {
-                //EstMutable = estMutable;
-                //_année = date.Année;
-                //_mois = date.Mois;
-                //_jour = date.Jour;
-
                 _annéeMoisJour = Compacter(date.Année, date.Mois, date.Jour, estMutable);
             }
             else
@@ -114,11 +109,6 @@ namespace Prog2
                 {
                     throw new InvalidOperationException();
                 }
-
-                // _annéeMoisJour = value;
-                // Année = année;
-                // _annéeMoisJour = Année * 10000 + Mois * 1000 + Jour * 10 +
-                //    (EstMutable ? 1 : 0);
 
                 _année = value;
             }
